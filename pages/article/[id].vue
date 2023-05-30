@@ -1,0 +1,33 @@
+<template>
+  <article v-if="data">
+    <h1>
+      {{ data.title }}
+    </h1>
+    <!-- <img
+      :src="data.eyecatch?.url"
+      :width="data.eyecatch?.width"
+      :height="data.eyecatch?.height"
+      alt=""
+    /> -->
+    <div>
+      <div>
+        {{ data.tags?.map((tag) => tag.name).join(", ") }}
+      </div>
+      <div>
+        {{ data.publishedAt ?? data.createdAt }}
+      </div>
+    </div>
+    <div v-html="data.content"></div>
+  </article>
+</template>
+
+<script setup lang="ts">
+import { Article } from "~/types/article";
+
+const { params } = useRoute();
+
+const { data } = await useMicroCMSGetListDetail<Article>({
+  endpoint: "article",
+  contentId: Array.isArray(params.id) ? params.id[0] : params.id,
+});
+</script>
