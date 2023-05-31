@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- navbar -->
-    <v-app-bar scroll-behavior="hide">
+    <v-app-bar>
       <v-app-bar-nav-icon @click="state.drawer = !state.drawer" />
       <v-toolbar-title>Khsmty</v-toolbar-title>
       <!-- <v-spacer />
