@@ -30,6 +30,6 @@ import { Article } from "~/types/article";
 
 const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
-  queries: { fields: 'id,title,emoji,publishedAt,updatedAt' },
+  queries: { fields: "id,title,emoji,publishedAt,updatedAt" },
 });
 </script>
