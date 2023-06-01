@@ -39,4 +39,9 @@ const { data } = await useMicroCMSGetListDetail<Article>({
 if (!data.value) {
   throw createError({ statusCode: 404 });
 }
+
+useSeoMeta({
+  title: data.value.title,
+  description: data.value.description,
+});
 </script>

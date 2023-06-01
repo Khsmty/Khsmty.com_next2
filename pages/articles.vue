@@ -32,4 +32,9 @@ const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
   queries: { fields: "id,title,emoji,publishedAt,updatedAt" },
 });
+
+useSeoMeta({
+  title: "記事一覧",
+  description: "Khsmtyが書いた記事の一覧です。",
+});
 </script>

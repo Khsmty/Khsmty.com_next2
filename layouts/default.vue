@@ -2,7 +2,7 @@
   <v-app>
     <!-- drawer -->
     <v-navigation-drawer v-if="windowWidth < 768" v-model="state.drawer" app>
-      <v-list nav>
+      <v-list>
         <v-list-item
           v-for="item in navItems"
           :key="item.to"
@@ -10,6 +10,7 @@
           :title="item.title"
           :to="item.to"
           nuxt
+          ripple
         />
       </v-list>
     </v-navigation-drawer>
@@ -67,7 +68,7 @@ onMounted(() => {
 
 const navItems = [
   { title: "ホーム", icon: "mdi-home", to: "/" },
-  { title: "投稿一覧", icon: "mdi-text-box-multiple", to: "/articles" },
+  { title: "記事一覧", icon: "mdi-text-box-multiple", to: "/articles" },
   { title: "連絡先", icon: "mdi-email", to: "/contacts" },
 ];
 </script>
