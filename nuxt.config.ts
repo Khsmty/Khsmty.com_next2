@@ -1,6 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["nuxt-microcms-module", "@nuxtjs/google-fonts"],
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+    },
+  },
+
+  modules: [
+    "nuxt-microcms-module",
+    "@nuxtjs/google-fonts",
+    "nuxt-simple-sitemap",
+  ],
   css: [
     "~/assets/style.scss",
     "vuetify/lib/styles/main.sass",
@@ -19,6 +30,9 @@ export default defineNuxtConfig({
     preconnect: true,
     preload: true,
     prefetch: true,
+  },
+  sitemap: {
+    siteUrl: "https://blog.terrier.dev",
   },
   microCMS: {
     serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
