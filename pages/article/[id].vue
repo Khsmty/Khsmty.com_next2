@@ -25,9 +25,18 @@
 import { Article } from "~/types/article";
 
 const { params } = useRoute();
+if ((Array.isArray(params.id) ? params.id[0] : params.id).match(/\W/)) {
+  throw createError({ statusCode: 404 });
+}
 
 const { data } = await useMicroCMSGetListDetail<Article>({
   endpoint: "article",
   contentId: Array.isArray(params.id) ? params.id[0] : params.id,
+}).catch(() => {
+  throw createError({ statusCode: 404 });
 });
+
+if (!data.value) {
+  throw createError({ statusCode: 404 });
+}
 </script>

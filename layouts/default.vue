@@ -1,29 +1,26 @@
 <template>
   <v-app>
     <!-- drawer -->
-    <v-navigation-drawer v-model="state.drawer" app>
-      <v-list>
-        <v-list-item-group>
-          <v-list-item
-            v-for="item in drawerItems"
-            :key="item.title"
-            :to="item.to"
-            link
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
+    <v-navigation-drawer v-if="windowWidth < 768" v-model="state.drawer" app>
+      <v-list nav>
+        <v-list-item
+          v-for="item in navItems"
+          :key="item.to"
+          :prepend-icon="item.icon"
+          :title="item.title"
+          :to="item.to"
+          nuxt
+        />
       </v-list>
     </v-navigation-drawer>
 
     <!-- navbar -->
     <v-app-bar>
-      <v-app-bar-nav-icon @click="state.drawer = !state.drawer" />
+      <v-app-bar-nav-icon
+        v-if="windowWidth < 768"
+        @click="state.drawer = !state.drawer"
+      />
+      <div v-else class="ml-4" />
 
       <v-toolbar-title class="toolbar-title" @click="$router.push('/')">
         <v-avatar class="mr-2">
@@ -31,8 +28,20 @@
         </v-avatar>
         Khsmty
       </v-toolbar-title>
-      <!-- <v-spacer />
-      <v-btn>Logout</v-btn> -->
+
+      <template v-slot:append>
+        <div v-if="windowWidth >= 768">
+          <v-btn
+            v-for="(item, i) in navItems"
+            :key="i"
+            :to="item.to"
+            :prepend-icon="item.icon"
+            nuxt
+          >
+            {{ item.title }}
+          </v-btn>
+        </div>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -46,10 +55,20 @@
 <script setup lang="ts">
 import state from "~/scripts/state";
 
-const drawerItems = [
-  { title: "Home", icon: "mdi-home", to: "/" },
-  { title: "About", icon: "mdi-information", to: "/about" },
-  { title: "Contact", icon: "mdi-email", to: "/contact" },
+let windowWidth = ref(0);
+function syncWindowWidth() {
+  windowWidth.value = window.innerWidth;
+  state.drawer = false;
+}
+onMounted(() => {
+  syncWindowWidth();
+  window.addEventListener("resize", syncWindowWidth);
+});
+
+const navItems = [
+  { title: "ホーム", icon: "mdi-home", to: "/" },
+  { title: "投稿一覧", icon: "mdi-text-box-multiple", to: "/articles" },
+  { title: "連絡先", icon: "mdi-email", to: "/contacts" },
 ];
 </script>
 
