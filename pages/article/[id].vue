@@ -23,7 +23,7 @@
         <!-- 更新日など -->
         <span>
           <v-icon icon="mdi-calendar" />
-          &nbsp;{{ article.publishedAt }}
+          {{ article.publishedAt }}
         </span>
         <span v-if="article.publishedAt !== article.updatedAt" class="ml-3">
           <v-icon icon="mdi-update" />
