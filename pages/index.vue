@@ -60,7 +60,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="12" sm="8">
+    <v-col cols="12" sm="8" class="mt-2">
       <h2 class="header">
         書いた記事
         <span class="eng">Articles</span>
@@ -85,7 +85,7 @@
         </v-btn>
       </v-row>
     </v-col>
-    <v-col cols="12" sm="8">
+    <v-col cols="12" sm="8" class="mt-3">
       <h2 class="header">
         作ったもの
         <span class="eng">Works</span>
