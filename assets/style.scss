@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "0xProto";
+  src: local("0xProto"), url("/font/0xProto.woff2") format("woff2");
+}
+
 * {
   font-family: Roboto, "Noto Sans JP", sans-serif;
+}
+pre,
+code,
+code > span {
+  font-family: "0xProto", monospace !important;
 }
