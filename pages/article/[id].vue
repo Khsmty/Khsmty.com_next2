@@ -7,7 +7,7 @@
       </h1>
       <div class="metadata mt-0">
         <!-- タグ一覧 -->
-        <div v-if="article.tags" class="d-flex align-center">
+        <div v-if="article.tags.length" class="d-flex align-center">
           <v-icon icon="mdi-tag" />&nbsp;
           <v-chip-group class="mr-3">
             <v-chip
