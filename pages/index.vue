@@ -1,5 +1,5 @@
 <template>
-  <v-parallax src="/img/background.webp" height="500" class="top-image mb-5">
+  <v-parallax src="/img/background.webp" height="500" class="top-image mb-8">
     <v-row>
       <v-col cols="12" class="profile">
         <v-avatar size="130">
