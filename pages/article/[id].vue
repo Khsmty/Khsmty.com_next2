@@ -20,23 +20,18 @@
 
         <!-- 更新日など -->
         <v-icon icon="mdi-calendar" />
-        {{ article.publishedAt }}
-        &nbsp;<span
-          v-if="article.publishedAt !== article.updatedAt"
-          class="ml-3"
-        >
+        &nbsp;{{ article.publishedAt }}
+        <span v-if="article.publishedAt !== article.updatedAt" class="ml-3">
           <v-icon icon="mdi-update" />
           {{ article.updatedAt }}
         </span>
       </div>
     </v-col>
 
-    <v-col cols="12" class="mt-4" style="max-width: 800px">
+    <v-col cols="12" style="max-width: 800px">
       <div v-html="article.content" />
     </v-col>
   </v-row>
-
-  <div v-html="article.content"></div>
 </template>
 
 <script setup lang="ts">
@@ -85,9 +80,9 @@ useSeoMeta({
 <style lang="scss">
 .metadata {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   color: #a1a1a1;
-  margin-top: 0.5rem;
 }
 </style>
