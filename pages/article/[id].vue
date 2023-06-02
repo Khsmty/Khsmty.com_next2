@@ -7,7 +7,7 @@
       </h1>
       <div class="metadata mt-0">
         <!-- タグ一覧 -->
-        <span v-if="article.tags">
+        <div v-if="article.tags" class="d-flex align-center">
           <v-icon icon="mdi-tag" />&nbsp;
           <v-chip-group class="mr-3">
             <v-chip
@@ -18,7 +18,7 @@
               {{ tag.name }}
             </v-chip>
           </v-chip-group>
-        </span>
+        </div>
 
         <!-- 更新日など -->
         <span>
@@ -32,7 +32,7 @@
       </div>
     </v-col>
 
-    <v-col cols="12" style="max-width: 800px">
+    <v-col cols="12" class="mb-10" style="max-width: 800px">
       <div class="article-content" v-html="article.content" />
     </v-col>
   </v-row>
