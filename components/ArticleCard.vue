@@ -11,7 +11,7 @@
             :key="tag.id"
             :to="`/tag/${tag.id}`"
             density="compact"
-            class="mt-0 mb-2"
+            class="mt-0 mb-1"
           >
             {{ tag.name }}
           </v-chip>
