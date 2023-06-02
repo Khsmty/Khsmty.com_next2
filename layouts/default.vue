@@ -45,14 +45,14 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main style="min-height: calc(100svh - 50px)">
       <v-container>
         <slot />
       </v-container>
     </v-main>
 
     <!-- footer -->
-    <v-footer>
+    <v-footer style="height: 50px; justify-content: center">
       &copy;2020 Khsmty
     </v-footer>
   </v-app>
