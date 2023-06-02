@@ -7,19 +7,14 @@
 
     <v-col cols="12" style="max-width: 900px">
       <v-row>
-        <v-col
+        <article-card
           v-for="article in data?.contents"
           :key="article.id"
-          cols="12"
-          sm="6"
-        >
-          <v-card class="article-card" :to="`/article/${article.id}`" ripple>
-            <div class="eyecatch-emoji">
-              <twemoji :emoji="article.emoji" size="40px" />
-            </div>
-            <span>{{ article.title }}</span>
-          </v-card>
-        </v-col>
+          :to="`/article/${article.id}`"
+          :emoji="article.emoji"
+          :title="article.title"
+          :tags="article.tags"
+        />
       </v-row>
     </v-col>
   </v-row>
@@ -31,9 +26,11 @@ import { Article } from "~/types/article";
 const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
   queries: {
-    fields: "id,title,emoji,publishedAt,updatedAt",
+    fields: "id,title,emoji,tags,publishedAt,updatedAt",
     orders: "-publishedAt",
   },
+}).catch(() => {
+  throw createError({ statusCode: 404 });
 });
 
 useSeoMeta({
@@ -41,24 +38,3 @@ useSeoMeta({
   description: "Khsmtyが書いた記事の一覧です。",
 });
 </script>
-
-<style lang="scss" scoped>
-.article-card {
-  display: flex;
-  align-items: center;
-  font-size: larger;
-  padding: 0.7rem;
-
-  .eyecatch-emoji {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: #4a4b4e;
-    margin-right: 1rem;
-    border-radius: 7px;
-    flex-shrink: 0;
-  }
-}
-</style>
