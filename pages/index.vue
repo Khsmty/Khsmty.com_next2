@@ -74,18 +74,22 @@
           :title="article.title"
           :tags="article.tags"
         />
-        <v-btn
-          append-icon="mdi-arrow-right"
-          to="/articles"
-          color="primary"
-          nuxt
-          rounded
-        >
-          すべて見る
-        </v-btn>
+      </v-row>
+      <v-row class="mt-0">
+        <v-col cols="12" class="text-center">
+          <v-btn
+            append-icon="mdi-arrow-right"
+            to="/articles"
+            color="primary"
+            nuxt
+            rounded
+          >
+            すべて見る
+          </v-btn>
+        </v-col>
       </v-row>
     </v-col>
-    <v-col cols="12" sm="8" class="mt-3">
+    <v-col cols="12" sm="8" class="mt-2">
       <h2 class="header">
         作ったもの
         <span class="eng">Works</span>
