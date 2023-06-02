@@ -19,8 +19,10 @@
         </v-chip-group>
 
         <!-- 更新日など -->
-        <v-icon icon="mdi-calendar" />
-        &nbsp;{{ article.publishedAt }}
+        <span>
+          <v-icon icon="mdi-calendar" />
+          &nbsp;{{ article.publishedAt }}
+        </span>
         <span v-if="article.publishedAt !== article.updatedAt" class="ml-3">
           <v-icon icon="mdi-update" />
           {{ article.updatedAt }}
