@@ -14,8 +14,10 @@
           sm="6"
         >
           <v-card class="article-card" :to="`/article/${article.id}`" ripple>
-            <span class="eyecatch-emoji">{{ article.emoji }}</span>
-            {{ article.title }}
+            <div class="eyecatch-emoji">
+              <twemoji :emoji="article.emoji" size="40px" />
+            </div>
+            <span>{{ article.title }}</span>
           </v-card>
         </v-col>
       </v-row>
@@ -45,11 +47,15 @@ useSeoMeta({
   padding: 0.7rem;
 
   .eyecatch-emoji {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
     background-color: #4a4b4e;
     margin-right: 1rem;
     border-radius: 7px;
-    padding: 0.2rem 0.3rem;
+    flex-shrink: 0;
   }
 }
 </style>

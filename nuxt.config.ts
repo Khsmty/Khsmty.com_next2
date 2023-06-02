@@ -2,10 +2,29 @@
 export default defineNuxtConfig({
   app: {
     head: {
+      script: [
+        {
+          src: "https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js",
+          crossorigin: "anonymous",
+        },
+      ],
       link: [
         {
           rel: "icon",
           href: "/img/icon_r.webp",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap",
         },
       ],
     },
@@ -18,11 +37,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    "nuxt-microcms-module",
-    "@nuxtjs/google-fonts",
-    "nuxt-simple-sitemap",
-  ],
+  modules: ["nuxt-microcms-module", "nuxt-simple-sitemap", "nuxt-twemoji"],
   css: [
     "~/assets/style.scss",
     "vuetify/lib/styles/main.sass",
@@ -32,16 +47,6 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
 
-  googleFonts: {
-    families: {
-      Roboto: [400, 700],
-      "Noto+Sans+JP": [400, 700],
-    },
-    display: "swap",
-    preconnect: true,
-    preload: true,
-    prefetch: true,
-  },
   sitemap: {
     siteUrl: "https://blog.terrier.dev",
   },
