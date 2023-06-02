@@ -7,16 +7,18 @@
       </h1>
       <div class="metadata mt-0">
         <!-- タグ一覧 -->
-        <v-icon icon="mdi-tag" />&nbsp;
-        <v-chip-group v-if="article.tags" class="mr-3">
-          <v-chip
-            v-for="tag in article.tags"
-            :key="tag.id"
-            :to="`/tag/${tag.id}`"
-          >
-            {{ tag.name }}
-          </v-chip>
-        </v-chip-group>
+        <span v-if="article.tags">
+          <v-icon icon="mdi-tag" />&nbsp;
+          <v-chip-group class="mr-3">
+            <v-chip
+              v-for="tag in article.tags"
+              :key="tag.id"
+              :to="`/tag/${tag.id}`"
+            >
+              {{ tag.name }}
+            </v-chip>
+          </v-chip-group>
+        </span>
 
         <!-- 更新日など -->
         <span>
