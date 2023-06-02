@@ -32,7 +32,7 @@
       </div>
     </v-col>
 
-    <v-col cols="12" class="mb-10" style="max-width: 800px">
+    <v-col cols="12" style="max-width: 800px">
       <div class="article-content" v-html="article.content" />
     </v-col>
   </v-row>

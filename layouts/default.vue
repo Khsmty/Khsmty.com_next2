@@ -52,7 +52,7 @@
     </v-main>
 
     <!-- footer -->
-    <v-footer style="height: 50px; justify-content: center">
+    <v-footer class="mt-10 justify-center" style="height: 50px">
       &copy;2020 Khsmty
     </v-footer>
   </v-app>
