@@ -31,7 +31,7 @@
     </v-col>
 
     <v-col cols="12" style="max-width: 800px">
-      <div v-html="article.content" />
+      <div class="article-content" v-html="article.content" />
     </v-col>
   </v-row>
 </template>
@@ -42,6 +42,7 @@ import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
+import "~/assets/article.scss";
 
 const { params } = useRoute();
 if ((Array.isArray(params.id) ? params.id[0] : params.id).match(/\W/)) {
