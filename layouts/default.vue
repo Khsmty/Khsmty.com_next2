@@ -50,6 +50,11 @@
         <slot />
       </v-container>
     </v-main>
+
+    <!-- footer -->
+    <v-footer>
+      &copy;2020 Khsmty
+    </v-footer>
   </v-app>
 </template>
 

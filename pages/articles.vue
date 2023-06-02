@@ -15,9 +15,7 @@
         >
           <v-card class="article-card" :to="`/article/${article.id}`" ripple>
             <span class="eyecatch-emoji">{{ article.emoji }}</span>
-            {{
-              article.title
-            }}こんにちは。さようなら。挨拶は大切ですよね。これは成功でいいですか？
+            {{ article.title }}
           </v-card>
         </v-col>
       </v-row>
