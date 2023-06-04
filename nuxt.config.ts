@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        lang: "ja",
+      },
       script: [
         {
           src: "https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js",
