@@ -45,7 +45,7 @@
       </template>
     </v-app-bar>
 
-    <v-main style="min-height: calc(100vh - 50px)">
+    <v-main style="min-height: calc(100svh - 90px)">
       <v-container>
         <slot />
       </v-container>
