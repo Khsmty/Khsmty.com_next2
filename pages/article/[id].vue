@@ -1,18 +1,19 @@
 <template>
   <v-row justify="center" class="mt-4">
     <v-col cols="12" class="text-center mb-5">
-      <twemoji :emoji="article.emoji" size="60px" />
-      <h1 class="mt-4">
+      <twemoji :emoji="article.emoji" size="70px" />
+      <h1 class="mt-5">
         {{ article.title }}
       </h1>
       <div class="metadata mt-2">
         <!-- タグ一覧 -->
         <div v-if="article.tags.length" class="d-flex align-center">
           <v-icon icon="mdi-tag" />&nbsp;
-          <v-chip-group class="mr-3">
+          <v-chip-group class="mr-3 py-0">
             <v-chip
               v-for="tag in article.tags"
               :key="tag.id"
+              class="my-0"
               :to="`/tag/${tag.id}`"
             >
               {{ tag.name }}
