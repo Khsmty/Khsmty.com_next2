@@ -26,7 +26,13 @@ const contacts = [
     title: "Discord",
     description: "Khsmty#2222",
     logo: "discord.svg",
-    to: "https://discord.com/users/852596596899575306",
+    to: "https://discord.com/users/723052392911863858",
+  },
+  {
+    title: "Twitter",
+    description: "@Khsmty",
+    logo: "twitter.svg",
+    to: "https://twitter.com/Khsmty",
   },
 ];
 
