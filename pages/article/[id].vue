@@ -43,7 +43,7 @@
 import { Article } from "~/types/article";
 import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";
-import hljs from "highlight.js";
+import hljs, { HighlightResult } from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import "~/assets/article.scss";
 
@@ -65,7 +65,16 @@ if (!data.value) {
 
 const $ = load(data.value.content);
 $("pre code").each((_, elm) => {
-  const result = hljs.highlightAuto($(elm).text());
+  const language = $(elm).attr("class") || "";
+  let result: HighlightResult;
+
+  if (!language) {
+    result = hljs.highlightAuto($(elm).text());
+  } else {
+    result = hljs.highlight($(elm).text(), {
+      language: language.replace("language-", ""),
+    });
+  }
   $(elm).html(result.value);
   $(elm).addClass("hljs");
 });
@@ -90,5 +99,18 @@ useSeoMeta({
   align-items: center;
   justify-content: center;
   color: #a1a1a1;
+}
+
+.article-content > div[data-filename]::before {
+  content: attr(data-filename);
+  font-size: 0.8rem;
+  font-family: "0xProto", monospace;
+  position: absolute;
+  background-color: #121314;
+  border-radius: 6px 0 0 0;
+  padding: 2px 5px 3px 7px;
+}
+.article-content > div[data-filename] > pre {
+  padding-top: 25px;
 }
 </style>
