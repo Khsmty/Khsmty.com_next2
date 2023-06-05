@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" sm="6">
-    <v-card class="article-card" :to="props.to" ripple>
+    <v-card class="article-card" :to="props.to" :href="props.href" ripple>
       <div class="eyecatch-emoji">
         <twemoji v-if="props.emoji" :emoji="props.emoji" size="40px" />
         <v-img
@@ -10,7 +10,7 @@
           height="30px"
         />
       </div>
-      <div>
+      <div style="line-height: 1.2">
         <v-chip-group v-if="props.tags.length" class="ml-auto">
           <v-chip
             v-for="tag in (props.tags as Tag[])"
@@ -39,7 +39,11 @@ import { Tag } from "~/types/tag";
 const props = defineProps({
   to: {
     type: String,
-    required: true,
+    required: false,
+  },
+  href: {
+    type: String,
+    required: false,
   },
   emoji: {
     type: String,
@@ -86,6 +90,7 @@ const props = defineProps({
     font-size: larger;
   }
   .card-description {
+    font-size: 0.9rem;
     color: #a0a0a0;
   }
 }

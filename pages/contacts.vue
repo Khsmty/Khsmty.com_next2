@@ -10,7 +10,7 @@
         <article-card
           v-for="contact in contacts"
           :key="contact.title"
-          :to="contact.to"
+          :href="contact.href"
           :img="`/img/service/${contact.logo}`"
           :title="contact.title"
           :description="contact.description"
@@ -26,13 +26,31 @@ const contacts = [
     title: "Discord",
     description: "Khsmty#2222",
     logo: "discord.svg",
-    to: "https://discord.com/users/723052392911863858",
+    href: "https://discord.com/users/723052392911863858",
   },
   {
     title: "Twitter",
     description: "@Khsmty",
     logo: "twitter.svg",
-    to: "https://twitter.com/Khsmty",
+    href: "https://twitter.com/Khsmty",
+  },
+  {
+    title: "GitHub",
+    description: "@Khsmty",
+    logo: "github.svg",
+    href: "https://github.com/Khsmty",
+  },
+  {
+    title: "Misskey",
+    description: "@Khsmty@misskey.io",
+    logo: "misskey.webp",
+    href: "https://misskey.io/@Khsmty",
+  },
+  {
+    title: "メール",
+    description: "me@Khsmty.com",
+    logo: "gmail.svg",
+    href: "mailto:me@khsmty.com",
   },
 ];
 
