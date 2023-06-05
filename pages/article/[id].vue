@@ -111,6 +111,6 @@ useSeoMeta({
   padding: 2px 5px 3px 7px;
 }
 .article-content > div[data-filename] > pre {
-  padding-top: 40px;
+  padding-top: 32px;
 }
 </style>
