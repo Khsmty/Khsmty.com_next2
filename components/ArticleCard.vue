@@ -1,6 +1,12 @@
 <template>
   <v-col cols="12" sm="6">
-    <v-card class="article-card" :to="props.to" :href="props.href" ripple>
+    <v-card
+      class="article-card"
+      :to="props.to"
+      :href="props.href"
+      :target="props.href ? '_blank' : null"
+      ripple
+    >
       <div class="eyecatch-emoji">
         <twemoji v-if="props.emoji" :emoji="props.emoji" size="40px" />
         <v-img
