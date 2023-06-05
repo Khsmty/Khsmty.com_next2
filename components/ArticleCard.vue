@@ -2,7 +2,13 @@
   <v-col cols="12" sm="6">
     <v-card class="article-card" :to="props.to" ripple>
       <div class="eyecatch-emoji">
-        <twemoji :emoji="props.emoji" size="40px" />
+        <twemoji v-if="props.emoji" :emoji="props.emoji" size="40px" />
+        <v-img
+          v-else-if="props.img"
+          :src="props.img"
+          width="30px"
+          height="30px"
+        />
       </div>
       <div>
         <v-chip-group v-if="props.tags.length" class="ml-auto">
@@ -17,7 +23,11 @@
           </v-chip>
         </v-chip-group>
 
-        <span>{{ props.title }}</span>
+        <span class="card-title">{{ props.title }}</span>
+        <span v-if="props.description" class="card-description">
+          <br />
+          {{ props.description }}
+        </span>
       </div>
     </v-card>
   </v-col>
@@ -33,11 +43,19 @@ const props = defineProps({
   },
   emoji: {
     type: String,
-    required: true,
+    required: false,
+  },
+  img: {
+    type: String,
+    required: false,
   },
   title: {
     type: String,
     required: true,
+  },
+  description: {
+    type: String,
+    required: false,
   },
   tags: {
     type: Array,
@@ -51,7 +69,6 @@ const props = defineProps({
 .article-card {
   display: flex;
   align-items: center;
-  font-size: larger;
   padding: 0.7rem;
 
   .eyecatch-emoji {
@@ -64,6 +81,12 @@ const props = defineProps({
     margin-right: 1rem;
     border-radius: 7px;
     flex-shrink: 0;
+  }
+  .card-title {
+    font-size: larger;
+  }
+  .card-description {
+    color: #a0a0a0;
   }
 }
 </style>
