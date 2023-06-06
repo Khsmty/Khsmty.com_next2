@@ -5,29 +5,10 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "ja",
       },
-      script: [
-        {
-          src: "https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js",
-          crossorigin: "anonymous",
-        },
-      ],
       link: [
         {
           rel: "icon",
           href: "/img/icon_r.webp",
-        },
-        {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com",
-        },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap",
         },
       ],
     },
@@ -47,7 +28,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    siteUrl: "https://blog.terrier.dev",
+    siteUrl: "https://khsmty.com",
   },
   microCMS: {
     serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
