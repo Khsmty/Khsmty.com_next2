@@ -25,7 +25,7 @@
 
       <v-toolbar-title class="toolbar-title" @click="$router.push('/')">
         <v-avatar class="mr-2">
-          <v-img src="/img/icon.webp" />
+          <v-img src="/img/icon.webp" alt="Khsmtyのアイコン" />
         </v-avatar>
         Khsmty
       </v-toolbar-title>
@@ -59,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { mdiHome, mdiTextBoxMultiple, mdiEmail } from "@mdi/js";
 import state from "~/scripts/state";
 
 let windowWidth = ref(0);
@@ -72,9 +73,9 @@ onMounted(() => {
 });
 
 const navItems = [
-  { title: "ホーム", icon: "mdi-home", to: "/" },
-  { title: "記事一覧", icon: "mdi-text-box-multiple", to: "/articles" },
-  { title: "連絡先", icon: "mdi-email", to: "/contacts" },
+  { title: "ホーム", icon: mdiHome, to: "/" },
+  { title: "記事一覧", icon: mdiTextBoxMultiple, to: "/articles" },
+  { title: "連絡先", icon: mdiEmail, to: "/contacts" },
 ];
 </script>
 

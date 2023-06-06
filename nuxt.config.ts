@@ -41,11 +41,7 @@ export default defineNuxtConfig({
   },
 
   modules: ["nuxt-microcms-module", "nuxt-simple-sitemap", "nuxt-twemoji"],
-  css: [
-    "~/assets/style.scss",
-    "vuetify/lib/styles/main.sass",
-    "@mdi/font/css/materialdesignicons.min.css",
-  ],
+  css: ["~/assets/style.scss", "vuetify/lib/styles/main.sass"],
   build: {
     transpile: ["vuetify"],
   },

@@ -8,7 +8,7 @@
       <div class="metadata mt-2">
         <!-- タグ一覧 -->
         <div v-if="article.tags.length" class="d-flex align-center">
-          <v-icon icon="mdi-tag" />&nbsp;
+          <v-icon :icon="mdiTag" />&nbsp;
           <v-chip-group class="mr-3 py-0">
             <v-chip
               v-for="tag in article.tags"
@@ -23,11 +23,11 @@
 
         <!-- 更新日など -->
         <span>
-          <v-icon icon="mdi-calendar" />
+          <v-icon :icon="mdiCalendar" />
           {{ article.publishedAt }}
         </span>
         <span v-if="article.publishedAt !== article.updatedAt" class="ml-3">
-          <v-icon icon="mdi-update" />
+          <v-icon :icon="mdiUpdate" />
           {{ article.updatedAt }}
         </span>
       </div>
@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import { mdiTag, mdiCalendar, mdiUpdate } from "@mdi/js";
 import { Article } from "~/types/article";
 import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";

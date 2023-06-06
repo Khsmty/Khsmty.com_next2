@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" class="profile">
         <v-avatar size="130">
-          <v-img src="/img/icon.webp" />
+          <v-img src="/img/icon.webp" alt="Khsmtyのアイコン" />
         </v-avatar>
         <span class="ml-5">
           <h1 style="font-size: 3rem">Khsmty</h1>
@@ -78,7 +78,7 @@
       <v-row class="mt-0">
         <v-col cols="12" class="text-center">
           <v-btn
-            append-icon="mdi-arrow-right"
+            :append-icon="mdiArrowRight"
             to="/articles"
             color="primary"
             nuxt
@@ -100,6 +100,7 @@
 </template>
 
 <script setup lang="ts">
+import { mdiArrowRight } from "@mdi/js";
 import { Article } from "~/types/article";
 
 const skills = [
