@@ -36,17 +36,71 @@
     <v-col cols="12" style="max-width: 800px">
       <div class="article-content" v-html="article.content" />
     </v-col>
+
+    <v-col cols="12" class="text-center mt-3">
+      <span style="font-size: 1.3rem">Share<br /></span>
+      <v-btn
+        v-for="service in share"
+        :key="service.name"
+        target="_blank"
+        icon
+        variant="text"
+        class="my-1"
+        @click="shareURL(service.url)"
+      >
+        <img
+          :src="`/img/service/${service.img}`"
+          :style="`height: ${
+            service.img.split('.')[1] === 'svg' ? 1.5 : 1.8
+          }rem; width: auto`"
+        />
+      </v-btn>
+      <v-btn
+        title="URL をコピー"
+        icon
+        variant="text"
+        class="my-1"
+        @click="copyURL"
+      >
+        <v-icon :icon="mdiContentCopy" />
+      </v-btn>
+    </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import { mdiTag, mdiCalendar, mdiUpdate } from "@mdi/js";
+import { mdiTag, mdiCalendar, mdiUpdate, mdiContentCopy } from "@mdi/js";
 import { Article } from "~/types/article";
 import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";
 import hljs, { HighlightResult } from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import "~/assets/article.scss";
+
+const share = [
+  {
+    name: "Twitter",
+    img: "twitter.svg",
+    url: "https://twitter.com/intent/tweet?url=",
+  },
+  {
+    name: "Facebook",
+    img: "facebook.webp",
+    url: "https://www.facebook.com/sharer/sharer.php?u=",
+  },
+  {
+    name: "LINE",
+    img: "line.webp",
+    url: "https://social-plugins.line.me/lineit/share?url=",
+  },
+];
+
+function copyURL() {
+  navigator.clipboard.writeText(location.href);
+}
+function shareURL(url: string) {
+  window.open(url + encodeURIComponent(location.href));
+}
 
 const { params } = useRoute();
 if ((Array.isArray(params.id) ? params.id[0] : params.id).match(/\W/)) {
@@ -105,7 +159,7 @@ useSeoMeta({
 .article-content > div[data-filename]::before {
   content: attr(data-filename);
   font-size: 0.8rem;
-  font-family: "0xProto", monospace;
+  font-family: monospace;
   position: absolute;
   background-color: #121314;
   border-radius: 6px 0 0 0;
