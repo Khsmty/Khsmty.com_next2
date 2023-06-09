@@ -24,7 +24,7 @@
 const contacts = [
   {
     title: "Discord",
-    description: "Khsmty#2222",
+    description: "hsmty",
     logo: "discord.svg",
     href: "https://discord.com/users/723052392911863858",
   },
