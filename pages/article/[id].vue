@@ -67,7 +67,7 @@
     </v-col>
 
     <v-col cols="12" class="text-center pt-1">
-      <span style="font-size: 1.3rem">Comment & Reaction</span>
+      <span style="font-size: 1.3rem">Comments</span>
 
       <div class="mt-2">
         <giscus
@@ -78,7 +78,7 @@
           categoryId="DIC_kwDOJpMqKM4CXK78"
           mapping="pathname"
           strict="1"
-          reactionsEnabled="1"
+          reactionsEnabled="0"
           emitMetadata="0"
           inputPosition="top"
           theme="dark"
