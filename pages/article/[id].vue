@@ -65,6 +65,28 @@
         <v-icon :icon="mdiContentCopy" />
       </v-btn>
     </v-col>
+
+    <v-col cols="12" class="text-center mt-3">
+      <span style="font-size: 1.3rem">Comment</span>
+
+      <div class="comments-container">
+        <giscus
+          id="comments"
+          repo="Khsmty/Khsmty.com"
+          repoId="R_kgDOJpMqKA"
+          category="コメント"
+          categoryId="DIC_kwDOJpMqKM4CXK78"
+          mapping="pathname"
+          strict="1"
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="top"
+          theme="dark"
+          lang="ja"
+          loading="lazy"
+        />
+      </div>
+    </v-col>
   </v-row>
 </template>
 
@@ -74,6 +96,8 @@ import { Article } from "~/types/article";
 import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";
 import hljs, { HighlightResult } from "highlight.js";
+import Giscus from "@giscus/vue";
+
 import "highlight.js/styles/atom-one-dark.css";
 import "~/assets/article.scss";
 
@@ -167,5 +191,16 @@ useSeoMeta({
 }
 .article-content > div[data-filename] > pre {
   padding-top: 32px;
+}
+
+#comments::part(iframe) {
+  max-width: 640px;
+  margin: auto;
+  display: flex;
+}
+
+.comments-container {
+  max-height: 640px;
+  overflow-y: scroll;
 }
 </style>
