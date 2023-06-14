@@ -66,10 +66,10 @@
       </v-btn>
     </v-col>
 
-    <v-col cols="12" class="text-center mt-3">
-      <span style="font-size: 1.3rem">Comment</span>
+    <v-col cols="12" class="text-center pt-1">
+      <span style="font-size: 1.3rem">Comment & Reaction</span>
 
-      <div class="comments-container">
+      <div class="mt-2">
         <giscus
           id="comments"
           repo="Khsmty/Khsmty.com"
@@ -197,10 +197,5 @@ useSeoMeta({
   max-width: 640px;
   margin: auto;
   display: flex;
-}
-
-.comments-container {
-  max-height: 640px;
-  overflow-y: scroll;
 }
 </style>
