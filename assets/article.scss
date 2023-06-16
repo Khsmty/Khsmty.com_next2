@@ -89,7 +89,9 @@
 }
 
 @media (width => 768px) {
-  max-width: calc(800px - 32px);
+  .article-content img {
+    max-width: calc(800px - 32px);
+  }
 }
 
 .article-content code,
