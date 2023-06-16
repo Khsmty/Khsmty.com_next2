@@ -88,7 +88,7 @@
   background-color: #0d1117;
 }
 
-@media (width => 768px) {
+@media (width >= 768px) {
   .article-content img {
     max-width: calc(800px - 32px);
   }
