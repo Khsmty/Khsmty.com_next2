@@ -3,8 +3,6 @@
 }
 pre,
 code,
-code > span,
-code > span > span
-code > span > span > span {
+code * {
   font-family: monospace !important;
 }
