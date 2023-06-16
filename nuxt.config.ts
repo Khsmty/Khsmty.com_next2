@@ -20,6 +20,12 @@ export default defineNuxtConfig({
       routes: ["/"],
     },
   },
+  
+  runtimeConfig: {
+    public: {
+      siteUrl: "https://khsmty.com",
+    }
+  },
 
   modules: ["nuxt-microcms-module", "nuxt-simple-sitemap", "nuxt-twemoji"],
   css: ["~/assets/style.scss", "vuetify/lib/styles/main.sass"],
@@ -27,9 +33,6 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
 
-  sitemap: {
-    siteUrl: "https://khsmty.com",
-  },
   microCMS: {
     serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
     apiKey: process.env.MICROCMS_API_KEY,
