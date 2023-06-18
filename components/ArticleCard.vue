@@ -17,23 +17,36 @@
         />
       </div>
       <div style="line-height: 1.2">
-        <v-chip-group v-if="props.tags.length" class="ml-auto">
-          <v-chip
-            v-for="tag in (props.tags as Tag[])"
-            :key="tag.id"
-            :to="`/tag/${tag.id}`"
-            density="compact"
-            class="mt-0 mb-1"
-          >
-            {{ tag.name }}
-          </v-chip>
-        </v-chip-group>
+        <div
+          v-if="props.tags.length"
+          class="d-flex align-center card-description"
+        >
+          <v-icon :icon="mdiTag" class="mr-1" style="font-size: 1rem" />
+          <v-chip-group>
+            <v-chip
+              v-for="tag in (props.tags as Tag[])"
+              :key="tag.id"
+              :to="`/tag/${tag.id}`"
+              density="compact"
+              class="mt-0 mb-1"
+            >
+              {{ tag.name }}
+            </v-chip>
+          </v-chip-group>
+        </div>
 
         <span class="card-title">{{ props.title }}</span>
         <span v-if="props.description" class="card-description">
           <br />
           {{ props.description }}
         </span>
+        <div
+          v-if="props.date"
+          class="card-description mt-2 d-flex align-center"
+        >
+          <v-icon :icon="mdiCalendar" class="mr-1" style="font-size: 1rem" />
+          {{ formatDate(props.date) }}
+        </div>
       </div>
     </v-card>
   </v-col>
@@ -41,6 +54,8 @@
 
 <script setup lang="ts">
 import { Tag } from "~/types/tag";
+import { formatDate } from "~/scripts/util";
+import { mdiCalendar, mdiTag } from "@mdi/js";
 
 const props = defineProps({
   to: {
@@ -64,6 +79,10 @@ const props = defineProps({
     required: true,
   },
   description: {
+    type: String,
+    required: false,
+  },
+  date: {
     type: String,
     required: false,
   },

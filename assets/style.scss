@@ -1,8 +1,15 @@
+:root {
+  --base-font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "BIZ UDGothic",
+    "メイリオ", sans-serif;
+  --monospace-font-family: "Consolas", "Menlo", "Monaco", "Courier New",
+    monospace;
+}
+
 * {
-  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "BIZ UDGothic", "メイリオ", sans-serif;
+  font-family: var(--base-font-family);
 }
 pre,
 code,
 code * {
-  font-family: monospace !important;
+  font-family: var(--monospace-font-family) !important;
 }

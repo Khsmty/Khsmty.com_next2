@@ -22,12 +22,15 @@
         </div>
 
         <!-- 更新日など -->
-        <span>
-          <v-icon :icon="mdiCalendar" />
+        <span class="d-flex align-center">
+          <v-icon :icon="mdiCalendar" class="mr-1" />
           {{ article.publishedAt }}
         </span>
-        <span v-if="article.publishedAt !== article.updatedAt" class="ml-3">
-          <v-icon :icon="mdiUpdate" />
+        <span
+          v-if="article.publishedAt !== article.updatedAt"
+          class="d-flex align-center ml-3"
+        >
+          <v-icon :icon="mdiUpdate" class="mr-1" />
           {{ article.updatedAt }}
         </span>
       </div>
@@ -183,7 +186,7 @@ useSeoMeta({
 .article-content > div[data-filename]::before {
   content: attr(data-filename);
   font-size: 0.8rem;
-  font-family: monospace;
+  font-family: var(--monospace-font-family);
   position: absolute;
   background-color: #121314;
   border-radius: 6px 0 0 0;

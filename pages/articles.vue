@@ -13,6 +13,7 @@
           :to="`/article/${article.id}`"
           :emoji="article.emoji"
           :title="article.title"
+          :date="article.publishedAt"
           :tags="article.tags"
         />
       </v-row>
