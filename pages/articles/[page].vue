@@ -18,6 +18,10 @@
         />
       </v-row>
     </v-col>
+
+    <v-col cols="12" class="mt-3">
+      <v-pagination :length="paginationLength" />
+    </v-col>
   </v-row>
 </template>
 
@@ -33,6 +37,8 @@ const { data } = await useMicroCMSGetList<Article>({
 }).catch(() => {
   throw createError({ statusCode: 404 });
 });
+
+const paginationLength = String(Math.ceil((data.value?.totalCount || 0) / 10));
 
 useSeoMeta({
   title: "記事一覧",
