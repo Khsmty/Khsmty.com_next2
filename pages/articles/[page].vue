@@ -21,6 +21,7 @@
 
     <v-col cols="12" class="mt-3">
       <v-pagination
+        v-model="params.page"
         :length="paginationLength"
         @update:model-value="togglePage"
       />
