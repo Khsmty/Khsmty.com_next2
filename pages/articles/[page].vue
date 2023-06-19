@@ -21,7 +21,7 @@
 
     <v-col cols="12" class="mt-3">
       <v-pagination
-        v-model="Number(params.page)"
+        v-model="currentPage"
         :length="paginationLength"
         @update:model-value="togglePage"
       />
@@ -46,6 +46,8 @@ const { data } = await useMicroCMSGetList<Article>({
 }).catch(() => {
   throw createError({ statusCode: 404 });
 });
+
+const currentPage = ref(Number(params.page))
 
 const paginationLength = String(Math.ceil((data.value?.totalCount || 0) / 10));
 
