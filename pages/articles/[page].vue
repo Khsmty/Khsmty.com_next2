@@ -22,8 +22,7 @@
     <v-col cols="12" class="mt-3">
       <v-pagination
         :length="paginationLength"
-        @prev="togglePage('prev')"
-        @next="togglePage('next')"
+        @update:model-value="togglePage"
       />
     </v-col>
   </v-row>
@@ -33,6 +32,7 @@
 import { Article } from "~/types/article";
 
 const { params } = useRoute();
+const router = useRouter();
 
 const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
@@ -48,10 +48,8 @@ const { data } = await useMicroCMSGetList<Article>({
 
 const paginationLength = String(Math.ceil((data.value?.totalCount || 0) / 10));
 
-function togglePage(type: "prev" | "next") {
-  const currentPage = Number(params.page);
-  const nextPage = type === "prev" ? currentPage - 1 : currentPage + 1;
-  navigateTo(`/articles/${nextPage}`);
+function togglePage(number: number) {
+  router.push(`/articles/${number}`);
 }
 
 useSeoMeta({
