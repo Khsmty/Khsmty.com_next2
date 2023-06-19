@@ -39,6 +39,8 @@ const { data } = await useMicroCMSGetList<Article>({
   queries: {
     fields: "id,title,emoji,tags,publishedAt,updatedAt",
     orders: "-publishedAt",
+    limit: 10,
+    offset: (Number(params.page) - 1) * 10,
   },
 }).catch(() => {
   throw createError({ statusCode: 404 });
