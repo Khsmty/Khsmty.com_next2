@@ -20,11 +20,16 @@ export default defineNuxtConfig({
       routes: ["/"],
     },
   },
-  
+  hooks: {
+    async "nitro:config"(nitroConfig) {
+      nitroConfig.prerender?.routes!.push(...["/articles/2"]);
+    },
+  },
+
   runtimeConfig: {
     public: {
       siteUrl: "https://khsmty.com",
-    }
+    },
   },
 
   modules: ["nuxt-microcms-module", "nuxt-simple-sitemap", "nuxt-twemoji"],
