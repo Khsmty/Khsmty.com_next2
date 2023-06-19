@@ -20,13 +20,19 @@
     </v-col>
 
     <v-col cols="12" class="mt-3">
-      <v-pagination :length="paginationLength" />
+      <v-pagination
+        :length="paginationLength"
+        @prev="togglePage('prev')"
+        @next="togglePage('next')"
+      />
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
 import { Article } from "~/types/article";
+
+const { params } = useRoute();
 
 const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
@@ -39,6 +45,12 @@ const { data } = await useMicroCMSGetList<Article>({
 });
 
 const paginationLength = String(Math.ceil((data.value?.totalCount || 0) / 10));
+
+function togglePage(type: "prev" | "next") {
+  const currentPage = Number(params.page);
+  const nextPage = type === "prev" ? currentPage - 1 : currentPage + 1;
+  navigateTo(`/articles/${nextPage}`);
+}
 
 useSeoMeta({
   title: "記事一覧",
