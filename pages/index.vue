@@ -76,7 +76,7 @@
           :tags="article.tags"
         />
       </v-row>
-      <v-row class="mt-0">
+      <v-row class="mt-3">
         <v-col cols="12" class="text-center">
           <v-btn
             :append-icon="mdiArrowRight"
