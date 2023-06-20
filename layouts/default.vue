@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiHome, mdiTextBoxMultiple, mdiEmail } from "@mdi/js";
+import { mdiHome, mdiTextBoxMultiple, mdiMagnify, mdiEmail } from "@mdi/js";
 import state from "~/scripts/state";
 
 let windowWidth = ref(0);
@@ -75,6 +75,11 @@ onMounted(() => {
 const navItems = [
   { title: "ホーム", icon: mdiHome, to: "/" },
   { title: "記事一覧", icon: mdiTextBoxMultiple, to: "/articles/1" },
+  {
+    title: "検索",
+    icon: mdiMagnify,
+    to: "/search",
+  },
   { title: "連絡先", icon: mdiEmail, to: "/contacts" },
 ];
 </script>

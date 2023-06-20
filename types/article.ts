@@ -8,4 +8,6 @@ export type Article = {
   content: string;
   emoji: string;
   tags: (MicroCMSListContent & Tag)[];
+  publishedAt: string;
+  updatedAt: string;
 };
