@@ -7,6 +7,9 @@
 
 * {
   font-family: var(--base-font-family);
+
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
 }
 pre,
 code,

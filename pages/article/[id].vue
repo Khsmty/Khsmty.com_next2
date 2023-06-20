@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" class="mt-4">
-    <v-col cols="12" class="text-center mb-5">
+    <v-col cols="12" class="text-center">
       <twemoji :emoji="article.emoji" size="70px" />
       <h1 class="mt-5">
         {{ article.title }}
@@ -36,7 +36,54 @@
       </div>
     </v-col>
 
-    <v-col cols="12" style="max-width: 800px">
+    <v-col cols="12" class="pt-0" style="max-width: 800px">
+      <!-- 目次 -->
+      <v-row v-if="toc.length" justify="center" class="mt-0 mb-3">
+        <v-col cols="12" sm="10" md="8" lg="6" xl="4">
+          <v-card class="pa-2" elevation="0">
+            <span class="d-flex align-center ml-1 mt-1">
+              <v-icon
+                :icon="mdiFormatListBulleted"
+                class="mr-1"
+                style="font-size: 1.1rem"
+              />
+              <span style="font-size: 1.1rem">目次</span>
+            </span>
+
+            <v-list class="pt-1 pb-0">
+              <v-list-item
+                v-for="item in toc"
+                :key="item.id"
+                :href="`#${item.id}`"
+                density="compact"
+                rounded
+                :style="
+                  'min-height: 32px; margin-left: ' +
+                  (item.name === 'h2'
+                    ? 0
+                    : item.name === 'h3'
+                    ? 8
+                    : item.name === 'h4'
+                    ? 16
+                    : 24) +
+                  'px'
+                "
+              >
+                <v-list-item-title class="d-flex">
+                  <span class="mr-1" style="font-size: 0.9rem; color: grey">
+                    {{ item.num }}
+                  </span>
+                  <span style="font-weight: 600; font-size: 1.05rem">
+                    {{ item.text }}
+                  </span>
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <!-- 本文 -->
       <div class="article-content" v-html="article.content" />
     </v-col>
 
@@ -94,7 +141,13 @@
 </template>
 
 <script setup lang="ts">
-import { mdiTag, mdiCalendar, mdiUpdate, mdiContentCopy } from "@mdi/js";
+import {
+  mdiTag,
+  mdiCalendar,
+  mdiUpdate,
+  mdiContentCopy,
+  mdiFormatListBulleted,
+} from "@mdi/js";
 import { Article } from "~/types/article";
 import { formatDate } from "~/scripts/util";
 import { load } from "cheerio";
@@ -146,6 +199,7 @@ if (!data.value) {
 }
 
 const $ = load(data.value.content);
+
 $("pre code").each((_, elm) => {
   const language = $(elm).attr("class") || "";
   let result: HighlightResult;
@@ -160,6 +214,42 @@ $("pre code").each((_, elm) => {
   $(elm).html(result.value);
   $(elm).addClass("hljs");
 });
+
+const headings = $("h2, h3, h4, h5").toArray();
+const toc = headings.map((data) => ({
+  // @ts-expect-error
+  text: data.children[0].data,
+  id: data.attribs.id,
+  name: data.name,
+  num: "0",
+}));
+
+// toc に番号を振る
+let h2 = 0,
+  h3 = 0,
+  h4 = 0,
+  h5 = 0;
+for (let i = 0; i < toc.length; i++) {
+  if (toc[i].name === "h2") {
+    h2++;
+    h3 = 0;
+    h4 = 0;
+    h5 = 0;
+    toc[i].num = `${h2}.`;
+  } else if (toc[i].name === "h3") {
+    h3++;
+    h4 = 0;
+    h5 = 0;
+    toc[i].num = `${h2}.${h3}.`;
+  } else if (toc[i].name === "h4") {
+    h4++;
+    h5 = 0;
+    toc[i].num = `${h2}.${h3}.${h4}.`;
+  } else if (toc[i].name === "h5") {
+    h5++;
+    toc[i].num = `${h2}.${h3}.${h4}.${h5}.`;
+  }
+}
 
 const article = {
   ...data.value,
