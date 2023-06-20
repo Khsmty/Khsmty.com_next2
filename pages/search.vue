@@ -73,6 +73,7 @@ async function doSearch() {
   articles.value = request.data.value?.contents || [];
 
   isFormLoading.value = false;
+  isSearched.value = true;
 }
 
 const contacts = [
