@@ -1396,10 +1396,15 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001464:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001491.tgz#eab0e0f392de6f7411751d148de9b5bd6b203e46"
   integrity sha512-17EYIi4TLnPiTzVKMveIxU5ETlxbSO3B6iPvMbprqnKh4qJsQGk5Nh1Lp4jIMAE0XfrujsJuWZAM3oJdMHaKBA==
 
-caniuse-lite@^1.0.30001489, caniuse-lite@^1.0.30001503:
+caniuse-lite@^1.0.30001489:
   version "1.0.30001503"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001503.tgz#88b6ff1b2cf735f1f3361dc1a15b59f0561aa398"
   integrity sha512-Sf9NiF+wZxPfzv8Z3iS0rXM1Do+iOy2Lxvib38glFX+08TCYYYGR5fRJXk4d77C4AYwhUjgYgMsMudbh2TqCKw==
+
+caniuse-lite@^1.0.30001503:
+  version "1.0.30001504"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001504.tgz#eaf77e5c852dfa5f82c4924468c30602ac53744a"
+  integrity sha512-5uo7eoOp2mKbWyfMXnGO9rJWOGU8duvzEiYITW+wivukL7yHH4gX9yuRaobu6El4jPxo6jKZfG+N6fB621GD/Q==
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -1894,9 +1899,9 @@ dot-prop@^7.2.0:
     type-fest "^2.11.2"
 
 dotenv@^16.0.3:
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.0.tgz#1c61ae0a7b6f7b7e2285d50016ebab048f12ec6d"
-  integrity sha512-tHB+hmf8MRCkT3VVivGiG8kq9HiGTmQ3FzOKgztfpJQH1IWuZTOvKSJmHNnQPowecAmkCJhLrxdPhOr06LLqIQ==
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 duplexer@^0.1.2:
   version "0.1.2"
@@ -1914,9 +1919,9 @@ electron-to-chromium@^1.4.411:
   integrity sha512-FytjTbGwz///F+ToZ5XSeXbbSaXalsVRXsz2mHityI5gfxft7ieW3HqFLkU5V1aIrY42aflICqbmFoDxW10etg==
 
 electron-to-chromium@^1.4.431:
-  version "1.4.433"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.433.tgz#305ef5f8ea5fe65d252aae4b0e1088f9e4842533"
-  integrity sha512-MGO1k0w1RgrfdbLVwmXcDhHHuxCn2qRgR7dYsJvWFKDttvYPx6FNzCGG0c/fBBvzK2LDh3UV7Tt9awnHnvAAUQ==
+  version "1.4.434"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.434.tgz#4bdef7b5b18d8dac177ec0d31dab9f92eebf22a1"
+  integrity sha512-5Gvm09UZTQRaWrimRtWRO5rvaX6Kpk5WHAPKDa7A4Gj6NIPuJ8w8WNpnxCXdd+CJJt6RBU6tUw0KyULoW6XuHw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -2338,9 +2343,9 @@ globals@^11.1.0:
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
 globby@^13.1.4:
-  version "13.1.4"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-13.1.4.tgz#2f91c116066bcec152465ba36e5caa4a13c01317"
-  integrity sha512-iui/IiiW+QrJ1X1hKH5qwlMQyv34wJAYwH1vrf8b9kBA4sNiif3gKsMHa+BrdnOpEudWjpotfa7LrTzB1ERS/g==
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-13.2.0.tgz#7dd5678d765c4680c2e6d106230d86cb727cb1af"
+  integrity sha512-jWsQfayf13NvqKUIL3Ta+CIqMnvlaIDFveWE/dpOZ9+3AMEJozsxDvKA02zync9UuvOM8rOXzsD5GqKP4OnWPQ==
   dependencies:
     dir-glob "^3.0.1"
     fast-glob "^3.2.11"
@@ -3308,9 +3313,9 @@ nuxt-simple-sitemap@^2.6.1:
     ufo "^1.1.2"
 
 nuxt-twemoji@^3.2.6:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/nuxt-twemoji/-/nuxt-twemoji-3.3.0.tgz#e7858b586acb2667314d07a51a8b88b63cd03c9b"
-  integrity sha512-ckiqrVr1avgjlAYnxKy3Hpc6X/Mp7zJtyYt5tKYY5L/ei4tILAe/1usHIlla1NVFhTI6o7yDaaX7CZBUlXxqBg==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/nuxt-twemoji/-/nuxt-twemoji-3.3.1.tgz#09c3b7fa6b5c9ed6c4340d537283a5d3b5b7a9f6"
+  integrity sha512-YQJKAoPQdfAJbklJ5CsDA+A6HITjCQHbb+WaXeaWRLxy4dvPqvhPFY2XJ279ZjOIu+kkLcUU3fjEFFhvxql7mQ==
   dependencies:
     "@nuxt/kit" "^3.5.3"
     "@twemoji/api" "^14.1.2"
