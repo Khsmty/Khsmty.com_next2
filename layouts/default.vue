@@ -74,7 +74,7 @@ onMounted(() => {
 
 const navItems = [
   { title: "ホーム", icon: mdiHome, to: "/" },
-  { title: "記事一覧", icon: mdiTextBoxMultiple, to: "/articles/1" },
+  { title: "記事一覧", icon: mdiTextBoxMultiple, to: "/articles" },
   {
     title: "検索",
     icon: mdiMagnify,
