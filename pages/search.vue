@@ -29,6 +29,14 @@
           :date="article.publishedAt"
           :tags="article.tags"
         />
+
+        <v-col cols="12" class="mt-3">
+          <v-pagination
+            v-model="currentPage"
+            :length="paginationLength"
+            @update:model-value="doSearch"
+          />
+        </v-col>
       </v-row>
     </v-col>
     <v-col v-else-if="isSearched" cols="12" style="max-width: 900px">
@@ -41,13 +49,26 @@
 import { mdiMagnify } from "@mdi/js";
 import { Article } from "@/types/article";
 
-const route = useRoute();
-const currentPage = ref(Number(route.query.page) || 1);
+const { query } = useRoute();
+const router = useRouter();
 
+const currentPage = ref(Number(query.page) || 1);
+const articles = ref<Article[]>([]);
 const isSearched = ref(false);
 const searchKeyword = ref("");
 const isFormLoading = ref(false);
-const articles = ref<Article[]>([]);
+const paginationLength = ref(1);
+
+onMounted(async () => {
+  if (query.page) {
+    currentPage.value = Number(query.page);
+  }
+
+  if (query.q) {
+    searchKeyword.value = String(query.q);
+    await doSearch();
+  }
+});
 
 async function doSearch() {
   if (!searchKeyword.value) {
@@ -71,46 +92,29 @@ async function doSearch() {
   });
 
   articles.value = request.data.value?.contents || [];
+  paginationLength.value = Math.ceil(
+    (request.data.value?.totalCount || 0) / 10
+  );
 
   isFormLoading.value = false;
   isSearched.value = true;
+
+  router.push({
+    query: {
+      ...query,
+      q: searchKeyword.value,
+      page: currentPage.value !== 1 ? currentPage.value : undefined,
+    },
+  });
+
+  useSeoMeta({
+    title: `「${searchKeyword.value}」の検索結果`,
+    description: `「${searchKeyword.value}」の記事検索結果です。`,
+  });
 }
 
-const contacts = [
-  {
-    title: "Discord",
-    description: "@khsmty",
-    logo: "discord.svg",
-    href: "https://discord.com/users/723052392911863858",
-  },
-  {
-    title: "Twitter",
-    description: "@Khsmty",
-    logo: "twitter.svg",
-    href: "https://twitter.com/Khsmty",
-  },
-  {
-    title: "GitHub",
-    description: "@Khsmty",
-    logo: "github.svg",
-    href: "https://github.com/Khsmty",
-  },
-  {
-    title: "Misskey",
-    description: "@Khsmty@misskey.io",
-    logo: "misskey.webp",
-    href: "https://misskey.io/@Khsmty",
-  },
-  {
-    title: "メール",
-    description: "me@Khsmty.com",
-    logo: "gmail.svg",
-    href: "mailto:me@khsmty.com",
-  },
-];
-
 useSeoMeta({
-  title: "連絡先",
-  description: "Khsmtyの連絡先のリストです。",
+  title: "記事検索",
+  description: "記事をキーワードで検索できます。",
 });
 </script>

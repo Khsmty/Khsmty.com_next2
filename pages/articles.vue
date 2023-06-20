@@ -37,7 +37,7 @@ const router = useRouter();
 
 const currentPage = ref(Number(query.page) || 1);
 const articles = ref<Article[]>([]);
-let paginationLength = ref(1);
+const paginationLength = ref(1);
 
 onMounted(async () => {
   if (query.page) {
