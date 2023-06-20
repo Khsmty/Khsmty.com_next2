@@ -5,7 +5,7 @@
       <p>記事をキーワードで検索できます。</p>
     </v-col>
 
-    <v-col>
+    <v-col cols="12" style="max-width: 900px">
       <v-text-field
         v-model="searchKeyword"
         label="検索キーワード"
@@ -31,7 +31,7 @@
         />
       </v-row>
     </v-col>
-    <v-col v-else-if="isSearched">
+    <v-col v-else-if="isSearched" cols="12" style="max-width: 900px">
       <v-alert type="info">記事が見つかりませんでした。</v-alert>
     </v-col>
   </v-row>
