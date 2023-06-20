@@ -38,10 +38,10 @@
 
     <v-col cols="12" class="pt-0" style="max-width: 800px">
       <!-- 目次 -->
-      <v-row v-if="toc.length" justify="center" class="mt-0 mb-3">
+      <v-row v-if="toc.length > 1" justify="center" class="mt-0 mb-3">
         <v-col cols="12" sm="10" md="8" lg="6" xl="4">
           <v-card class="pa-2" elevation="0">
-            <span class="d-flex align-center ml-1 mt-1">
+            <span class="d-flex align-center ml-2 mt-2">
               <v-icon
                 :icon="mdiFormatListBulleted"
                 class="mr-1"
@@ -50,7 +50,7 @@
               <span style="font-size: 1.1rem">目次</span>
             </span>
 
-            <v-list class="pt-1 pb-0">
+            <v-list class="pt-2 pb-1">
               <v-list-item
                 v-for="item in toc"
                 :key="item.id"
@@ -70,10 +70,10 @@
                 "
               >
                 <v-list-item-title class="d-flex">
-                  <span class="mr-1" style="font-size: 0.9rem; color: grey">
+                  <span class="mr-2" style="color: grey">
                     {{ item.num }}
                   </span>
-                  <span style="font-weight: 600; font-size: 1.05rem">
+                  <span>
                     {{ item.text }}
                   </span>
                 </v-list-item-title>
@@ -217,8 +217,10 @@ $("pre code").each((_, elm) => {
 
 const headings = $("h2, h3, h4, h5").toArray();
 const toc = headings.map((data) => ({
-  // @ts-expect-error
-  text: data.children[0].data,
+  text: data.children
+    // @ts-expect-error
+    .map((child) => (child.data ? child.data : child.children[0].data))
+    .join(""),
   id: data.attribs.id,
   name: data.name,
   num: "0",
