@@ -39,12 +39,12 @@ const currentPage = ref(Number(query.page) || 1);
 const articles = ref<Article[]>([]);
 const paginationLength = ref(1);
 
-onMounted(async () => {
+onMounted(() => {
   if (query.page) {
     currentPage.value = Number(query.page);
   }
 
-  await getData();
+  getData();
 });
 
 async function getData() {
