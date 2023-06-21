@@ -39,12 +39,12 @@
     <v-col cols="12" class="pt-0" style="max-width: 800px">
       <!-- 目次 -->
       <v-row v-if="toc.length > 1" justify="center" class="mt-0 mb-3">
-        <v-col
-          cols="12"
-          class="d-flex justify-center"
-          style="width: 100%; max-width: 500px"
-        >
-          <v-card class="pa-2" elevation="0">
+        <v-col cols="12" class="d-flex justify-center">
+          <v-card
+            class="pa-2"
+            elevation="0"
+            style="width: 100%; max-width: 500px"
+          >
             <span class="d-flex align-center ml-2 mt-2">
               <v-icon
                 :icon="mdiFormatListBulleted"
