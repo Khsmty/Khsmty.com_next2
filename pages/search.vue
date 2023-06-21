@@ -59,16 +59,14 @@ const searchKeyword = ref("");
 const isFormLoading = ref(false);
 const paginationLength = ref(1);
 
-onMounted(async () => {
-  if (query.page) {
-    currentPage.value = Number(query.page);
-  }
+if (query.page) {
+  currentPage.value = Number(query.page);
+}
 
-  if (query.q) {
-    searchKeyword.value = String(query.q);
-    await doSearch();
-  }
-});
+if (query.q) {
+  searchKeyword.value = String(query.q);
+  doSearch();
+}
 
 async function doSearch() {
   if (!searchKeyword.value) {
