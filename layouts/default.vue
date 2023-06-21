@@ -64,8 +64,10 @@ import state from "~/scripts/state";
 
 let windowWidth = ref(0);
 
-syncWindowWidth();
-window.addEventListener("resize", syncWindowWidth);
+onMounted(() => {
+  syncWindowWidth();
+  window.addEventListener("resize", syncWindowWidth);
+});
 
 function syncWindowWidth() {
   windowWidth.value = window.innerWidth;
