@@ -49,7 +49,7 @@ async function getData() {
   const request = await useMicroCMSGetList<Article>({
     endpoint: "article",
     queries: {
-      fields: "id,title,emoji,tags,publishedAt,updatedAt",
+      fields: "id,title,emoji,tags,publishedAt",
       orders: "-publishedAt",
       limit: 10,
       offset: (currentPage.value - 1) * 10,

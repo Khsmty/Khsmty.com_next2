@@ -79,7 +79,7 @@ async function doSearch() {
   const request = await useMicroCMSGetList<Article>({
     endpoint: "article",
     queries: {
-      fields: "id,title,emoji,tags,publishedAt,updatedAt",
+      fields: "id,title,emoji,tags,publishedAt",
       orders: "-publishedAt",
       q: searchKeyword.value,
       limit: 10,

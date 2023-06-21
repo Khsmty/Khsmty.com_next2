@@ -116,7 +116,7 @@ const skills = [
 const { data } = await useMicroCMSGetList<Article>({
   endpoint: "article",
   queries: {
-    fields: "id,title,emoji,tags,publishedAt,updatedAt",
+    fields: "id,title,emoji,tags,publishedAt",
     limit: 4,
     orders: "-publishedAt",
   },
