@@ -9,7 +9,8 @@
   font-family: var(--base-font-family);
 }
 html {
-  scroll-margin-top: 80px;
+  scroll-padding-top: 80px;
+  -webkit-scroll-padding-top: 80px;
   scroll-behavior: smooth;
 }
 pre,
