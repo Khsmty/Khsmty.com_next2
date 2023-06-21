@@ -39,7 +39,11 @@
     <v-col cols="12" class="pt-0" style="max-width: 800px">
       <!-- 目次 -->
       <v-row v-if="toc.length > 1" justify="center" class="mt-0 mb-3">
-        <v-col cols="12" sm="10" md="8" lg="6" xl="4">
+        <v-col
+          cols="12"
+          class="d-flex justify-center"
+          style="width: 100%; max-width: 500px"
+        >
           <v-card class="pa-2" elevation="0">
             <span class="d-flex align-center ml-2 mt-2">
               <v-icon
@@ -73,7 +77,7 @@
                   <span class="mr-2" style="color: grey">
                     {{ item.num }}
                   </span>
-                  <span>
+                  <span style="white-space: normal">
                     {{ item.text }}
                   </span>
                 </v-list-item-title>
