@@ -157,31 +157,6 @@ import Giscus from "@giscus/vue";
 import "highlight.js/styles/atom-one-dark.css";
 import "~/assets/article.scss";
 
-const share = [
-  {
-    name: "Twitter",
-    img: "twitter.svg",
-    url: "https://twitter.com/intent/tweet?url=",
-  },
-  {
-    name: "Facebook",
-    img: "facebook.webp",
-    url: "https://www.facebook.com/sharer/sharer.php?u=",
-  },
-  {
-    name: "LINE",
-    img: "line.webp",
-    url: "https://social-plugins.line.me/lineit/share?url=",
-  },
-];
-
-function copyURL() {
-  navigator.clipboard.writeText(location.href);
-}
-function shareURL(url: string) {
-  window.open(url + encodeURIComponent(location.href));
-}
-
 const { params } = useRoute();
 if ((Array.isArray(params.id) ? params.id[0] : params.id).match(/\W/)) {
   throw createError({ statusCode: 404 });
@@ -215,14 +190,14 @@ $("pre code").each((_, elm) => {
   $(elm).addClass("hljs");
 });
 
-const headings = $("h2, h3, h4, h5").toArray();
+const headings = $("h1, h2, h3, h4, h5").toArray();
 const toc = headings.map((data) => ({
   text: data.children
     // @ts-expect-error
     .map((child) => (child.data ? child.data : child.children[0].data))
     .join(""),
   id: data.attribs.id,
-  name: data.name,
+  name: data.name.replace("h1", "h2"),
   num: "0",
 }));
 
@@ -259,6 +234,32 @@ const article = {
   publishedAt: formatDate(data.value.publishedAt || ""),
   updatedAt: formatDate(data.value.updatedAt),
 };
+
+function copyURL() {
+  navigator.clipboard.writeText(location.href);
+}
+
+function shareURL(url: string) {
+  window.open(url + encodeURIComponent(location.href));
+}
+
+const share = [
+  {
+    name: "Twitter",
+    img: "twitter.svg",
+    url: "https://twitter.com/intent/tweet?url=",
+  },
+  {
+    name: "Facebook",
+    img: "facebook.webp",
+    url: "https://www.facebook.com/sharer/sharer.php?u=",
+  },
+  {
+    name: "LINE",
+    img: "line.webp",
+    url: "https://social-plugins.line.me/lineit/share?url=",
+  },
+];
 
 useSeoMeta({
   title: data.value.title,
