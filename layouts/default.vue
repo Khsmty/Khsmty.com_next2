@@ -63,14 +63,14 @@ import { mdiHome, mdiTextBoxMultiple, mdiMagnify, mdiEmail } from "@mdi/js";
 import state from "~/scripts/state";
 
 let windowWidth = ref(0);
+
+syncWindowWidth();
+window.addEventListener("resize", syncWindowWidth);
+
 function syncWindowWidth() {
   windowWidth.value = window.innerWidth;
   state.drawer = false;
 }
-onMounted(() => {
-  syncWindowWidth();
-  window.addEventListener("resize", syncWindowWidth);
-});
 
 const navItems = [
   { title: "ホーム", icon: mdiHome, to: "/" },
