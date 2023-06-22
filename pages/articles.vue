@@ -43,7 +43,10 @@ if (query.page) {
   currentPage.value = Number(query.page);
 }
 
-getData();
+onMounted(async () => {
+  await getData();
+});
+await getData();
 
 async function getData() {
   const request = await useMicroCMSGetList<Article>({
