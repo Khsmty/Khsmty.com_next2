@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: Props) {
     <html lang="ja">
       <body>
         <Header />
-        <main className="mx-auto mb-0 mt-24 max-w-[900px] px-3 lg:px-0">
+        <main className="mx-auto mb-0 mt-24 max-w-4xl px-4 lg:px-0">
           {children}
         </main>
         <Footer />
