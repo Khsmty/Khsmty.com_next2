@@ -314,6 +314,10 @@
   word-wrap: normal;
 }
 
+.content pre > code {
+  padding: 0;
+}
+
 .content > div[data-filename]::before {
   content: attr(data-filename);
   font-size: 0.8rem;
