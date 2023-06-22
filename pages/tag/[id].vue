@@ -59,6 +59,9 @@ if (!tag.value) {
   throw createError({ statusCode: 404 });
 }
 
+onMounted(async () => {
+  await getData();
+});
 await getData();
 
 async function getData() {

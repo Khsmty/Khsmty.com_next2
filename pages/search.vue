@@ -65,8 +65,12 @@ if (query.page) {
 
 if (query.q) {
   searchKeyword.value = String(query.q);
-  doSearch();
+  await doSearch();
 }
+
+onMounted(async () => {
+  await doSearch();
+});
 
 async function doSearch() {
   if (!searchKeyword.value) {
