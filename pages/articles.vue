@@ -39,13 +39,11 @@ const currentPage = ref(Number(query.page) || 1);
 const articles = ref<Article[]>([]);
 const paginationLength = ref(1);
 
-onMounted(() => {
-  if (query.page) {
-    currentPage.value = Number(query.page);
-  }
+if (query.page) {
+  currentPage.value = Number(query.page);
+}
 
-  getData();
-});
+getData();
 
 async function getData() {
   const request = await useMicroCMSGetList<Article>({
