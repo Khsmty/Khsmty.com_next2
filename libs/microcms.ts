@@ -21,7 +21,8 @@ export type Article = {
   content: string;
   emoji: string;
   tags: Tag[];
-} & MicroCMSContentId & MicroCMSDate;
+} & MicroCMSContentId &
+  MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error('MICROCMS_SERVICE_DOMAIN is required');
@@ -43,18 +44,21 @@ export const getList = async (queries?: MicroCMSQueries) => {
     .getList<Article>({
       endpoint: 'article',
       queries: {
-        orders: "-publishedAt",
+        orders: '-publishedAt',
         limit: LIMIT,
         ...queries,
-      }
+      },
     })
     .catch(notFound);
-  
+
   return listData;
 };
 
 // ブログの詳細を取得
-export const getDetail = async (contentId: string, queries?: MicroCMSQueries) => {
+export const getDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
   const detailData = await client
     .getListDetail<Article>({
       endpoint: 'article',

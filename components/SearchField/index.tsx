@@ -14,7 +14,7 @@ export default function SearchField() {
         location.href = `/search?q=${inputRef.current?.value}`;
       }
     },
-    [composing],
+    [composing]
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
