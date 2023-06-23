@@ -1,9 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faEnvelope, faHome, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Nav() {
+  const links = [
+    {
+      icon: faHome,
+      name: "ホーム",
+      to: "/"
+    },
+    {
+      icon: faMagnifyingGlass,
+      name: "検索",
+      to: "/search"
+    },
+    {
+      icon: faUser,
+      name: "プロフィール",
+      to: "/profile"
+    },
+    {
+      icon: faEnvelope,
+      name: "連絡先",
+      to: "/contacts"
+    }
+]
+
   return (
     <header>
       <div className="drawer">
@@ -39,14 +62,16 @@ export default function Nav() {
 
             {/* PCメニュー */}
             <div className="hidden flex-none sm:block">
-              <ul className="menu menu-horizontal">
-                <li>
-                  <a>Navbar Item 1</a>
-                </li>
-                <li>
-                  <a>Navbar Item 2</a>
-                </li>
-              </ul>
+              {
+                links.map((link) => (
+                  <Link href={link.to} key={link.name} className='btn btn-ghost'>
+                    <FontAwesomeIcon icon={link.icon} className="h-3 w-3" />
+                    <span className="text-base font-normal">
+                      {link.name}
+                    </span>
+                  </Link>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -54,14 +79,18 @@ export default function Nav() {
         {/* Drawer */}
         <div className="drawer-side z-50">
           <label htmlFor="drawer" className="drawer-overlay"></label>
-          <ul className="menu h-full w-80 bg-base-200 p-4">
-            {/* Sidebar content */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
+          <ul className="menu menu-lg h-full w-60 bg-base-200 p-4">
+            {
+              links.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.to}>
+                    <FontAwesomeIcon icon={link.icon} className='h-4 w-4' />
+                    <span className="text-base font-normal">
+                      {link.name}
+                      </span>
+                  </Link>
+                  </li>
+              ))}
           </ul>
         </div>
       </div>
