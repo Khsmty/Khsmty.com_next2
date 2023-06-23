@@ -65,7 +65,7 @@ export default function Nav() {
               {
                 links.map((link) => (
                   <Link href={link.to} key={link.name} className='btn btn-ghost'>
-                    <FontAwesomeIcon icon={link.icon} className="h-3 w-3" />
+                    <FontAwesomeIcon icon={link.icon} className="h-4 w-4" />
                     <span className="text-base font-normal">
                       {link.name}
                     </span>
