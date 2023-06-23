@@ -55,9 +55,9 @@ export default function Nav() {
 
             {/* スマホ検索ボタン */}
             <div className="flex-none sm:hidden">
-              <button className="btn-ghost btn-square btn">
+              <Link href="/search" className="btn-ghost btn-square btn">
                 <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
-              </button>
+              </Link>
             </div>
 
             {/* PCメニュー */}
