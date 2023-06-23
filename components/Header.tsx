@@ -38,36 +38,47 @@ export default function Nav() {
       <input id="drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="navbar fixed top-0 z-40 w-full bg-base-200 drop-shadow-xl">
-          <div className="flex-none sm:hidden">
-            <label htmlFor="drawer" className="btn-ghost btn-square btn">
-              <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
-            </label>
-          </div>
+        <div className="fixed top-0 z-40 w-full bg-base-200 drop-shadow-xl">
+          <div className="navbar max-w-5xl mx-auto">
+            <div className="flex-none sm:hidden">
+              <label htmlFor="drawer" className="btn-ghost btn-square btn">
+                <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
+              </label>
+            </div>
 
-          {/* サイトタイトル */}
-          <div className="flex-1">
-            <Link href="/" className="btn-ghost btn text-xl normal-case">
-              <Image src="/img/icon_r.webp" alt="icon" width={40} height={40} />
-              <span className="text-2xl">Khsmty</span>
-            </Link>
-          </div>
-
-          {/* スマホ検索ボタン */}
-          <div className="flex-none sm:hidden">
-            <Link href="/search" className="btn-ghost btn-square btn">
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
-            </Link>
-          </div>
-
-          {/* PCメニュー */}
-          <div className="hidden flex-none sm:block">
-            {links.map((link) => (
-              <Link href={link.to} key={link.name} className="btn-ghost btn">
-                <FontAwesomeIcon icon={link.icon} className="h-4 w-4" />
-                <span className="text-base font-normal">{link.name}</span>
+            {/* サイトタイトル */}
+            <div className="flex-1">
+              <Link href="/" className="btn-ghost btn text-xl normal-case">
+                <Image
+                  src="/img/icon_r.webp"
+                  alt="icon"
+                  width={40}
+                  height={40}
+                />
+                <span className="text-2xl">Khsmty</span>
               </Link>
-            ))}
+            </div>
+
+            {/* スマホ検索ボタン */}
+            <div className="flex-none sm:hidden">
+              <Link href="/search" className="btn-ghost btn-square btn">
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
+              </Link>
+            </div>
+
+            {/* PCメニュー */}
+            <div className="hidden flex-none sm:block">
+              {links.map((link) => (
+                <Link
+                  href={link.to}
+                  key={link.name}
+                  className="btn-ghost btn px-3"
+                >
+                  <FontAwesomeIcon icon={link.icon} className="h-4 w-4" />
+                  <span className="text-base font-normal">{link.name}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

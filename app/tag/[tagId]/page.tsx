@@ -20,7 +20,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <ArticleList articles={data.contents} />
-      <Pagination totalCount={data.totalCount} basePath={`/tags/${tagId}`} />
+      <Pagination totalCount={data.totalCount} basePath={`/tag/${tagId}`} />
     </>
   );
 }

@@ -15,7 +15,7 @@ export default async function TagsLayout({ children, params }: Props) {
   return (
     <div>
       <p className={styles.title}>
-        <TagListItem tag={tag} />
+        <TagListItem tag={tag} noLink />
         の記事一覧
       </p>
       <div>{children}</div>

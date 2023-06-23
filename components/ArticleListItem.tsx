@@ -18,8 +18,9 @@ export default function ArticleListItem({ article }: Props) {
         <div className="mr-3 flex h-[65px] w-[65px] shrink-0 items-center justify-center rounded-lg bg-base-100">
           {twemoji(article.emoji, 40)}
         </div>
+
         <div className="card-body gap-1 p-0">
-          <TagList tags={article.tags} small={true} />
+          <TagList tags={article.tags} noLink />
           <h2 className="card-title">{article.title}</h2>
           <PublishedDate date={article.publishedAt || article.createdAt} />
         </div>

@@ -3,19 +3,24 @@ import { Tag } from '@/libs/microcms';
 
 type Props = {
   tag: Tag;
-  small?: boolean;
+  noLink?: boolean;
 };
 
-export default function TagListItem({ tag, small = true }: Props) {
-  return (
-    <Link
-      href={`/tag/${tag.id}`}
-      className={
-        'whitespace-nowrap rounded-lg px-2 py-1 text-sm ' +
-        (!small ? 'bg-base-200' : 'bg-base-100')
-      }
-    >
-      {tag.name}
-    </Link>
-  );
+export default function TagListItem({ tag, noLink = false }: Props) {
+  if (!noLink) {
+    return (
+      <Link
+        href={`/tag/${tag.id}`}
+        className="whitespace-nowrap rounded-lg bg-base-200 px-2 py-1 text-sm"
+      >
+        {tag.name}
+      </Link>
+    );
+  } else {
+    return (
+      <span className="whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-xs">
+        {tag.name}
+      </span>
+    );
+  }
 }

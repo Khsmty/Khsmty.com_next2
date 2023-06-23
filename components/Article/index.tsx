@@ -1,4 +1,4 @@
-import { formatRichText } from '@/libs/utils';
+import { formatDate, formatRichText } from '@/libs/utils';
 import { type Article } from '@/libs/microcms';
 import PublishedDate from '../Date';
 import { twemoji } from '@/libs/utils';
@@ -30,7 +30,11 @@ export default function Article({ data }: Props) {
 
         <div className="mt-2 flex gap-3">
           <PublishedDate date={data.publishedAt || ''} />
-          <PublishedDate date={data.updatedAt} />
+
+          {formatDate(data.publishedAt || '') !==
+            formatDate(data.updatedAt) && (
+            <PublishedDate date={data.updatedAt} type="updated" />
+          )}
         </div>
       </div>
 

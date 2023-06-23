@@ -14,7 +14,7 @@ export default function ArticleList({ articles }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap items-start justify-between">
+    <div className="flex flex-wrap justify-between">
       {articles.map((article) => (
         <ArticleListItem key={article.id} article={article} />
       ))}

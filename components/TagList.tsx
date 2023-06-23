@@ -3,20 +3,19 @@ import TagListItem from './TagListItem';
 
 type Props = {
   tags?: Tag[];
-  small?: boolean;
+  noLink?: boolean;
 };
 
-export default function TagList({ tags, small = false }: Props) {
+export default function TagList({ tags, noLink = false }: Props) {
   if (!tags) {
     return null;
   }
+
   return (
-    <ul className="m-0 flex flex-wrap gap-2">
+    <div className="m-0 flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <li key={tag.id}>
-          <TagListItem tag={tag} small={small} />
-        </li>
+        <TagListItem key={tag.id} tag={tag} noLink={noLink} />
       ))}
-    </ul>
+    </div>
   );
 }
