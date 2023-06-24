@@ -18,8 +18,8 @@ export const revalidate = 60;
 
 export function generateMetadata({ params, searchParams }: Props): Metadata {
   return {
-    title: `「${searchParams.q}」の検索結果 (${params.current}ページ)`,
-    description: `キーワード「${searchParams.q}」の検索結果です。(${params.current}ページ目)`,
+    title: searchParams.q ? `「${searchParams.q}」の検索結果 (${params.current}ページ)` : "検索",
+    description: searchParams.q ? `キーワード「${searchParams.q}」の検索結果です。(${params.current}ページ目)` : "キーワードで記事を検索できます。",
   };
 }
 
