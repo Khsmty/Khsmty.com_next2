@@ -1,23 +1,14 @@
-'use client';
-
-import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faB,
-  faClipboard,
-  faComment,
-  faShare,
-} from '@fortawesome/free-solid-svg-icons';
+import { faB, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import {
   faLine,
   faTwitter,
   faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
-import Giscus from '@giscus/react';
-
-import styles from './index.module.css';
+import CopyBtn from '@/components/CopyBtn';
+import GiscusComponent from '@/components/Giscus';
 
 type Props = {
   params: {
@@ -85,16 +76,7 @@ export default async function Page({ params }: Props) {
               />
             </a>
           ))}
-          <button
-            className="btn-circle btn"
-            onClick={() => {
-              navigator.clipboard.writeText(
-                process.env.NEXT_PUBLIC_BASE_URL + `/article/${data.id}`
-              );
-            }}
-          >
-            <FontAwesomeIcon icon={faClipboard} className="h-6 w-6" />
-          </button>
+          <CopyBtn path={data.id} />
         </div>
 
         <span className="mt-3 flex items-center text-xl font-semibold">
@@ -103,21 +85,7 @@ export default async function Page({ params }: Props) {
         </span>
 
         <div className="w-full">
-          <Giscus
-            id={styles.comments}
-            repo="Khsmty/Khsmty.com"
-            repoId="R_kgDOJpMqKA"
-            category="コメント"
-            categoryId="DIC_kwDOJpMqKM4CXK78"
-            mapping="pathname"
-            strict="1"
-            reactionsEnabled="0"
-            emitMetadata="0"
-            inputPosition="top"
-            theme="dark"
-            lang="ja"
-            loading="lazy"
-          />
+          <GiscusComponent />
         </div>
       </div>
     </>

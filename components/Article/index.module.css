@@ -389,6 +389,7 @@
 .content table,
 .content pre,
 .content details {
+  list-style: initial;
   margin-top: 0;
   margin-bottom: 16px;
 }
