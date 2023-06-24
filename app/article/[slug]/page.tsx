@@ -27,19 +27,6 @@ type Props = {
 
 export const revalidate = 60;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getDetail(params.slug);
-
-  return {
-    title: data.title,
-    description: data.description,
-    openGraph: {
-      title: data.title,
-      description: data.description,
-    },
-  };
-}
-
 export default async function Page({ params }: Props) {
   const data = await getDetail(params.slug);
 
@@ -106,10 +93,7 @@ export default async function Page({ params }: Props) {
               );
             }}
           >
-            <FontAwesomeIcon
-              icon={faClipboard}
-              className="h-6 w-6"
-            />
+            <FontAwesomeIcon icon={faClipboard} className="h-6 w-6" />
           </button>
         </div>
 
