@@ -71,7 +71,7 @@ export const formatRichText = (richText: string) => {
     }
   }
 
-  return $.html();
+  return { html: $.html(), toc };
 };
 
 export const twemoji = (input: string, size: number) => {

@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <footer className="items-center bg-base-200 p-4 text-neutral-content">
-      <div className="footer mx-auto max-w-4xl">
+      <div className="footer mx-auto max-w-4xl gap-y-3">
         <div className="grid-flow-col items-center">
           <Image src="/img/icon_r.webp" alt="icon" width={30} height={30} />
           <p>©2020 Khsmty</p>

@@ -16,6 +16,7 @@ export default async function Page({ params }: Props) {
   const data = await getList({
     offset: LIMIT * (current - 1),
   });
+  
   return (
     <>
       <ArticleList articles={data.contents} />
