@@ -19,13 +19,17 @@ export default function Pagination({
   );
 
   return (
-    <div className="mt-4 mb-10 flex items-center justify-center">
+    <div className="mb-10 mt-4 flex items-center justify-center">
       <div className="join">
         {pages.map((p) => (
           <Link
             key={p}
             href={`${basePath}/p/${p}` + (q ? `?q=${q}` : '')}
-            className={'join-item btn' + (current === p ? ' btn-active' : '')}
+            className={
+              'btn' +
+              (pages.length > 1 ? ' join-item' : '') +
+              (current === p ? ' btn-active' : '')
+            }
           >
             {p}
           </Link>

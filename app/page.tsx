@@ -13,7 +13,7 @@ export default async function Page() {
   return (
     <>
       <div
-        className="hero mb-5 rounded-2xl"
+        className="hero mb-7 rounded-2xl"
         style={{ backgroundImage: 'url(/img/background.webp)' }}
       >
         <div className="hero-content h-full w-full flex-col rounded-2xl py-20 text-neutral-content backdrop-blur backdrop-brightness-50 md:flex-row">

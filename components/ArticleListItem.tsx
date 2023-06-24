@@ -21,7 +21,7 @@ export default function ArticleListItem({ article }: Props) {
 
         <div className="card-body gap-1 p-0">
           <TagList tags={article.tags} noLink />
-          <h2 className="card-title">{article.title}</h2>
+          <h2 className="card-title mt-1">{article.title}</h2>
           <PublishedDate date={article.publishedAt || article.createdAt} />
         </div>
       </Link>

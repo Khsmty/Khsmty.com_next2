@@ -1,6 +1,7 @@
 import { getList } from '@/libs/microcms';
 import ArticleList from '@/components/ArticleList';
 import Pagination from '@/components/Pagination';
+import SearchField from '@/components/SearchField';
 
 type Props = {
   searchParams: {
@@ -17,6 +18,7 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <>
+      <SearchField />
       <ArticleList articles={data.contents} />
       <Pagination
         totalCount={data.totalCount}

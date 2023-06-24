@@ -4,8 +4,10 @@ import Footer from '@/components/Footer';
 import './globals.css';
 
 export const metadata = {
-  metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
-  title: 'Simple Blog',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://khsmty.com'
+  ),
+  title: 'Khsmty',
   description: 'A simple blog presented by microCMS',
   openGraph: {
     title: 'Simple Blog',

@@ -1,13 +1,23 @@
+'use client';
+
 import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard, faShare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faB,
+  faClipboard,
+  faComment,
+  faShare,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   faLine,
   faTwitter,
   faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
+import Giscus from '@giscus/react';
+
+import styles from './index.module.css';
 
 type Props = {
   params: {
@@ -49,6 +59,11 @@ export default async function Page({ params }: Props) {
       color: '#06c655',
       url: 'https://social-plugins.line.me/lineit/share?url={url}&text={title}',
     },
+    {
+      icon: faB,
+      color: '#00a4de',
+      url: 'https://b.hatena.ne.jp/add?mode=confirm&url={url}&title={title}',
+    },
   ];
 
   return (
@@ -69,7 +84,7 @@ export default async function Page({ params }: Props) {
                 .replace(
                   '{url}',
                   encodeURIComponent(
-                    process.env.BASE_URL + `/article/${data.id}`
+                    process.env.NEXT_PUBLIC_BASE_URL + `/article/${data.id}`
                   )
                 )
                 .replace('{title}', encodeURIComponent(data.title))}
@@ -83,6 +98,42 @@ export default async function Page({ params }: Props) {
               />
             </a>
           ))}
+          <button
+            className="btn-circle btn"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                process.env.NEXT_PUBLIC_BASE_URL + `/article/${data.id}`
+              );
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faClipboard}
+              className="h-6 w-6"
+            />
+          </button>
+        </div>
+
+        <span className="mt-3 flex items-center text-xl font-semibold">
+          <FontAwesomeIcon icon={faComment} className="mr-2 h-4 w-4" />
+          コメント
+        </span>
+
+        <div className="w-full">
+          <Giscus
+            id={styles.comments}
+            repo="Khsmty/Khsmty.com"
+            repoId="R_kgDOJpMqKA"
+            category="コメント"
+            categoryId="DIC_kwDOJpMqKM4CXK78"
+            mapping="pathname"
+            strict="1"
+            reactionsEnabled="0"
+            emitMetadata="0"
+            inputPosition="top"
+            theme="dark"
+            lang="ja"
+            loading="lazy"
+          />
         </div>
       </div>
     </>
