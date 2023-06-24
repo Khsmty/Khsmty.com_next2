@@ -24,6 +24,15 @@ export type Article = {
 } & MicroCMSContentId &
   MicroCMSDate;
 
+// ページの型定義
+export type Page = {
+  title: string;
+  description: string;
+  content: string;
+  emoji: string;
+} & MicroCMSContentId &
+  MicroCMSDate;
+
 if (!process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN) {
   throw new Error('NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN is required');
 }
@@ -70,23 +79,27 @@ export const getDetail = async (
   return detailData;
 };
 
-// タグの一覧を取得
-export const getTagList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Tag>({
-      endpoint: 'tag',
-      queries,
-    })
-    .catch(notFound);
-
-  return listData;
-};
-
 // タグの詳細を取得
 export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
     .getListDetail<Tag>({
       endpoint: 'tag',
+      contentId,
+      queries,
+    })
+    .catch(notFound);
+
+  return detailData;
+};
+
+// ページの詳細を取得
+export const getPageDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  const detailData = await client
+    .getListDetail<Article>({
+      endpoint: 'page',
       contentId,
       queries,
     })

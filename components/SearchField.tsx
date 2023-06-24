@@ -18,16 +18,20 @@ export default function SearchField() {
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
   const defaultQuery = searchParams.get('q') || '';
+
   return (
-    <input
-      type="search"
-      name="q"
-      ref={inputRef}
-      placeholder="Search..."
-      onKeyDown={_onEnter}
-      onCompositionStart={startComposition}
-      onCompositionEnd={endComposition}
-      defaultValue={defaultQuery}
-    />
+    <div className='mb-7'>
+      <input
+        className="input-bordered input-primary input w-full"
+        type="search"
+        name="q"
+        ref={inputRef}
+        placeholder="検索ワードを入力..."
+        onKeyDown={_onEnter}
+        onCompositionStart={startComposition}
+        onCompositionEnd={endComposition}
+        defaultValue={defaultQuery}
+      />
+    </div>
   );
 }

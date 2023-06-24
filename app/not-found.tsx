@@ -1,6 +1,12 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '404 Not Found',
+  description: 'ページが見つかりませんでした。',
+};
 
 export default function NotFound() {
   return (

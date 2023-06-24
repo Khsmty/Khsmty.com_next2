@@ -1,4 +1,4 @@
-import { getDetail } from '@/libs/microcms';
+import { getPageDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { Metadata } from 'next';
 
@@ -11,7 +11,7 @@ type Props = {
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getDetail(params.slug);
+  const data = await getPageDetail(params.slug);
 
   return {
     title: data.title,
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const data = await getDetail(params.slug);
+  const data = await getPageDetail(params.slug);
 
-  return <Article data={data} />;
+  return <Article data={data} page />;
 }
