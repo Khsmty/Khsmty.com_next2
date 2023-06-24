@@ -1,5 +1,4 @@
 import { getList, getTag } from '@/libs/microcms';
-import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
 import { Metadata } from 'next';
@@ -25,7 +24,6 @@ export default async function Page({ params }: Props) {
   const data = await getList({
     filters: `tags[contains]${params.tagId}`,
   });
-  const tag = await getTag(params.tagId);
 
   return (
     <>
