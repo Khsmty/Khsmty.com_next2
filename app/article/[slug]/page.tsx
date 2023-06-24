@@ -54,7 +54,7 @@ export default async function Page({ params }: Props) {
           共有
         </span>
 
-        <div className="flex gap-2">
+        <div className="flex">
           {shares.map((share) => (
             <a
               key={share.icon.iconName}
@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
                   )
                 )
                 .replace('{title}', encodeURIComponent(data.title))}
-              className="btn-circle btn"
+              className="btn-ghost btn-circle btn"
               target="_blank"
             >
               <FontAwesomeIcon

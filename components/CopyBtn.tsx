@@ -10,7 +10,7 @@ type Props = {
 export default function CopyBtn({ path }: Props) {
   return (
     <button
-      className="btn-circle btn"
+      className="btn-ghost btn-circle btn"
       onClick={() => {
         navigator.clipboard.writeText(
           process.env.NEXT_PUBLIC_BASE_URL + `/article/${path}`
