@@ -28,7 +28,7 @@ export default function Pagination({
             className={
               'btn' +
               (pages.length > 1 ? ' join-item' : '') +
-              (current === p ? ' btn-active' : '')
+              (current === p ? ' btn-active btn-primary' : '')
             }
           >
             {p}
