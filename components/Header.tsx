@@ -1,3 +1,5 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -8,8 +10,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Nav() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [pathname, searchParams]);
+
+  function toggleDrawer() {
+    setDrawerOpen(!drawerOpen);
+  }
+
   const links = [
     {
       icon: faHome,
@@ -35,11 +51,17 @@ export default function Nav() {
 
   return (
     <header className="drawer">
-      <input id="drawer" type="checkbox" className="drawer-toggle" />
+      <input
+        id="drawer"
+        type="checkbox"
+        className="drawer-toggle"
+        checked={drawerOpen}
+        onChange={toggleDrawer}
+      />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
         <div className="fixed top-0 z-40 w-full bg-base-200 drop-shadow-xl">
-          <div className="navbar max-w-5xl mx-auto">
+          <div className="navbar mx-auto max-w-5xl">
             <div className="flex-none sm:hidden">
               <label htmlFor="drawer" className="btn-ghost btn-square btn">
                 <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
