@@ -1,2 +1,2 @@
 // 1ページの表示件数
-export const LIMIT = 16;
+export const LIMIT = 12;
