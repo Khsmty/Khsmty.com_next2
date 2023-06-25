@@ -20,7 +20,14 @@ export default function Pagination({
 
   return (
     <div className="mb-10 mt-4 flex items-center justify-center">
-      <div className="join">
+      <Link
+        href={`${basePath}/p/${current !== 1 ? current - 1 : current}`}
+        className={'btn' + (current === 1 ? ' btn-disabled' : '')}
+      >
+        ←
+      </Link>
+
+      <div className="join mx-2">
         {pages.map((p) => (
           <Link
             key={p}
@@ -28,13 +35,22 @@ export default function Pagination({
             className={
               'btn' +
               (pages.length > 1 ? ' join-item' : '') +
-              (current === p ? ' btn-active btn-primary' : '')
+              (current === p ? ' btn-primary btn-active' : '')
             }
           >
             {p}
           </Link>
         ))}
       </div>
+
+      <Link
+        href={`${basePath}/p/${
+          current !== pages.length ? current + 1 : pages.length
+        }`}
+        className={'btn' + (current === pages.length ? ' btn-disabled' : '')}
+      >
+        →
+      </Link>
     </div>
   );
 }
