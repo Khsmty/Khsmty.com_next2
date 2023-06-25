@@ -20,6 +20,8 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 
+import './prism.css';
+
 type Props = {
   data: Article | Page;
   page?: boolean;
@@ -85,7 +87,7 @@ export default function Article({ data, page = false }: Props) {
       {content.toc.length >= 2 && (
         <div className="card mx-auto mt-5 max-w-lg bg-base-200">
           <div className="card-body gap-1 p-2">
-            <h2 className="card-title ml-2 mt-2">
+            <h2 className="card-title ml-3.5 mt-2">
               <FontAwesomeIcon
                 icon={faList}
                 className="h-5 w-5 text-gray-500"

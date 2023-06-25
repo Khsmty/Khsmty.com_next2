@@ -1,10 +1,8 @@
 import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import cheerio from 'cheerio';
-import hljs, { HighlightResult } from 'highlight.js';
+import { highlight } from '@/libs/highlight';
 import emoji from 'react-easy-emoji';
-
-import 'highlight.js/styles/atom-one-dark.css';
 
 export const formatDate = (date: string) => {
   const utcDate = new Date(date);
@@ -16,18 +14,16 @@ export const formatRichText = (richText: string) => {
   const $ = cheerio.load(richText);
 
   $('pre code').each((_, elm) => {
-    const language = $(elm).attr('class') || '';
-    let result: HighlightResult;
-
-    if (!language) {
-      result = hljs.highlightAuto($(elm).text());
-    } else {
-      result = hljs.highlight($(elm).text(), {
-        language: language.replace('language-', ''),
-      });
+    const attr = $(elm).attr('class') || '';
+    let lang = attr.replace('language-', '');
+    let hasDiff = false;
+    if (lang.startsWith('diff-')) {
+      hasDiff = true;
+      lang = lang.replace('diff-', '');
     }
-    $(elm).html(result.value);
-    $(elm).addClass('hljs');
+
+    const result = highlight($(elm).text(), lang, hasDiff);
+    $(elm).html(result);
   });
 
   const headings = $('h1, h2, h3, h4, h5').toArray();
