@@ -25,7 +25,7 @@ export default async function Page() {
           <Image src="/img/icon_r.webp" alt="icon" height={100} width={100} />
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">Khsmty</h1>
-            <p className="my-2 text-lg">くそざこプログラマー</p>
+            <p className="my-2 text-lg">よわよわプログラマー</p>
             <Link href="/profile" className="btn-primary btn-sm btn">
               プロフィール
               <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
