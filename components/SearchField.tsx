@@ -20,7 +20,7 @@ export default function SearchField() {
   const defaultQuery = searchParams.get('q') || '';
 
   return (
-    <div className='mb-7'>
+    <div className="mb-7">
       <input
         className="input-bordered input-primary input w-full"
         type="search"

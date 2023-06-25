@@ -1,8 +1,9 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Metadata } from 'next';
+import GA from '@/components/GA';
 
 import './globals.css';
-import { Metadata } from 'next';
 
 type Props = {
   children: React.ReactNode;
@@ -24,6 +25,8 @@ export default async function RootLayout({ children }: Props) {
           {children}
         </main>
         <Footer />
+
+        <GA />
       </body>
     </html>
   );

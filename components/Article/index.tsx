@@ -1,7 +1,6 @@
-import { formatDate, formatRichText } from '@/libs/utils';
+import { formatDate, formatRichText, twemoji } from '@/libs/utils';
 import type { Article, Page } from '@/libs/microcms';
 import PublishedDate from '../Date';
-import { twemoji } from '@/libs/utils';
 import TagList from '../TagList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
