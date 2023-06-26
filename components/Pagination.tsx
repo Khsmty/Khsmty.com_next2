@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import { LIMIT } from '@/constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   totalCount: number;
@@ -24,7 +29,7 @@ export default function Pagination({
         href={`${basePath}/p/${current !== 1 ? current - 1 : current}`}
         className={'btn' + (current === 1 ? ' btn-disabled' : '')}
       >
-        ←
+        <FontAwesomeIcon icon={faChevronLeft} />
       </Link>
 
       <div className="join mx-2">
@@ -49,7 +54,7 @@ export default function Pagination({
         }`}
         className={'btn' + (current === pages.length ? ' btn-disabled' : '')}
       >
-        →
+        <FontAwesomeIcon icon={faChevronRight} />
       </Link>
     </div>
   );
