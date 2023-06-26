@@ -19,7 +19,7 @@
     "@giscus/react": "^2.2.8",
     "@types/cheerio": "^0.22.31",
     "@types/markdown-it": "^12.2.3",
-    "@types/node": "20.3.1",
+    "@types/node": "20.3.2",
     "@types/prismjs": "^1.26.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
