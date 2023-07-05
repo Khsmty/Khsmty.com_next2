@@ -21,14 +21,48 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import './prism.css';
+import {
+  Article as JsonLDArticle,
+  WebPage as JsonLDWebPage,
+  WithContext,
+} from 'schema-dts';
 
 type Props = {
   data: Article | Page;
+  slug: string;
   page?: boolean;
 };
 
-export default function Article({ data, page = false }: Props) {
+export default function Article({ data, slug, page = false }: Props) {
   const content = formatRichText(data.content);
+
+  const jsonLd: WithContext<JsonLDArticle | JsonLDWebPage> = {
+    '@context': 'https://schema.org',
+    '@type': !page ? 'Article' : 'WebPage',
+    name: data.title,
+    headline: data.title,
+    description: data.description,
+    datePublished: data.publishedAt,
+    dateModified: data.updatedAt,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}${
+      !page ? '/article' : ''
+    }/${slug}`,
+    mainEntityOfPage: `${process.env.NEXT_PUBLIC_BASE_URL}${
+      !page ? '/article' : ''
+    }/${slug}`,
+    author: {
+      '@type': 'Person',
+      name: 'Khsmty',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Khsmty',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
+      },
+    },
+  };
 
   const shares = [
     {
@@ -55,6 +89,11 @@ export default function Article({ data, page = false }: Props) {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="flex flex-col items-center text-center">
         <div className="mt-10">{twemoji(data.emoji, 75)}</div>
 
