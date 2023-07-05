@@ -14,8 +14,6 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-
 export function generateMetadata({ params, searchParams }: Props): Metadata {
   return {
     title: searchParams.q

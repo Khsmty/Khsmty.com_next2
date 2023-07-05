@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
 
-export const revalidate = 0;
-
 export const metadata: Metadata = {
   description: 'Khsmtyのブログです。',
 };
@@ -22,7 +20,7 @@ export default async function Page() {
         className="hero mb-7 rounded-2xl"
         style={{ backgroundImage: 'url(/img/background.webp)' }}
       >
-        <div className="hero-content h-full w-full flex-col rounded-2xl py-20 text-neutral-content backdrop-blur backdrop-brightness-50 md:flex-row">
+        <div className="hero-content h-full w-full flex-col rounded-2xl py-20 backdrop-blur backdrop-brightness-50 md:flex-row">
           <Image src="/img/icon_r.webp" alt="icon" height={100} width={100} />
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">Khsmty</h1>

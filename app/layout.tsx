@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import GA from '@/components/GA';
 
-import './globals.css';
+import './globals.scss';
 
 type Props = {
   children: React.ReactNode;

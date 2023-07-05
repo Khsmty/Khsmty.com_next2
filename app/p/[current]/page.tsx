@@ -10,8 +10,6 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-
 export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `記事一覧 (${params.current}ページ)`,

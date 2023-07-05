@@ -10,8 +10,6 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-
 export function generateMetadata({ searchParams }: Props): Metadata {
   return {
     title: searchParams.q ? `「${searchParams.q}」の検索結果` : '検索',

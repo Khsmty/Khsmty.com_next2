@@ -18,14 +18,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import CopyBtn from '@/components/CopyBtn';
 import GiscusComponent from '@/components/Giscus';
-
-import styles from './index.module.css';
-import './prism.css';
 import {
   Article as JsonLDArticle,
   WebPage as JsonLDWebPage,
   WithContext,
 } from 'schema-dts';
+
+import './content.scss';
 
 type Props = {
   data: Article | Page;
@@ -141,7 +140,7 @@ export default function Article({ data, slug, page = false }: Props) {
               />
               目次
             </h2>
-            <ul className="menu rounded-box menu-sm bg-base-200 pt-0">
+            <ul className="menu rounded-box menu-sm pt-1">
               {content.toc.map((item) => (
                 <li
                   key={item.id}
@@ -169,7 +168,7 @@ export default function Article({ data, slug, page = false }: Props) {
 
       <div className="mx-auto mt-7 max-w-[800px]">
         <div
-          className={styles.content}
+          className="content"
           dangerouslySetInnerHTML={{
             __html: `${content.html}`,
           }}

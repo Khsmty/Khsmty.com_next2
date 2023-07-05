@@ -2,7 +2,7 @@
 
 import Giscus from '@giscus/react';
 
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 export default function GiscusComponent() {
   return (
