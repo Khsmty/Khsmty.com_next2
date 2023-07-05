@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
-import { WebSite, WithContext } from 'schema-dts';
 
 export const revalidate = 0;
 
@@ -17,36 +16,8 @@ export const metadata: Metadata = {
 export default async function Page() {
   const data = await getList();
 
-  const jsonLd: WithContext<WebSite> = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Khsmty',
-    url: process.env.NEXT_PUBLIC_BASE_URL,
-    description: metadata.description || '',
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
-    author: {
-      '@type': 'Person',
-      name: 'Khsmty',
-      url: process.env.NEXT_PUBLIC_BASE_URL,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Khsmty',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
-      },
-    },
-  };
-
   return (
     <>
-      <script
-        key="json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <div
         className="hero mb-7 rounded-2xl"
         style={{ backgroundImage: 'url(/img/background.webp)' }}
