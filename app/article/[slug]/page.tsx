@@ -22,5 +22,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const data = await getDetail(params.slug);
 
-  return <Article data={data} />;
+  return <Article data={data} slug={params.slug} />;
 }
