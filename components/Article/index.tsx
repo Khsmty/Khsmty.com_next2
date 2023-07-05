@@ -12,9 +12,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
+  faGetPocket,
   faLine,
   faTwitter,
-  faGetPocket,
 } from '@fortawesome/free-brands-svg-icons';
 import CopyBtn from '@/components/CopyBtn';
 import GiscusComponent from '@/components/Giscus';
@@ -42,6 +42,7 @@ export default function Article({ data, slug, page = false }: Props) {
     name: data.title,
     headline: data.title,
     description: data.description,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
     datePublished: data.publishedAt,
     dateModified: data.updatedAt,
     url: `${process.env.NEXT_PUBLIC_BASE_URL}${
@@ -53,6 +54,7 @@ export default function Article({ data, slug, page = false }: Props) {
     author: {
       '@type': 'Person',
       name: 'Khsmty',
+      url: process.env.NEXT_PUBLIC_BASE_URL,
     },
     publisher: {
       '@type': 'Organization',
@@ -95,6 +97,7 @@ export default function Article({ data, slug, page = false }: Props) {
   return (
     <article>
       <script
+        key="json-ld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

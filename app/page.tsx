@@ -23,9 +23,11 @@ export default async function Page() {
     name: 'Khsmty',
     url: process.env.NEXT_PUBLIC_BASE_URL,
     description: metadata.description || '',
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
     author: {
       '@type': 'Person',
       name: 'Khsmty',
+      url: process.env.NEXT_PUBLIC_BASE_URL,
     },
     publisher: {
       '@type': 'Organization',
@@ -40,6 +42,7 @@ export default async function Page() {
   return (
     <>
       <script
+        key="json-ld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
