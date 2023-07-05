@@ -10,16 +10,16 @@ import {
   faShare,
   faTags,
 } from '@fortawesome/free-solid-svg-icons';
-
-import styles from './index.module.css';
-import CopyBtn from '@/components/CopyBtn';
-import GiscusComponent from '@/components/Giscus';
 import {
   faFacebook,
   faLine,
   faTwitter,
+  faGetPocket,
 } from '@fortawesome/free-brands-svg-icons';
+import CopyBtn from '@/components/CopyBtn';
+import GiscusComponent from '@/components/Giscus';
 
+import styles from './index.module.css';
 import './prism.css';
 import {
   Article as JsonLDArticle,
@@ -84,6 +84,11 @@ export default function Article({ data, slug, page = false }: Props) {
       icon: faB,
       color: '#00a4de',
       url: 'https://b.hatena.ne.jp/add?mode=confirm&url={url}&title={title}',
+    },
+    {
+      icon: faGetPocket,
+      color: '#ef4056',
+      url: 'https://getpocket.com/edit?url={url}',
     },
   ];
 
