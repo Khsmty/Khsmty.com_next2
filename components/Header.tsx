@@ -64,7 +64,7 @@ export default function Nav() {
           <div className="navbar mx-auto max-w-5xl">
             <div className="flex-none sm:hidden">
               <label htmlFor="drawer" className="btn-ghost btn-square btn">
-                <FontAwesomeIcon icon={faBars} size="lg" />
+                <FontAwesomeIcon icon={faBars} size="lg" className="w-5 h-5" />
               </label>
             </div>
 
@@ -84,7 +84,7 @@ export default function Nav() {
             {/* スマホ検索ボタン */}
             <div className="flex-none sm:hidden">
               <Link href="/search" className="btn-ghost btn-square btn">
-                <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+                <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" className="w-5 h-5" />
               </Link>
             </div>
 
@@ -96,7 +96,7 @@ export default function Nav() {
                   key={link.name}
                   className="btn-ghost btn px-3"
                 >
-                  <FontAwesomeIcon icon={link.icon} />
+                  <FontAwesomeIcon icon={link.icon} className="w-4 h-4" />
                   <span className="text-base font-normal">{link.name}</span>
                 </Link>
               ))}
@@ -112,7 +112,7 @@ export default function Nav() {
           {links.map((link) => (
             <li key={link.name}>
               <Link href={link.to}>
-                <FontAwesomeIcon icon={link.icon} />
+                <FontAwesomeIcon icon={link.icon} className="w-4 h-4" />
                 <span className="text-base font-normal">{link.name}</span>
               </Link>
             </li>
