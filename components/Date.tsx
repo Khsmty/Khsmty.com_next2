@@ -24,6 +24,7 @@ export default function PublishedDate({
     >
       <FontAwesomeIcon
         icon={type === 'published' ? faCalendarDays : faArrowsRotate}
+        size="xs"
         className="mr-1 h-3 w-3"
       />
       {formatDate(date)}
