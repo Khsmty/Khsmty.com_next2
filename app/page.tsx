@@ -27,7 +27,7 @@ export default async function Page() {
             <p className="my-2 text-lg">よわよわプログラマー</p>
             <Link href="/profile" className="btn-primary btn-sm btn">
               プロフィール
-              <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
+              <FontAwesomeIcon icon={faArrowRight} size="xs" className="h-3 w-3" />
             </Link>
           </div>
         </div>
