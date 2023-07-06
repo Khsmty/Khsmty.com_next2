@@ -111,6 +111,7 @@ export default function Article({ data, slug, page = false }: Props) {
             <div className="mt-4 flex items-center">
               <FontAwesomeIcon
                 icon={faTags}
+                size="lg"
                 className="mr-2 h-5 w-5 text-gray-500"
               />
               {/* @ts-expect-error */}
@@ -136,6 +137,7 @@ export default function Article({ data, slug, page = false }: Props) {
             <h2 className="card-title ml-3.5 mt-2">
               <FontAwesomeIcon
                 icon={faList}
+                size="lg"
                 className="h-5 w-5 text-gray-500"
               />
               目次
@@ -198,6 +200,7 @@ export default function Article({ data, slug, page = false }: Props) {
             >
               <FontAwesomeIcon
                 icon={share.icon}
+                size="xl"
                 className="h-6 w-6"
                 style={{ color: share.color }}
               />
