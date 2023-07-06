@@ -17,7 +17,7 @@ export default function CopyBtn({ path }: Props) {
         );
       }}
     >
-      <FontAwesomeIcon icon={faClipboard} className="h-6 w-6" />
+      <FontAwesomeIcon icon={faClipboard} size="xl" className="h-6 w-6" />
     </button>
   );
 }
