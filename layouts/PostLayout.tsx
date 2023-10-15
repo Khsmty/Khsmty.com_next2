@@ -41,7 +41,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
         <header className="pt-8 flex flex-col items-center">
           <span>{twemoji(emoji, 75)}</span>
 
-          <div className="mt-7">
+          <div className="mt-7 text-center">
             <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
               {title}
             </h1>
