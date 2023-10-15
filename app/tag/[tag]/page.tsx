@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: { tag: string } }):
     alternates: {
       canonical: './',
       types: {
-        'application/rss+xml': `${siteMetadata.siteUrl}/tags/${tag}/feed.xml`,
+        'application/rss+xml': `${siteMetadata.siteUrl}/tag/${tag}/feed.xml`,
       },
     },
   })
@@ -42,5 +42,5 @@ export default function TagPage({ params }: { params: { tag: string } }) {
     return notFound()
   }
 
-  return <ListLayout posts={filteredPosts} title={title} />
+  return <ListLayout posts={filteredPosts} />
 }
