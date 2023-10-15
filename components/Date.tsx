@@ -12,7 +12,7 @@ export default function PublishedDate({ date, small = false, type = 'published' 
 
   return (
     <span className={'flex items-center text-gray-500 ' + (!small ? 'text-base' : 'text-sm')}>
-      <Icon size="xs" className="mr-1 h-3 w-3" />
+      <Icon className="mr-1 h-3 w-3" />
       {formatDate(date)}
     </span>
   )

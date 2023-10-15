@@ -19,7 +19,7 @@ const siteMetadata = {
   locale: 'ja-JP',
   analytics: {
     googleAnalytics: {
-      googleAnalyticsId: '', // e.g. G-XXXXXXX
+      googleAnalyticsId: 'G-58TCGP81KF',
     },
   },
   comments: {

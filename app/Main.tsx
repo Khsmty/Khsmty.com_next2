@@ -1,7 +1,4 @@
 import Link from '@/components/Link'
-import Tag from '@/components/TagListItem'
-import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
 import { FaArrowRight } from 'react-icons/fa6'
 import Image from 'next/image'
 import ArticleList from '@/components/ArticleList'
@@ -33,7 +30,7 @@ export default function Home({ posts }) {
               className="focus:shadow-outline-blue inline-flex rounded-lg border border-transparent bg-blue-600 px-3 py-1.5 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-blue-700 focus:outline-none dark:hover:bg-blue-500 items-center gap-2"
             >
               プロフィール
-              <FaArrowRight size="xs" className="h-3 w-3" />
+              <FaArrowRight className="h-3 w-3" />
             </Link>
           </div>
         </div>
