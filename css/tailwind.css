@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --base-font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic', 'メイリオ',
+    sans-serif;
+  --monospace-font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+* {
+  font-family: var(--base-font-family);
+  line-height: 1.8;
+}
+
+pre,
+code,
+code * {
+  font-family: var(--monospace-font-family) !important;
+}
+
 .task-list-item::before {
   @apply hidden;
 }

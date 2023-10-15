@@ -1,9 +1,9 @@
 const headerNavLinks = [
   { href: '/', title: 'ホーム' },
-  { href: '/blog', title: 'Blog' },
-  { href: '/tags', title: 'Tags' },
-  { href: '/projects', title: 'Projects' },
-  { href: '/about', title: 'About' },
+  { href: '/article', title: '記事' },
+  { href: '/tags', title: 'タグ' },
+  { href: '/projects', title: 'プロジェクト' },
+  { href: '/about', title: 'プロフィール' },
 ]
 
 export default headerNavLinks
