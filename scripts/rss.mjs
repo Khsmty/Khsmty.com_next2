@@ -49,7 +49,7 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
         post.tags.map((t) => GithubSlugger.slug(t)).includes(tag)
       )
       const rss = generateRss(config, filteredPosts, `tag/${tag}/${page}`)
-      const rssPath = path.join('public', 'tags', tag)
+      const rssPath = path.join('public', 'tag', tag)
       mkdirSync(rssPath, { recursive: true })
       writeFileSync(path.join(rssPath, page), rss)
     }
