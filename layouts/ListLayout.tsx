@@ -11,6 +11,7 @@ import Tag from '@/components/TagListItem'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
 import ArticleListItem from '@/components/ArticleListItem'
+import ArticleList from '@/components/ArticleList'
 
 interface PaginationProps {
   totalPages: number
@@ -77,13 +78,8 @@ export default function ListLayoutWithTags({
   return (
     <>
       <div>
-        <div className="flex flex-wrap justify-between">
-          {displayPosts.map((post) => {
-            const { path } = post
+        <ArticleList articles={displayPosts} />
 
-            return <ArticleListItem key={path} post={post} />
-          })}
-        </div>
         {pagination && pagination.totalPages > 1 && (
           <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
         )}

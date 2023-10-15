@@ -48,8 +48,8 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           </div>
 
           {tags && (
-            <div className="flex mt-4">
-              <FaTags className="w-5 h-5 mr-1 text-gray-500 dark:text-gray-400" />
+            <div className="flex mt-4 items-center">
+              <FaTags className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
               <TagList tags={tags} />
             </div>
           )}
