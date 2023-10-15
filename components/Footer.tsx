@@ -1,30 +1,37 @@
 import Link from './Link'
-import siteMetadata from '@/data/siteMetadata'
-import SocialIcon from '@/components/social-icons'
+import Image from 'next/image'
 
 export default function Footer() {
+  const links = [
+    {
+      name: 'ホーム',
+      to: '/',
+    },
+    {
+      name: 'プライバシーポリシー',
+      to: '/privacy',
+    },
+  ]
+
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
-          <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
-          <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-          <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
-          <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
+    <footer className="p-4 pb-6 mt-10 text-sm">
+      <div className="flex justify-between items-center flex-col lg:flex-row gap-4 lg:gap-0">
+        <div className="flex gap-4 items-center">
+          <Image
+            src="/static/icon.webp"
+            alt="icon"
+            className="rounded-full"
+            width={30}
+            height={30}
+          />
+          <p>©2020 Khsmty</p>
         </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>{siteMetadata.author}</div>
-          <div>{` • `}</div>
-          <div>{`© ${new Date().getFullYear()}`}</div>
-          <div>{` • `}</div>
-          <Link href="/">{siteMetadata.title}</Link>
-        </div>
-        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
-            Tailwind Nextjs Theme
-          </Link>
+        <div className="flex gap-4">
+          {links.map((link) => (
+            <Link href={link.to} key={link.name}>
+              {link.name}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>
