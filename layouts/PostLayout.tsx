@@ -1,15 +1,16 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
-import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import SectionContainer from '@/components/SectionContainer'
-import Tag from '@/components/Tag'
+import Tag from '@/components/TagListItem'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { FaTags } from 'react-icons/fa6'
 import { twemoji } from 'scripts/utils'
 import PublishedDate from '@/components/Date'
+import { Comments } from 'pliny/comments'
+import TagList from '@/components/TagList'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -49,11 +50,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           {tags && (
             <div className="flex mt-4">
               <FaTags className="w-5 h-5 mr-1 text-gray-500 dark:text-gray-400" />
-              <div className="flex flex-wrap">
-                {tags.map((tag) => (
-                  <Tag key={tag} text={tag} />
-                ))}
-              </div>
+              <TagList tags={tags} />
             </div>
           )}
 
@@ -67,7 +64,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
             <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
             <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
-              <Comments slug={slug} />
+              <Comments commentsConfig={siteMetadata.comments!} slug={slug} />
             </div>
           </div>
           <footer>
