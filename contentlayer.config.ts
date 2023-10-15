@@ -80,6 +80,7 @@ export const Blog = defineDocumentType(() => ({
   filePathPattern: 'article/**/*.mdx',
   contentType: 'mdx',
   fields: {
+    emoji: { type: 'string', required: true },
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
