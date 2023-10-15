@@ -42,5 +42,10 @@ export default function TagPage({ params }: { params: { tag: string } }) {
     return notFound()
   }
 
-  return <ListLayout posts={filteredPosts} />
+  return (
+    <>
+      <h1 className="text-2xl font-semibold mt-5 mb-6 text-center">タグ「{tag}」がついた記事</h1>
+      <ListLayout posts={filteredPosts} />
+    </>
+  )
 }
