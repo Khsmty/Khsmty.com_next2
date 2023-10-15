@@ -1,7 +1,6 @@
 import 'css/prism.css'
 import 'katex/dist/katex.css'
 
-import PageTitle from '@/components/PageTitle'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
@@ -77,12 +76,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   if (postIndex === -1) {
     return (
       <div className="mt-24 text-center">
-        <PageTitle>
-          Under Construction{' '}
-          <span role="img" aria-label="roadwork sign">
-            🚧
-          </span>
-        </PageTitle>
+        <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100">
+          この記事は準備中です
+        </h1>
       </div>
     )
   }

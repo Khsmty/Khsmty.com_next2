@@ -3,9 +3,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
-import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
@@ -32,7 +30,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, lastmod, title, emoji, tags } = content
+  const { path, slug, date, lastmod, title, emoji, tags } = content
   const basePath = path.split('/')[0]
 
   return (
@@ -43,7 +41,9 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           <span>{twemoji(emoji, 75)}</span>
 
           <div className="mt-7">
-            <PageTitle>{title}</PageTitle>
+            <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+              {title}
+            </h1>
           </div>
 
           {tags && (
