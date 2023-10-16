@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
+            <div className="flex h-[100svh] flex-col justify-between">
               <AlgoliaSearchProvider
                 algoliaConfig={{
                   appId: 'OZ3EZL97TA',
