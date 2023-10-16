@@ -50,7 +50,7 @@ const computedFields: ComputedFields = {
 function createTagCount(allBlogs) {
   const tagCount: Record<string, number> = {}
   allBlogs.forEach((file) => {
-    if (file.tags && (!isProduction || file.published === true)) {
+    if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
         const formattedTag = GithubSlugger.slug(tag)
         if (formattedTag in tagCount) {
@@ -65,7 +65,11 @@ function createTagCount(allBlogs) {
 }
 
 async function createSearchIndex(allBlogs) {
-  const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => {
+  // if (!isProduction) return
+
+  const postsObj = allBlogs.map((post) => {
+    if (post.draft === true) return
+
     return {
       objectID: `article/${post.slug}`,
       url: `${siteMetadata.siteUrl}/article/${post.slug}`,
@@ -75,7 +79,6 @@ async function createSearchIndex(allBlogs) {
       content: removeMd(post.body.code),
     }
   })
-  console.log(postsObj)
 
   const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
   const index = client.initIndex('content')
@@ -92,7 +95,7 @@ export const Blog = defineDocumentType(() => ({
     date: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
-    published: { type: 'boolean' },
+    draft: { type: 'boolean' },
     summary: { type: 'string' },
     images: { type: 'json' },
   },
