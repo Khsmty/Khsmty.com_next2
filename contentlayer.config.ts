@@ -65,9 +65,8 @@ function createTagCount(allBlogs) {
 }
 
 async function createSearchIndex(allBlogs) {
-  // if (!isProduction) return
+  if (!isProduction) return
 
-  // const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => ({
   const postsObj = allBlogs.map((post) => {
     if (post.draft === true) return
 
@@ -80,7 +79,6 @@ async function createSearchIndex(allBlogs) {
       body: removeMd(post.body.raw),
     }
   })
-  console.log(postsObj)
 
   const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
   const index = client.initIndex('content')
