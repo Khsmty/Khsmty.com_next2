@@ -1,5 +1,6 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import { writeFileSync } from 'fs'
+import removeMd from 'remove-markdown'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -71,7 +72,7 @@ async function createSearchIndex(allBlogs) {
       title: post.title,
       tags: post.tags,
       description: post.summary,
-      content: post.body.raw,
+      content: removeMd(post.body),
     }
   })
 
