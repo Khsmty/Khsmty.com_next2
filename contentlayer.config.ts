@@ -1,6 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import { writeFileSync } from 'fs'
-import removeMd from 'remove-markdown'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -67,17 +66,13 @@ function createTagCount(allBlogs) {
 async function createSearchIndex(allBlogs) {
   // if (!isProduction) return
 
-  const postsObj = allBlogs.map((post) => {
-    if (post.draft === true) return
-
-    return {
-      objectID: `article/${post.slug}`,
-      url: `${siteMetadata.siteUrl}/article/${post.slug}`,
-      title: post.title,
-      tags: post.tags,
-      description: post.summary,
-    }
-  })
+  const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => ({
+    objectID: `article/${post.slug}`,
+    url: `${siteMetadata.siteUrl}/article/${post.slug}`,
+    title: post.title,
+    tags: post.tags,
+    description: post.summary,
+  }))
 
   const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
   const index = client.initIndex('content')
