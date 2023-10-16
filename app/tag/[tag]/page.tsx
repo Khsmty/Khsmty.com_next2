@@ -2,7 +2,7 @@ import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
-import { allBlogs } from 'contentlayer/generated'
+import { allArticles } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
 import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
@@ -36,7 +36,9 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const filteredPosts = allCoreContent(
-    sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
+    sortPosts(
+      allArticles.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag))
+    )
   )
   if (!filteredPosts.length) {
     return notFound()

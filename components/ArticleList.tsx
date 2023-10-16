@@ -1,9 +1,9 @@
 import { CoreContent } from 'pliny/utils/contentlayer'
 import ArticleListItem from './ArticleListItem'
-import { Blog } from 'contentlayer/generated'
+import { Article } from 'contentlayer/generated'
 
 type Props = {
-  articles?: CoreContent<Blog>[]
+  articles?: CoreContent<Article>[]
 }
 
 export default function ArticleList({ articles }: Props) {

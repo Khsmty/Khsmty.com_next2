@@ -17,11 +17,6 @@ const siteMetadata = {
   youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com',
   locale: 'ja-JP',
-  analytics: {
-    googleAnalytics: {
-      googleAnalyticsId: 'G-58TCGP81KF',
-    },
-  },
   comments: {
     provider: 'giscus',
     giscusConfig: {

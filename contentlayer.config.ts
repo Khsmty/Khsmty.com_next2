@@ -21,7 +21,6 @@ import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import algoliasearch from 'algoliasearch'
 
 const root = process.cwd()
@@ -47,9 +46,9 @@ const computedFields: ComputedFields = {
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
-function createTagCount(allBlogs) {
+function createTagCount(allArticles) {
   const tagCount: Record<string, number> = {}
-  allBlogs.forEach((file) => {
+  allArticles.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
         const formattedTag = GithubSlugger.slug(tag)
@@ -64,10 +63,10 @@ function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
 }
 
-async function createSearchIndex(allBlogs) {
+async function createSearchIndex(allArticles) {
   // if (!isProduction) return
 
-  const postsObj = allBlogs.map((post) => {
+  const postsObj = allArticles.map((post) => {
     if (post.draft === true) return
 
     return {
@@ -90,8 +89,8 @@ async function createSearchIndex(allBlogs) {
   await index.saveObjects(postsObj, { autoGenerateObjectIDIfNotExist: true })
 }
 
-export const Blog = defineDocumentType(() => ({
-  name: 'Blog',
+export const Article = defineDocumentType(() => ({
+  name: 'Article',
   filePathPattern: 'article/**/*.mdx',
   contentType: 'mdx',
   fields: {
@@ -122,9 +121,38 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+export const Page = defineDocumentType(() => ({
+  name: 'Page',
+  filePathPattern: 'page/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    emoji: { type: 'string', required: true },
+    title: { type: 'string', required: true },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+  },
+  computedFields: {
+    ...computedFields,
+    // structuredData: {
+    //   type: 'json',
+    //   resolve: (doc) => ({
+    //     '@context': 'https://schema.org',
+    //     '@type': 'BlogPosting',
+    //     headline: doc.title,
+    //     datePublished: doc.date,
+    //     dateModified: doc.lastmod || doc.date,
+    //     description: doc.summary,
+    //     image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+    //     url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+    //   }),
+    // },
+  },
+}))
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog],
+  documentTypes: [Article, Page],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -144,9 +172,9 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
+    const { allArticles } = await importData()
 
-    createTagCount(allBlogs)
-    await createSearchIndex(allBlogs)
+    createTagCount(allArticles)
+    await createSearchIndex(allArticles)
   },
 })

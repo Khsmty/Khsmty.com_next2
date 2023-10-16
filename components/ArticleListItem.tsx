@@ -3,10 +3,10 @@ import TagList from './TagList'
 import PublishedDate from './Date'
 import { twemoji } from 'scripts/utils'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import { Blog } from 'contentlayer/generated'
+import { Article } from 'contentlayer/generated'
 
 type Props = {
-  article: CoreContent<Blog>
+  article: CoreContent<Article>
 }
 
 export default function ArticleListItem({ article }: Props) {
