@@ -1,13 +1,14 @@
 import 'css/tailwind.css'
+import 'pliny/search/algolia.css'
 
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import { AlgoliaSearchProvider } from 'pliny/search/Algolia'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -66,10 +67,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <AlgoliaSearchProvider
+                algoliaConfig={{
+                  appId: 'OZ3EZL97TA',
+                  apiKey: 'fe707591c3ac98c3da6f645d3e5e5010',
+                  indexName: 'content',
+                  placeholder: 'サイト内を検索',
+                }}
+              >
                 <Header />
                 <main className="mb-auto">{children}</main>
-              </SearchProvider>
+              </AlgoliaSearchProvider>
               <Footer />
             </div>
           </SectionContainer>

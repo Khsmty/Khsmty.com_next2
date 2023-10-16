@@ -21,6 +21,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import algoliasearch from 'algoliasearch'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -62,17 +63,21 @@ function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
 }
 
-function createSearchIndex(allBlogs) {
-  if (
-    siteMetadata?.search?.provider === 'kbar' &&
-    siteMetadata.search.kbarConfig.searchDocumentsPath
-  ) {
-    writeFileSync(
-      `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
-    )
-    console.log('Local search index generated...')
-  }
+async function createSearchIndex(allBlogs) {
+  const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => {
+    return {
+      objectID: `article/${post.slug}`,
+      url: `${siteMetadata.siteUrl}/article/${post.slug}`,
+      title: post.title,
+      tags: post.tags,
+      description: post.summary,
+      content: post.body.raw,
+    }
+  })
+
+  const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
+  const index = client.initIndex('content')
+  await index.saveObjects(postsObj, { autoGenerateObjectIDIfNotExist: true })
 }
 
 export const Blog = defineDocumentType(() => ({
@@ -130,7 +135,8 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
+
     createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+    await createSearchIndex(allBlogs)
   },
 })
