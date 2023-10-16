@@ -65,7 +65,7 @@ function createTagCount(allBlogs) {
 }
 
 async function createSearchIndex(allBlogs) {
-  if (!isProduction) return
+  // if (!isProduction) return
 
   const postsObj = allBlogs.map((post) => {
     if (post.draft === true) return
@@ -77,6 +77,11 @@ async function createSearchIndex(allBlogs) {
       tags: post.tags,
       description: post.summary,
       body: removeMd(post.body.raw),
+      hierarchy: {
+        lvl0: '記事',
+        lvl1: post.title,
+      },
+      type: 'lvl1',
     }
   })
 
