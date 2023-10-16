@@ -76,7 +76,6 @@ async function createSearchIndex(allBlogs) {
       title: post.title,
       tags: post.tags,
       description: post.summary,
-      content: removeMd(post.body.code),
     }
   })
 
