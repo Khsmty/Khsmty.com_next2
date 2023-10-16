@@ -66,13 +66,19 @@ function createTagCount(allBlogs) {
 async function createSearchIndex(allBlogs) {
   // if (!isProduction) return
 
-  const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => ({
-    objectID: `article/${post.slug}`,
-    url: `${siteMetadata.siteUrl}/article/${post.slug}`,
-    title: post.title,
-    tags: post.tags,
-    description: post.summary,
-  }))
+  // const postsObj = allCoreContent(sortPosts(allBlogs)).map((post) => ({
+  const postsObj = allBlogs.map((post) => {
+    if (post.draft === true) return
+
+    return {
+      objectID: `article/${post.slug}`,
+      url: `${siteMetadata.siteUrl}/article/${post.slug}`,
+      title: post.title,
+      tags: post.tags,
+      description: post.summary,
+    }
+  })
+  console.log(postsObj)
 
   const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
   const index = client.initIndex('content')
