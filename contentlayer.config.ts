@@ -72,9 +72,10 @@ async function createSearchIndex(allBlogs) {
       title: post.title,
       tags: post.tags,
       description: post.summary,
-      content: removeMd(post.body),
+      content: removeMd(post.body.code),
     }
   })
+  console.log(postsObj)
 
   const client = algoliasearch('OZ3EZL97TA', process.env.ALGOLIA_ADMIN_API_KEY as string)
   const index = client.initIndex('content')
