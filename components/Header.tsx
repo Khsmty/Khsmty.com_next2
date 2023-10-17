@@ -25,7 +25,7 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className="flex items-center leading-5 space-x-4 sm:space-x-6">
+      <div className="flex items-center leading-5 gap-4 sm:gap-6">
         {headerNavLinks
           .filter((link) => link.href !== '/')
           .map((link) => (
@@ -37,9 +37,12 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
-        <SearchButton />
-        <ThemeSwitch />
-        <MobileNav />
+
+        <div className="flex items-center gap-2">
+          <SearchButton />
+          <ThemeSwitch />
+          <MobileNav />
+        </div>
       </div>
     </header>
   )

@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
-import { HiBars3, HiXMark } from 'react-icons/hi2'
+import { HiXMark } from 'react-icons/hi2'
+import { SlMenu } from 'react-icons/sl'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -22,8 +23,8 @@ const MobileNav = () => {
 
   return (
     <>
-      <button aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden">
-        <HiBars3 className="w-8 h-8" />
+      <button aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden w-8 h-8">
+        <SlMenu className="w-[1.37rem] h-[1.37rem] m-auto" />
       </button>
       <div
         className={`fixed left-0 top-0 z-10 h-full w-full transform opacity-95 dark:opacity-[0.98] bg-white duration-300 ease-in-out dark:bg-gray-950 !ml-0 ${
@@ -39,12 +40,12 @@ const MobileNav = () => {
             <HiXMark className="h-8 w-8" />
           </button>
         </div>
-        <nav className="fixed mt-8 h-full">
+        <nav className="fixed mt-8 h-full w-full">
           {headerNavLinks.map((link) => (
             <div key={link.title} className="px-12 py-4">
               <Link
                 href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex"
                 onClick={onToggleNav}
               >
                 {link.title}

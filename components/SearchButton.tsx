@@ -4,8 +4,8 @@ import { HiMagnifyingGlass } from 'react-icons/hi2'
 
 const SearchButton = () => {
   return (
-    <AlgoliaButton>
-      <HiMagnifyingGlass className="text-gray-900 dark:text-gray-100 h-6 w-6" />
+    <AlgoliaButton className="w-8 h-8">
+      <HiMagnifyingGlass className="text-gray-900 dark:text-gray-100 h-6 w-6 m-auto" />
     </AlgoliaButton>
   )
 }

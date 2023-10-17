@@ -14,7 +14,7 @@ export default function ArticleListItem({ article }: Props) {
     <div className="mb-5 w-full md:w-[49%]">
       <Link
         href={`/article/${article.slug}`}
-        className="flex-row flex rounded-xl items-center bg-gray-100 p-3 shadow-xl"
+        className="flex-row flex rounded-xl items-center bg-gray-100 dark:bg-gray-900 p-3 shadow-xl"
       >
         <div className="mr-3 flex h-[65px] w-[65px] shrink-0 items-center justify-center rounded-lg bg-base-100">
           {twemoji(article.emoji, 40)}
