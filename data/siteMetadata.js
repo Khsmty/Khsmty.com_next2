@@ -39,6 +39,6 @@ const siteMetadata = {
       searchDocumentsPath: 'search.json',
     },
   },
-}
+};
 
-module.exports = siteMetadata
+module.exports = siteMetadata;

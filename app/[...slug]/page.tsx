@@ -1,41 +1,45 @@
-import 'css/content.scss'
-import 'katex/dist/katex.css'
+import 'css/content.scss';
+import 'katex/dist/katex.css';
 
-import { components } from '@/components/MDXComponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
-import { allPages } from 'contentlayer/generated'
-import type { Page } from 'contentlayer/generated'
-import PageLayout from '@/layouts/PageLayout'
-import { Metadata } from 'next'
-import siteMetadata from '@/data/siteMetadata'
-import { notFound } from 'next/navigation'
+import { components } from '@/components/MDXComponents';
+import { MDXLayoutRenderer } from 'pliny/mdx-components';
+import {
+  sortPosts,
+  coreContent,
+  allCoreContent,
+} from 'pliny/utils/contentlayer';
+import { allPages } from 'contentlayer/generated';
+import type { Page } from 'contentlayer/generated';
+import PageLayout from '@/layouts/PageLayout';
+import { Metadata } from 'next';
+import siteMetadata from '@/data/siteMetadata';
+import { notFound } from 'next/navigation';
 
-const defaultLayout = 'PageLayout'
+const defaultLayout = 'PageLayout';
 const layouts = {
   PageLayout,
-}
+};
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] }
+  params: { slug: string[] };
 }): Promise<Metadata | undefined> {
-  const slug = decodeURI(params.slug.join('/'))
-  const post = allPages.find((p) => p.slug === slug)
+  const slug = decodeURI(params.slug.join('/'));
+  const post = allPages.find((p) => p.slug === slug);
   if (!post) {
-    return
+    return;
   }
 
-  let imageList = [siteMetadata.socialBanner]
+  let imageList = [siteMetadata.socialBanner];
   if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images
+    imageList = typeof post.images === 'string' ? [post.images] : post.images;
   }
   const ogImages = imageList.map((img) => {
     return {
       url: img.includes('http') ? img : siteMetadata.siteUrl + img,
-    }
-  })
+    };
+  });
 
   return {
     title: post.title,
@@ -56,26 +60,26 @@ export async function generateMetadata({
       description: post.summary,
       images: imageList,
     },
-  }
+  };
 }
 
 export const generateStaticParams = async () => {
-  const paths = allPages.map((p) => ({ slug: p.slug.split('/') }))
+  const paths = allPages.map((p) => ({ slug: p.slug.split('/') }));
 
-  return paths
-}
+  return paths;
+};
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const slug = decodeURI(params.slug.join('/'))
+  const slug = decodeURI(params.slug.join('/'));
   // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(allPages)
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
+  const sortedCoreContents = allCoreContent(allPages);
+  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
   if (postIndex === -1) {
-    return notFound()
+    return notFound();
   }
 
-  const post = allPages.find((p) => p.slug === slug) as Page
-  const mainContent = coreContent(post)
+  const post = allPages.find((p) => p.slug === slug) as Page;
+  const mainContent = coreContent(post);
   // const jsonLd = post.structuredData
   // jsonLd['author'] = [
   //   {
@@ -84,7 +88,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   //   },
   // ]
 
-  const Layout = layouts[defaultLayout]
+  const Layout = layouts[defaultLayout];
 
   return (
     <>
@@ -93,8 +97,12 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       /> */}
       <Layout content={mainContent}>
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        <MDXLayoutRenderer
+          code={post.body.code}
+          components={components}
+          toc={post.toc}
+        />
       </Layout>
     </>
-  )
+  );
 }

@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --base-font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic', 'メイリオ',
-    sans-serif;
-  --monospace-font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+  --base-font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic',
+    'メイリオ', sans-serif;
+  --monospace-font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New',
+    monospace;
 }
 
 * {

@@ -1,5 +1,5 @@
-import Link from './Link'
-import Image from 'next/image'
+import Link from './Link';
+import Image from 'next/image';
 
 export default function Footer() {
   const links = [
@@ -11,7 +11,7 @@ export default function Footer() {
       name: 'プライバシーポリシー',
       to: '/privacy',
     },
-  ]
+  ];
 
   return (
     <footer className="items-center bg-base-200 p-4 text-neutral-content">
@@ -35,5 +35,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

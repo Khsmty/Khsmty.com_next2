@@ -1,11 +1,11 @@
-import { format, utcToZonedTime } from 'date-fns-tz'
-import emoji from 'react-easy-emoji'
+import { format, utcToZonedTime } from 'date-fns-tz';
+import emoji from 'react-easy-emoji';
 
 export const formatDate = (date: string) => {
-  const utcDate = new Date(date)
-  const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo')
-  return format(jstDate, 'yyyy/MM/dd')
-}
+  const utcDate = new Date(date);
+  const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo');
+  return format(jstDate, 'yyyy/MM/dd');
+};
 
 export const twemoji = (input: string, size: number) => {
   return emoji(input, {
@@ -20,5 +20,5 @@ export const twemoji = (input: string, size: number) => {
         verticalAlign: '-0.1em',
       },
     },
-  })
-}
+  });
+};

@@ -1,13 +1,13 @@
-import TagListItem from './TagListItem'
+import TagListItem from './TagListItem';
 
 type Props = {
-  tags?: string[]
-  noLink?: boolean
-}
+  tags?: string[];
+  noLink?: boolean;
+};
 
 export default function TagList({ tags, noLink = false }: Props) {
   if (!tags) {
-    return null
+    return null;
   }
 
   return (
@@ -16,5 +16,5 @@ export default function TagList({ tags, noLink = false }: Props) {
         <TagListItem key={tag} text={tag} noLink={noLink} />
       ))}
     </div>
-  )
+  );
 }

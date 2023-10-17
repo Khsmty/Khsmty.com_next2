@@ -15,6 +15,6 @@ const projectsData = [
     imgSrc: '/static/images/time-machine.jpg',
     href: '/article/the-time-machine',
   },
-]
+];
 
-export default projectsData
+export default projectsData;

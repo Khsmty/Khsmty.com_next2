@@ -1,16 +1,16 @@
-import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
-import { allArticles } from 'contentlayer/generated'
-import Link from '@/components/Link'
-import { FaArrowRight } from 'react-icons/fa6'
-import Image from 'next/image'
-import ArticleList from '@/components/ArticleList'
+import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer';
+import { allArticles } from 'contentlayer/generated';
+import Link from '@/components/Link';
+import { FaArrowRight } from 'react-icons/fa6';
+import Image from 'next/image';
+import ArticleList from '@/components/ArticleList';
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 5;
 
 export default async function Page() {
-  const sortedPosts = sortPosts(allArticles)
-  const posts = allCoreContent(sortedPosts)
-  const displayPosts = posts.slice(0, MAX_DISPLAY)
+  const sortedPosts = sortPosts(allArticles);
+  const posts = allCoreContent(sortedPosts);
+  const displayPosts = posts.slice(0, MAX_DISPLAY);
 
   return (
     <>
@@ -29,7 +29,7 @@ export default async function Page() {
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">Khsmty</h1>
             <p className="my-2 text-lg">よわよわプログラマー</p>
-            <Link href="/profile" className="btn-primary btn-sm btn">
+            <Link href="/profile" className="btn btn-primary btn-sm">
               プロフィール
               <FaArrowRight className="h-3 w-3" />
             </Link>
@@ -52,5 +52,5 @@ export default async function Page() {
         </div>
       )}
     </>
-  )
+  );
 }
