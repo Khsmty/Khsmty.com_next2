@@ -1,0 +1,229 @@
+---
+emoji: 🔍
+title: discord.js を使って Discord 上で Google 検索ができる Bot を作る方法
+summary: discord.js を使って Discord 上で Google 検索ができる Bot を作る方法
+tags: ['Discord']
+date: '2021-03-23'
+draft: false
+---
+
+※この記事の方法は現在は使用できません。Google カスタム検索などで代用してください。
+
+こんにちは、Khsmty です。
+
+この記事では、discord.js で Google 検索機能を作る方法を解説します。
+
+前提条件
+Node.js がインストールされている
+discord.js を使って bot が起動できている
+Step1 必要なパッケージのインストール
+$ npm install serp request
+↑を実行してserpとrequestをインストールします。
+
+使うパッケージはこれだけです。簡単ですね。
+
+Step2 コードを書いていく
+Step2.1 コマンドを決める
+単純なのがいいと思います。ここでは!searchにしておきます。
+
+if (message.content.startsWith("!search")) {
+
+}
+Step2.2 検索語句だけ切り取る
+message.content (メッセージそのまま) をそのまま検索にかけると、不要なコマンド部分まで検索されてしまいますので、検索語句だけ切り取ってやる必要があります。
+
+.replace(searchCmd, "")部分でコマンド文を削除しています。
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+}
+Step2.3 serpの設定
+npm
+
+serp
+serpのページを参考にして書いていきます。
+
+const serp = require("serp");
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+
+  const options = {
+    host : "google.co.jp",
+    qs : {
+      q : searchword,
+      filter : 0,
+      pws : 0
+    },
+    num : 3
+  };
+  const links = await serp.search(options);
+}
+Step2.4 結果を Discord に送信する
+<Channel>.send()で結果をチャンネルに送信します。
+
+const serp = require("serp");
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+
+  const options = {
+    host : "google.co.jp",
+    qs : {
+      q : searchword,
+      filter : 0,
+      pws : 0
+    },
+    num : 3
+  };
+  const links = await serp.search(options);
+
+  message.channel.send({
+    embed: {
+      title: "検索結果",
+      description:
+        `[${links[0].title}](https://www.google.co.jp${links[0].url})\n\n` +
+        `[${links[1].title}](https://www.google.co.jp${links[1].url})\n\n` +
+        `[${links[2].title}](https://www.google.co.jp${links[2].url})`,
+      color: "#4285F4"
+    }
+  });
+}
+Step2.5 検索結果が見つからなかった場合
+上までのコードでも検索はできるのですが、もし検索結果が見つからなかったら、bot がエラーを吐くだけで、メッセージが返されないまま落ちてしまいます。
+
+なので、見つからなかった時用のコードを書きます。
+
+const serp = require("serp");
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+
+  try {
+    const options = {
+      host : "google.co.jp",
+      qs : {
+        q : searchword,
+        filter : 0,
+        pws : 0
+      },
+      num : 3
+    };
+    const links = await serp.search(options);
+
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description:
+          `[${links[0].title}](https://www.google.co.jp${links[0].url})\n\n` +
+          `[${links[1].title}](https://www.google.co.jp${links[1].url})\n\n` +
+          `[${links[2].title}](https://www.google.co.jp${links[2].url})`,
+        color: "#4285F4"
+      }
+    });
+  } catch (e) {
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description: `検索結果が見つからなかったようです…\n検索語句を変えてもう一度試してください。`,
+        color: "#4285F4"
+      }
+    });
+  }
+}
+コード全文
+この記事で書いたコードの全文です。
+
+const serp = require("serp");
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+
+  try {
+    const options = {
+      host : "google.co.jp",
+      qs : {
+        q : searchword,
+        filter : 0,
+        pws : 0
+      },
+      num : 3
+    };
+    const links = await serp.search(options);
+
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description:
+          `[${links[0].title}](https://www.google.co.jp${links[0].url})\n\n` +
+          `[${links[1].title}](https://www.google.co.jp${links[1].url})\n\n` +
+          `[${links[2].title}](https://www.google.co.jp${links[2].url})`,
+        color: "#4285F4"
+      }
+    });
+  } catch (e) {
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description: `検索結果が見つからなかったようです…\n検索語句を変えてもう一度試してください。`,
+        color: "#4285F4"
+      }
+    });
+  }
+}
+おまけ 特定のサイト内を検索する
+http://example.comは検索したいサイトの URL に置き換えてください。
+
+const serp = require("serp");
+
+const searchCmd = "!search";
+
+if (message.content.startsWith(searchCmd)) {
+  const searchWord = message.content.replace(searchCmd, "");
+
+  try {
+    const options = {
+      host : "google.co.jp",
+      qs : {
+        q : searchword + " site:http://example.com",
+        filter : 0,
+        pws : 0
+      },
+      num : 3
+    };
+    const links = await serp.search(options);
+
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description:
+          `[${links[0].title}](https://www.google.co.jp${links[0].url})\n\n` +
+          `[${links[1].title}](https://www.google.co.jp${links[1].url})\n\n` +
+          `[${links[2].title}](https://www.google.co.jp${links[2].url})`,
+        color: "#4285F4"
+      }
+    });
+  } catch (e) {
+    message.channel.send({
+      embed: {
+        title: "検索結果",
+        description: `検索結果が見つからなかったようです…\n検索語句を変えてもう一度試してください。`,
+        color: "#4285F4"
+      }
+    });
+  }
+}
+おわり
+拙い文でしたがここまでお読みくださりありがとうございました…！
+
+動かないじゃん！とか、ここ読みにくい！書き直せ！とかがあれば、どうぞ下のコメント欄までお願いします。
