@@ -13,38 +13,54 @@ draft: false
 
 この記事では、discord.js で Google 検索機能を作る方法を解説します。
 
-前提条件
-Node.js がインストールされている
-discord.js を使って bot が起動できている
-Step1 必要なパッケージのインストール
+## 前提条件
+
+- Node.js がインストールされている
+- discord.js を使って bot が起動できている
+
+## Step1 必要なパッケージのインストール
+
+```
 $ npm install serp request
+```
+
 ↑を実行してserpとrequestをインストールします。
 
 使うパッケージはこれだけです。簡単ですね。
 
-Step2 コードを書いていく
-Step2.1 コマンドを決める
-単純なのがいいと思います。ここでは!searchにしておきます。
+## Step2 コードを書いていく
 
+### Step2.1 コマンドを決める
+
+単純なのがいいと思います。ここでは `!search` にしておきます。
+
+```
 if (message.content.startsWith("!search")) {
 
 }
-Step2.2 検索語句だけ切り取る
-message.content (メッセージそのまま) をそのまま検索にかけると、不要なコマンド部分まで検索されてしまいますので、検索語句だけ切り取ってやる必要があります。
+```
 
-.replace(searchCmd, "")部分でコマンド文を削除しています。
+### Step2.2 検索語句だけ切り取る
 
+`message.content` (メッセージそのまま) をそのまま検索にかけると、不要なコマンド部分まで検索されてしまいますので、検索語句だけ切り取ってやる必要があります。
+
+`.replace(searchCmd, "")` 部分でコマンド文を削除しています。
+
+```
 const searchCmd = "!search";
 
 if (message.content.startsWith(searchCmd)) {
   const searchWord = message.content.replace(searchCmd, "");
 }
-Step2.3 serpの設定
-npm
+```
 
-serp
+### Step2.3 serpの設定
+
+https://www.npmjs.com/package/serp
+
 serpのページを参考にして書いていきます。
 
+```
 const serp = require("serp");
 
 const searchCmd = "!search";
@@ -63,9 +79,13 @@ if (message.content.startsWith(searchCmd)) {
   };
   const links = await serp.search(options);
 }
-Step2.4 結果を Discord に送信する
-<Channel>.send()で結果をチャンネルに送信します。
+```
 
+### Step2.4 結果を Discord に送信する
+
+`<Channel>.send()` で結果をチャンネルに送信します。
+
+```
 const serp = require("serp");
 
 const searchCmd = "!search";
@@ -95,11 +115,15 @@ if (message.content.startsWith(searchCmd)) {
     }
   });
 }
-Step2.5 検索結果が見つからなかった場合
+```
+
+### Step2.5 検索結果が見つからなかった場合
+
 上までのコードでも検索はできるのですが、もし検索結果が見つからなかったら、bot がエラーを吐くだけで、メッセージが返されないまま落ちてしまいます。
 
 なので、見つからなかった時用のコードを書きます。
 
+```
 const serp = require("serp");
 
 const searchCmd = "!search";
@@ -139,9 +163,13 @@ if (message.content.startsWith(searchCmd)) {
     });
   }
 }
-コード全文
+```
+
+## コード全文
+
 この記事で書いたコードの全文です。
 
+```
 const serp = require("serp");
 
 const searchCmd = "!search";
@@ -181,9 +209,13 @@ if (message.content.startsWith(searchCmd)) {
     });
   }
 }
-おまけ 特定のサイト内を検索する
+```
+
+## おまけ 特定のサイト内を検索する
+
 http://example.comは検索したいサイトの URL に置き換えてください。
 
+```
 const serp = require("serp");
 
 const searchCmd = "!search";
@@ -223,7 +255,10 @@ if (message.content.startsWith(searchCmd)) {
     });
   }
 }
-おわり
+```
+
+## おわり
+
 拙い文でしたがここまでお読みくださりありがとうございました…！
 
 動かないじゃん！とか、ここ読みにくい！書き直せ！とかがあれば、どうぞ下のコメント欄までお願いします。
