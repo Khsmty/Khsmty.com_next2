@@ -2,7 +2,6 @@ import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Page } from 'contentlayer/generated'
 import Link from '@/components/Link'
-import SectionContainer from '@/components/SectionContainer'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import ArticlePageHeader from '@/components/article-page/ArticlePageHeader'
 
@@ -17,7 +16,7 @@ export default function PageLayout({ content, next, prev, children }: LayoutProp
   const { slug, title, emoji } = content
 
   return (
-    <SectionContainer>
+    <section>
       <ScrollTopAndComment />
       <article>
         <ArticlePageHeader title={title} emoji={emoji} />
@@ -28,6 +27,6 @@ export default function PageLayout({ content, next, prev, children }: LayoutProp
           </div>
         </div>
       </article>
-    </SectionContainer>
+    </section>
   )
 }

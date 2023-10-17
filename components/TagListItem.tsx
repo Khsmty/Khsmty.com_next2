@@ -1,22 +1,22 @@
-import Link from 'next/link'
-import { slug } from 'github-slugger'
+import Link from 'next/link';
+import { slug } from 'github-slugger';
 
 interface Props {
-  text: string
-  noLink?: boolean
+  text: string;
+  noLink?: boolean;
 }
 
 const Tag = ({ text, noLink }: Props) => {
-  const Element = noLink ? 'p' : Link
+  const Element = noLink ? 'span' : Link;
 
   return (
     <Element
       href={`/tag/${slug(text)}`}
-      className="whitespace-nowrap rounded-lg bg-gray-300 dark:bg-gray-800 px-2 py-1 text-sm"
+      className="whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-sm"
     >
       {text.split(' ').join('-')}
     </Element>
-  )
-}
+  );
+};
 
-export default Tag
+export default Tag;

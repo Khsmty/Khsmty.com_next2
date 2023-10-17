@@ -14,9 +14,9 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="p-4 pb-6 mt-10 text-sm">
-      <div className="flex justify-between items-center flex-col lg:flex-row gap-4 lg:gap-0">
-        <div className="flex gap-4 items-center">
+    <footer className="items-center bg-base-200 p-4 text-neutral-content">
+      <div className="footer mx-auto max-w-4xl gap-y-3">
+        <div className="grid-flow-col items-center">
           <Image
             src="/static/icon.webp"
             alt="icon"
@@ -26,7 +26,7 @@ export default function Footer() {
           />
           <p>©2020 Khsmty</p>
         </div>
-        <div className="flex gap-4">
+        <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
           {links.map((link) => (
             <Link href={link.to} key={link.name}>
               {link.name}

@@ -1,33 +1,37 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
-import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi2'
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { FaMoon, FaSun } from 'react-icons/fa6';
 
 const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   // When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), [])
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
     <button
       aria-label="Toggle Dark Mode"
-      className="w-8 h-8"
-      onClick={() => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')}
+      className="btn btn-square btn-ghost px-3"
+      onClick={() =>
+        setTheme(
+          theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark',
+        )
+      }
     >
       {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
-        <HiOutlineSun className="w-7 h-7 m-auto" />
+        <FaSun className="m-auto h-4 w-4" />
       ) : (
-        <HiOutlineMoon className="w-6 h-6 m-auto" />
+        <FaMoon className="m-auto h-4 w-4" />
       )}
     </button>
-  )
-}
+  );
+};
 
-export default ThemeSwitch
+export default ThemeSwitch;

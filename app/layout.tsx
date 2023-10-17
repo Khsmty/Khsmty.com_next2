@@ -1,14 +1,13 @@
-import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
+import 'css/tailwind.css';
+import 'pliny/search/algolia.css';
 
-import { AnalyticsConfig, GA } from 'pliny/analytics'
-import Header from '@/components/Header'
-import SectionContainer from '@/components/SectionContainer'
-import Footer from '@/components/Footer'
-import siteMetadata from '@/data/siteMetadata'
-import { ThemeProviders } from './theme-providers'
-import { Metadata } from 'next'
-import { AlgoliaSearchProvider } from 'pliny/search/Algolia'
+import { AnalyticsConfig, GA } from 'pliny/analytics';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import siteMetadata from '@/data/siteMetadata';
+import { ThemeProviders } from './theme-providers';
+import { Metadata } from 'next';
+import { AlgoliaSearchProvider } from 'pliny/search/Algolia';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -48,25 +47,59 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [siteMetadata.socialBanner],
   },
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang={siteMetadata.language} className="scroll-smooth" suppressHydrationWarning>
-      <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
+    <html
+      lang={siteMetadata.language}
+      className="scroll-smooth"
+      suppressHydrationWarning
+    >
+      <link
+        rel="apple-touch-icon"
+        sizes="76x76"
+        href="/static/favicons/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/static/favicons/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/static/favicons/favicon-16x16.png"
+      />
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
-      <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+      <link
+        rel="mask-icon"
+        href="/static/favicons/safari-pinned-tab.svg"
+        color="#5bbad5"
+      />
       <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: light)"
+        content="#fff"
+      />
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content="#000"
+      />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body>
         <ThemeProviders>
           <GA googleAnalyticsId="G-58TCGP81KF" />
 
-          <SectionContainer>
+          <section>
             <div className="flex h-[100svh] flex-col justify-between">
               <AlgoliaSearchProvider
                 algoliaConfig={{
@@ -77,13 +110,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 }}
               >
                 <Header />
-                <main className="mb-auto">{children}</main>
+                <main className="mx-auto mb-auto mt-24 w-screen max-w-4xl px-4 lg:px-0">
+                  {children}
+                </main>
               </AlgoliaSearchProvider>
               <Footer />
             </div>
-          </SectionContainer>
+          </section>
         </ThemeProviders>
       </body>
     </html>
-  )
+  );
 }

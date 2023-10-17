@@ -1,13 +1,10 @@
-import { KBarButton } from 'pliny/search/KBarButton'
-import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
-import { HiMagnifyingGlass } from 'react-icons/hi2'
+import { AlgoliaButton } from 'pliny/search/AlgoliaButton';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-const SearchButton = () => {
+export default function SearchButton() {
   return (
-    <AlgoliaButton className="w-8 h-8">
-      <HiMagnifyingGlass className="text-gray-900 dark:text-gray-100 h-6 w-6 m-auto" />
+    <AlgoliaButton className="btn btn-square btn-ghost px-3">
+      <FaMagnifyingGlass className="m-auto h-4 w-4" />
     </AlgoliaButton>
-  )
+  );
 }
-
-export default SearchButton
