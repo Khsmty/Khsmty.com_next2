@@ -154,7 +154,7 @@
   h4,
   h5,
   h6 {
-    margin-top: 24px;
+    margin-top: 48px;
     margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
@@ -164,7 +164,8 @@
     font-weight: 600;
     font-size: 1.45rem;
     padding: 12px 15px;
-    background: hsl(225 6% 6%);
+    color: #fff;
+    background: #187f57;
     border-radius: 6px;
   }
 
@@ -172,7 +173,7 @@
     font-weight: 600;
     font-size: 1.3em;
     padding: 10px;
-    border-left: solid 10px hsl(225 6% 6%);
+    border-left: solid 10px #187f57;
     border-radius: 3px 0 0 3px;
     display: flex;
     flex-direction: column;
@@ -182,7 +183,7 @@
     content: '';
     height: 4px;
     margin: 8px 0 -10px -10px;
-    background: hsl(225 6% 6%);
+    background: #187f57;
   }
 
   h4 {

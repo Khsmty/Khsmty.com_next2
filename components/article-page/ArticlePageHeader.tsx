@@ -23,7 +23,7 @@ export default function ArticlePageHeader({
       <span>{twemoji(emoji, 75)}</span>
 
       <div className="mt-7 text-center">
-        <h1 className="text-3xl font-semibold leading-normal tracking-tight text-gray-900 dark:text-gray-100">
+        <h1 className="text-3xl font-semibold leading-normal tracking-tight">
           {title}
         </h1>
       </div>

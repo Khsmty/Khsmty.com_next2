@@ -12,7 +12,9 @@ const Tag = ({ text, noLink }: Props) => {
   return (
     <Element
       href={`/tag/${slug(text)}`}
-      className="whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-sm"
+      className={`whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-sm ${
+        noLink ? 'bg-base-100' : 'bg-base-200'
+      }`}
     >
       {text.split(' ').join('-')}
     </Element>
