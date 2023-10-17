@@ -1,5 +1,5 @@
+import Link from './Link';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Footer() {
   const links = [
@@ -17,7 +17,13 @@ export default function Footer() {
     <footer className="items-center bg-base-200 p-4 text-neutral-content">
       <div className="footer mx-auto max-w-4xl gap-y-3">
         <div className="grid-flow-col items-center">
-          <Image src="/img/icon_r.webp" alt="icon" width={30} height={30} />
+          <Image
+            src="/static/icon.webp"
+            alt="icon"
+            className="rounded-full"
+            width={30}
+            height={30}
+          />
           <p>©2020 Khsmty</p>
         </div>
         <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">

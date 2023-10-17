@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base-font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic',
+    'メイリオ', sans-serif;
+  --monospace-font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New',
+    monospace;
+}
+
+* {
+  font-family: var(--base-font-family);
+  line-height: 1.8;
+}
+
+pre,
+code,
+code * {
+  font-family: var(--monospace-font-family) !important;
+}
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+  @apply no-underline;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+.DocSearch-Container {
+  @apply !fixed;
+}

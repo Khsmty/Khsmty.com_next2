@@ -1,8 +1,7 @@
-import { Tag } from '@/libs/microcms';
 import TagListItem from './TagListItem';
 
 type Props = {
-  tags?: Tag[];
+  tags?: string[];
   noLink?: boolean;
 };
 
@@ -14,7 +13,7 @@ export default function TagList({ tags, noLink = false }: Props) {
   return (
     <div className="m-0 flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <TagListItem key={tag.id} tag={tag} noLink={noLink} />
+        <TagListItem key={tag} text={tag} noLink={noLink} />
       ))}
     </div>
   );

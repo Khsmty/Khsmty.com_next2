@@ -1,26 +1,24 @@
 import Link from 'next/link';
-import { Tag } from '@/libs/microcms';
+import { slug } from 'github-slugger';
 
-type Props = {
-  tag: Tag;
+interface Props {
+  text: string;
   noLink?: boolean;
+}
+
+const Tag = ({ text, noLink }: Props) => {
+  const Element = noLink ? 'span' : Link;
+
+  return (
+    <Element
+      href={`/tag/${slug(text)}`}
+      className={`whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-sm ${
+        noLink ? 'bg-base-100' : 'bg-base-200'
+      }`}
+    >
+      {text.split(' ').join('-')}
+    </Element>
+  );
 };
 
-export default function TagListItem({ tag, noLink = false }: Props) {
-  if (!noLink) {
-    return (
-      <Link
-        href={`/tag/${tag.id}`}
-        className="whitespace-nowrap rounded-lg bg-base-200 px-2 py-1 text-sm"
-      >
-        {tag.name}
-      </Link>
-    );
-  } else {
-    return (
-      <span className="whitespace-nowrap rounded-lg bg-base-100 px-2 py-1 text-xs">
-        {tag.name}
-      </span>
-    );
-  }
-}
+export default Tag;

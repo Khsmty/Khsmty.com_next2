@@ -1,40 +1,56 @@
-import { getList } from '@/libs/microcms';
-import Pagination from '@/components/Pagination';
-import ArticleList from '@/components/ArticleList';
+import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer';
+import { allArticles } from 'contentlayer/generated';
+import Link from '@/components/Link';
+import { FaArrowRight } from 'react-icons/fa6';
 import Image from 'next/image';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Metadata } from 'next';
+import ArticleList from '@/components/ArticleList';
 
-export const metadata: Metadata = {
-  description: 'Khsmtyのブログです。',
-};
+const MAX_DISPLAY = 5;
 
 export default async function Page() {
-  const data = await getList();
+  const sortedPosts = sortPosts(allArticles);
+  const posts = allCoreContent(sortedPosts);
+  const displayPosts = posts.slice(0, MAX_DISPLAY);
 
   return (
     <>
       <div
         className="hero mb-7 rounded-2xl"
-        style={{ backgroundImage: 'url(/img/background.webp)' }}
+        style={{ backgroundImage: 'url(/static/background.webp)' }}
       >
         <div className="hero-content h-full w-full flex-col rounded-2xl py-20 backdrop-blur backdrop-brightness-50 md:flex-row">
-          <Image src="/img/icon_r.webp" alt="icon" height={100} width={100} />
+          <Image
+            src="/static/icon.webp"
+            alt="icon"
+            className="rounded-full"
+            height={100}
+            width={100}
+          />
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">Khsmty</h1>
             <p className="my-2 text-lg">よわよわプログラマー</p>
-            <Link href="/profile" className="btn-primary btn-sm btn">
+            <Link href="/profile" className="btn btn-primary btn-sm">
               プロフィール
-              <FontAwesomeIcon icon={faArrowRight} size="xs" className="h-3 w-3" />
+              <FaArrowRight className="h-3 w-3" />
             </Link>
           </div>
         </div>
       </div>
 
-      <ArticleList articles={data.contents} />
-      <Pagination totalCount={data.totalCount} />
+      {!posts.length && 'No posts found.'}
+      {posts.length > 0 && <ArticleList articles={displayPosts} />}
+
+      {posts.length > MAX_DISPLAY && (
+        <div className="flex justify-end text-base font-medium leading-6">
+          <Link
+            href="/article"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="All posts"
+          >
+            All Posts &rarr;
+          </Link>
+        </div>
+      )}
     </>
   );
 }

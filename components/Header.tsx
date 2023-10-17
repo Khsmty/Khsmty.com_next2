@@ -1,19 +1,23 @@
 'use client';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-  faEnvelope,
-  faHome,
-  faMagnifyingGlass,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
+import siteMetadata from '@/data/siteMetadata';
+import headerNavLinks from '@/data/headerNavLinks';
+import Link from './Link';
+import ThemeSwitch from './ThemeSwitch';
+import SearchButton from './SearchButton';
 import Image from 'next/image';
-import { usePathname, useSearchParams } from 'next/navigation';
+import {
+  FaBars,
+  FaEnvelope,
+  FaHouse,
+  FaFeather,
+  FaUser,
+  FaTag,
+} from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Nav() {
+const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const pathname = usePathname();
@@ -22,30 +26,38 @@ export default function Nav() {
     setDrawerOpen(false);
   }, [pathname, searchParams]);
 
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [drawerOpen]);
+
   function toggleDrawer() {
     setDrawerOpen(!drawerOpen);
   }
 
   const links = [
     {
-      icon: faHome,
+      icon: FaHouse,
       name: 'ホーム',
       to: '/',
     },
     {
-      icon: faMagnifyingGlass,
-      name: '検索',
-      to: '/search',
+      icon: FaFeather,
+      name: '記事一覧',
+      to: '/article',
     },
     {
-      icon: faUser,
+      icon: FaTag,
+      name: 'タグ一覧',
+      to: '/tag',
+    },
+    {
+      icon: FaUser,
       name: 'プロフィール',
       to: '/profile',
-    },
-    {
-      icon: faEnvelope,
-      name: '連絡先',
-      to: '/contacts',
     },
   ];
 
@@ -63,29 +75,29 @@ export default function Nav() {
         <div className="fixed top-0 z-40 w-full bg-base-200 drop-shadow-xl">
           <div className="navbar mx-auto max-w-5xl">
             <div className="flex-none sm:hidden">
-              <label htmlFor="drawer" className="btn-ghost btn-square btn">
-                <FontAwesomeIcon icon={faBars} size="lg" className="w-5 h-5" />
+              <label htmlFor="drawer" className="btn btn-square btn-ghost">
+                <FaBars className="h-5 w-5" />
               </label>
             </div>
 
             {/* サイトタイトル */}
             <div className="flex-1">
-              <Link href="/" className="btn-ghost btn text-xl normal-case">
+              <Link href="/" className="btn btn-ghost text-xl normal-case">
                 <Image
-                  src="/img/icon_r.webp"
+                  src="/static/icon.webp"
                   alt="icon"
+                  className="rounded-full"
                   width={40}
                   height={40}
                 />
-                <span className="text-2xl">Khsmty</span>
+                <span className="text-2xl">Khsmties</span>
               </Link>
             </div>
 
             {/* スマホ検索ボタン */}
             <div className="flex-none sm:hidden">
-              <Link href="/search" className="btn-ghost btn-square btn">
-                <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" className="w-5 h-5" />
-              </Link>
+              <SearchButton />
+              <ThemeSwitch />
             </div>
 
             {/* PCメニュー */}
@@ -94,12 +106,15 @@ export default function Nav() {
                 <Link
                   href={link.to}
                   key={link.name}
-                  className="btn-ghost btn px-3"
+                  className="btn btn-ghost px-3"
                 >
-                  <FontAwesomeIcon icon={link.icon} className="w-4 h-4" />
+                  <link.icon className="h-4 w-4" />
                   <span className="text-base font-normal">{link.name}</span>
                 </Link>
               ))}
+
+              <SearchButton />
+              <ThemeSwitch />
             </div>
           </div>
         </div>
@@ -107,13 +122,14 @@ export default function Nav() {
 
       {/* Drawer */}
       <div className="drawer-side z-50">
-        <label htmlFor="drawer" className="drawer-overlay"></label>
-        <ul className="menu menu-lg h-full w-60 bg-base-200 p-4">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label htmlFor="drawer" className="drawer-overlay" />
+        <ul className="menu menu-lg h-full w-80 overflow-hidden bg-base-200 p-4 pt-10 !text-2xl">
           {links.map((link) => (
             <li key={link.name}>
-              <Link href={link.to}>
-                <FontAwesomeIcon icon={link.icon} className="w-4 h-4" />
-                <span className="text-base font-normal">{link.name}</span>
+              <Link href={link.to} className="py-4">
+                <link.icon className="mr-1 h-5 w-5" />
+                <span className="font-normal">{link.name}</span>
               </Link>
             </li>
           ))}
@@ -121,4 +137,6 @@ export default function Nav() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
