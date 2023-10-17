@@ -1,6 +1,5 @@
 // @ts-check
-const { fontFamily } = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 /** @type {import("tailwindcss/types").Config } */
 module.exports = {
@@ -15,14 +14,8 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      lineHeight: {
-        11: '2.75rem',
-        12: '3rem',
-        13: '3.25rem',
-        14: '3.5rem',
-      },
       colors: {
-        primary: colors.pink,
+        primary: colors.indigo,
         gray: colors.gray,
       },
       typography: ({ theme }) => ({
@@ -47,24 +40,14 @@ module.exports = {
             },
           },
         },
-        invert: {
-          css: {
-            a: {
-              color: theme('colors.primary.500'),
-              '&:hover': {
-                color: `${theme('colors.primary.400')}`,
-              },
-              code: { color: theme('colors.primary.400') },
-            },
-            'h1,h2,h3,h4,h5,h6': {
-              color: theme('colors.gray.100'),
-            },
-          },
-        },
       }),
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
   daisyui: {
     themes: [
       {
@@ -95,4 +78,4 @@ module.exports = {
       },
     ],
   },
-}
+};

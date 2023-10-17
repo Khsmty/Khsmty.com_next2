@@ -59,11 +59,6 @@ const Header = () => {
       name: 'プロフィール',
       to: '/profile',
     },
-    {
-      icon: FaEnvelope,
-      name: '連絡先',
-      to: '/contacts',
-    },
   ];
 
   return (
@@ -107,18 +102,16 @@ const Header = () => {
 
             {/* PCメニュー */}
             <div className="hidden flex-none sm:block">
-              {links
-                .filter((link) => link.to !== '/')
-                .map((link) => (
-                  <Link
-                    href={link.to}
-                    key={link.name}
-                    className="btn btn-ghost px-3"
-                  >
-                    <link.icon className="h-4 w-4" />
-                    <span className="text-base font-normal">{link.name}</span>
-                  </Link>
-                ))}
+              {links.map((link) => (
+                <Link
+                  href={link.to}
+                  key={link.name}
+                  className="btn btn-ghost px-3"
+                >
+                  <link.icon className="h-4 w-4" />
+                  <span className="text-base font-normal">{link.name}</span>
+                </Link>
+              ))}
 
               <SearchButton />
               <ThemeSwitch />

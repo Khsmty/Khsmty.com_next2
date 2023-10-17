@@ -1,0 +1,625 @@
+.content {
+  word-wrap: break-word;
+
+  details,
+  figcaption,
+  figure {
+    display: block;
+  }
+
+  summary {
+    display: list-item;
+  }
+
+  a {
+    background-color: transparent;
+    color: #58a6ff;
+    text-decoration: none;
+  }
+
+  abbr[title] {
+    border-bottom: none;
+    text-decoration: underline dotted;
+  }
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+
+  dfn {
+    font-style: italic;
+  }
+
+  mark {
+    background-color: rgba(187, 128, 9, 0.15);
+    color: #c9d1d9;
+  }
+
+  small {
+    font-size: 90%;
+  }
+
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  img {
+    border-style: none;
+    max-width: calc(100vw - 32px);
+    height: auto;
+    box-sizing: content-box;
+    background-color: #0d1117;
+  }
+
+  @media (width >= 768px) {
+    img {
+      max-width: calc(800px - 32px);
+    }
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: monospace;
+    font-size: 1em;
+  }
+
+  figure {
+    margin: 1em 0;
+  }
+
+  hr {
+    height: 0.25em;
+    margin: 24px 0;
+    background-color: #30363d;
+    border: 0;
+  }
+
+  ::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.54;
+  }
+
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  td,
+  th {
+    padding: 0;
+  }
+
+  details summary {
+    cursor: pointer;
+  }
+
+  details:not([open]) > *:not(summary) {
+    display: none !important;
+  }
+
+  a:focus,
+  [role='button']:focus {
+    outline: 2px solid #58a6ff;
+    outline-offset: -2px;
+    box-shadow: none;
+  }
+
+  a:focus:not(:focus-visible),
+  [role='button']:focus:not(:focus-visible) {
+    outline: solid 1px transparent;
+  }
+
+  a:focus-visible,
+  [role='button']:focus-visible {
+    outline: 2px solid #58a6ff;
+    outline-offset: -2px;
+    box-shadow: none;
+  }
+
+  a:not([class]):focus,
+  a:not([class]):focus-visible {
+    outline-offset: 0;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.45rem;
+    padding: 12px 15px;
+    background: hsl(225 6% 6%);
+    border-radius: 6px;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 10px;
+    border-left: solid 10px hsl(225 6% 6%);
+    border-radius: 3px 0 0 3px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h3::after {
+    content: '';
+    height: 4px;
+    margin: 8px 0 -10px -10px;
+    background: hsl(225 6% 6%);
+  }
+
+  h4 {
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  h5 {
+    font-weight: 600;
+    font-size: 0.875em;
+  }
+
+  h6 {
+    font-weight: 600;
+    font-size: 0.85em;
+    color: #8b949e;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 0 1em;
+    color: #8b949e;
+    border-left: 0.25em solid #30363d;
+  }
+
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 2em;
+  }
+
+  ol ol,
+  ul ol {
+    list-style-type: lower-roman;
+  }
+
+  ul ul ol,
+  ul ol ol,
+  ol ul ol,
+  ol ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  tt,
+  code,
+  samp {
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      SF Mono,
+      Menlo,
+      Consolas,
+      Liberation Mono,
+      monospace;
+    font-size: 12px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    word-wrap: normal;
+  }
+
+  > div[data-filename]::before {
+    content: attr(data-filename);
+    font-size: 0.8rem;
+    font-family: var(--monospace-font-family);
+    position: absolute;
+    background-color: #121314;
+    border-radius: 6px 0 0 0;
+    padding: 2px 5px 3px 7px;
+  }
+
+  > div[data-filename] > pre {
+    padding-top: 32px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .absent {
+    color: #f85149;
+  }
+
+  .anchor {
+    float: left;
+    padding-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+  }
+
+  .anchor:focus {
+    outline: none;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  table,
+  pre,
+  details {
+    list-style: initial;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
+  h2 tt,
+  h2 code,
+  h3 tt,
+  h3 code,
+  h4 tt,
+  h4 code,
+  h5 tt,
+  h5 code,
+  h6 tt,
+  h6 code {
+    padding: 0 0.2em;
+    font-size: inherit;
+  }
+
+  summary h2,
+  summary h3,
+  summary h4,
+  summary h5,
+  summary h6 {
+    display: inline-block;
+  }
+
+  summary h2 {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  ul.no-list,
+  ol.no-list {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  ol[type='a'] {
+    list-style-type: lower-alpha;
+  }
+
+  ol[type='A'] {
+    list-style-type: upper-alpha;
+  }
+
+  ol[type='i'] {
+    list-style-type: lower-roman;
+  }
+
+  ol[type='I'] {
+    list-style-type: upper-roman;
+  }
+
+  ol[type='1'] {
+    list-style-type: decimal;
+  }
+
+  div > ol:not([type]) {
+    list-style-type: decimal;
+  }
+
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  li > p {
+    margin-top: 16px;
+  }
+
+  li + li {
+    margin-top: 0.25em;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+
+  table th {
+    font-weight: 600;
+  }
+
+  table th,
+  table td {
+    padding: 6px 13px;
+    border: 1px solid #30363d;
+  }
+
+  table tr {
+    background-color: #0d1117;
+    border-top: 1px solid #21262d;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #161b22;
+  }
+
+  table img {
+    background-color: transparent;
+  }
+
+  code,
+  tt {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    white-space: break-spaces;
+    background-color: rgba(110, 118, 129, 0.4);
+    border-radius: 6px;
+  }
+
+  code br,
+  tt br {
+    display: none;
+  }
+
+  del code {
+    text-decoration: inherit;
+  }
+
+  samp {
+    font-size: 85%;
+  }
+
+  pre code {
+    font-size: 100%;
+  }
+
+  pre > code {
+    padding: 0 !important;
+    margin: 0;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #161b22;
+    border-radius: 6px;
+  }
+
+  pre code,
+  pre tt {
+    display: inline;
+    max-width: fit-content;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  /*
+ * This source is an edited of https://github.com/zenn-dev/zenn-editor/blob/a304e0a7092e4bc0d40fb2eeb866f4643617d045/packages/zenn-content-css/src/_prism.scss
+ * Copyright © 2020-Present zenn.dev
+ */
+
+  .token.namespace {
+    opacity: 0.7;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #94a1b3;
+  }
+
+  .token.operator,
+  .token.boolean,
+  .token.number {
+    color: #ffc56d;
+  }
+
+  .token.attr-name,
+  .token.string {
+    color: #ffc56d;
+  }
+
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
+    color: #ffc56d;
+  }
+
+  .token.selector {
+    color: #ff8fa3;
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword,
+  .token.important {
+    color: #ff8fa3;
+  }
+
+  .token.deleted {
+    color: #ff8fa3;
+  }
+
+  .token.inserted {
+    color: #b4ff9b;
+  }
+
+  .token.deleted:not(.prefix) {
+    background: rgba(218, 54, 50, 0.2);
+    color: inherit;
+    display: block;
+  }
+
+  /* ref: https://github.com/zenn-dev/zenn-editor/issues/148 */
+  .token.prefix {
+    user-select: none;
+  }
+
+  .token.inserted:not(.prefix) {
+    background: rgba(0, 146, 27, 0.2);
+    color: inherit;
+    display: block;
+  }
+
+  .token.coord {
+    color: #aad4ff;
+  }
+
+  .token.regex,
+  .token.statement {
+    color: #ffc56d;
+  }
+
+  .token.placeholder,
+  .token.variable {
+    color: #fff;
+  }
+
+  .token.important,
+  .token.statement,
+  .token.bold {
+    font-weight: 700;
+  }
+
+  .token.punctuation {
+    color: #939bc1;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.tag,
+  .token.property,
+  .token.function {
+    color: #38c7ff;
+  }
+
+  .token.attr-name {
+    color: #ff8fa3;
+  }
+
+  .token.attr-value {
+    color: #ffc56d;
+  }
+
+  .token.style,
+  .token.script {
+    color: #ffc56d;
+  }
+
+  .token.script .token.keyword {
+    color: #ffc56d;
+  }
+}

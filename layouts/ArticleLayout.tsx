@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Article } from 'contentlayer/generated'
-import Link from '@/components/Link'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import { Comments, CommentsConfig } from 'pliny/comments'
-import ArticlePageHeader from '@/components/article-page/ArticlePageHeader'
+import { ReactNode } from 'react';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import type { Article } from 'contentlayer/generated';
+import Link from '@/components/Link';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import { Comments, CommentsConfig } from 'pliny/comments';
+import ArticlePageHeader from '@/components/article-page/ArticlePageHeader';
 
 const commentsConfig: CommentsConfig = {
   provider: 'giscus',
@@ -21,28 +21,43 @@ const commentsConfig: CommentsConfig = {
     themeURL: '',
     lang: 'ja',
   },
-}
+};
 
 interface LayoutProps {
-  content: CoreContent<Article>
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
-  children: ReactNode
+  content: CoreContent<Article>;
+  next?: { path: string; title: string };
+  prev?: { path: string; title: string };
+  children: ReactNode;
 }
 
-export default function ArticleLayout({ content, next, prev, children }: LayoutProps) {
-  const { slug, date, lastmod, title, emoji, tags } = content
+export default function ArticleLayout({
+  content,
+  next,
+  prev,
+  children,
+}: LayoutProps) {
+  const { slug, date, lastmod, title, emoji, tags } = content;
 
   return (
     <section>
-      <ScrollTopAndComment />
       <article>
-        <ArticlePageHeader title={title} emoji={emoji} tags={tags} date={date} lastmod={lastmod} />
+        <ArticlePageHeader
+          title={title}
+          emoji={emoji}
+          tags={tags}
+          date={date}
+          lastmod={lastmod}
+        />
 
         <div className="mx-auto mt-7 max-w-[800px]">
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-            <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-            <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+            <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
+              {children}
+            </div>
+            <div
+              className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+              id="comment"
+            >
               <Comments commentsConfig={commentsConfig} slug={slug} />
             </div>
           </div>
@@ -77,6 +92,7 @@ export default function ArticleLayout({ content, next, prev, children }: LayoutP
           </footer>
         </div>
       </article>
+      <ScrollTopAndComment />
     </section>
-  )
+  );
 }
