@@ -19,7 +19,8 @@ const generateRssItem = (config, post) => `
   </item>
 `;
 
-const generateRss = (config, posts, page = 'feed.xml') => `
+function createRSSXml(config, posts, page = 'feed.xml') {
+  return `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${escape(config.title)}</title>
@@ -36,12 +37,14 @@ const generateRss = (config, posts, page = 'feed.xml') => `
     </channel>
   </rss>
 `;
+}
 
 async function generateRSS(config, allArticles, page = 'feed.xml') {
   const publishPosts = allArticles.filter((post) => post.draft !== true);
-  // RSS for blog post
+  console.log(sortPosts(publishPosts)[0].date);
+
   if (publishPosts.length > 0) {
-    const rss = generateRss(config, sortPosts(publishPosts));
+    const rss = createRSSXml(config, sortPosts(publishPosts));
     writeFileSync(`./public/${page}`, rss);
   }
 
@@ -52,8 +55,9 @@ async function generateRSS(config, allArticles, page = 'feed.xml') {
       const filteredPosts = allArticles.filter((post) =>
         post.tags.map((t) => slugger.slug(t)).includes(tag),
       );
-      const rss = generateRss(config, filteredPosts, `tag/${tag}/${page}`);
+      const rss = createRSSXml(config, filteredPosts, `tag/${tag}/${page}`);
       const rssPath = path.join('public', 'tag', tag);
+
       mkdirSync(rssPath, { recursive: true });
       writeFileSync(path.join(rssPath, page), rss);
     }
