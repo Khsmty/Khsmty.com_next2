@@ -1,9 +1,8 @@
 import { MetadataRoute } from 'next';
 import { allArticles } from 'contentlayer/generated';
-import siteMetadata from '@/data/siteMetadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = siteMetadata.siteUrl;
+  const siteUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const blogRoutes = allArticles.map((post) => ({
     url: `${siteUrl}/${post.path}`,
     lastModified: post.lastmod || post.date,

@@ -7,6 +7,7 @@ import { writeFileSync } from 'fs';
 import { slug } from 'github-slugger';
 import removeMd from 'remove-markdown';
 import { Article as ArticleGenerated } from 'contentlayer/generated';
+import algoliasearch from 'algoliasearch';
 
 // Remark packages
 import remarkGfm from 'remark-gfm';
@@ -22,8 +23,6 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypePresetMinify from 'rehype-preset-minify';
-import siteMetadata from './data/siteMetadata';
-import algoliasearch from 'algoliasearch';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -73,7 +72,7 @@ async function createSearchIndex(allArticles: ArticleGenerated[]) {
 
     return {
       objectID: `article/${post.slug}`,
-      url: `${siteMetadata.siteUrl}/article/${post.slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/article/${post.slug}`,
       title: post.title,
       tags: post.tags,
       description: post.summary,
@@ -121,8 +120,8 @@ export const Article = defineDocumentType(() => ({
         datePublished: doc.date,
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        image: doc.images ? doc.images[0] : "/static/ogp.png",
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/${doc._raw.flattenedPath}`,
       }),
     },
   },
@@ -150,8 +149,8 @@ export const Page = defineDocumentType(() => ({
     //     datePublished: doc.date,
     //     dateModified: doc.lastmod || doc.date,
     //     description: doc.summary,
-    //     image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-    //     url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+    //     image: doc.images ? doc.images[0] : "/static/ogp.png",
+    //     url: `${process.env.NEXT_PUBLIC_BASE_URL}/${doc._raw.flattenedPath}`,
     //   }),
     // },
   },

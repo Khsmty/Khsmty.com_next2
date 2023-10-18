@@ -1,6 +1,5 @@
 import { slug } from 'github-slugger';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
-import siteMetadata from '@/data/siteMetadata';
 import ListLayout from '@/layouts/ListLayout';
 import { allArticles } from 'contentlayer/generated';
 import tagData from '@/app/tag-data.json';
@@ -16,11 +15,11 @@ export async function generateMetadata({
   const tag = decodeURI(params.tag);
   return genPageMetadata({
     title: tag,
-    description: `${siteMetadata.title} ${tag} tagged content`,
+    description: `Khsmties ${tag} tagged content`,
     alternates: {
       canonical: './',
       types: {
-        'application/rss+xml': `${siteMetadata.siteUrl}/tag/${tag}/feed.xml`,
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/tag/${tag}/feed.xml`,
       },
     },
   });

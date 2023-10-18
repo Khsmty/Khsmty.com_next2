@@ -5,31 +5,30 @@ import React from 'react';
 import { GA } from 'pliny/analytics';
 import Header from '@/components/layouts/Header';
 import Footer from '@/components/layouts/Footer';
-import siteMetadata from '@/data/siteMetadata';
 import { Metadata } from 'next';
 import { AlgoliaSearchProvider } from 'pliny/search/Algolia';
 import ThemeProvider from '@/components/layouts/ThemeProvider';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
   title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
+    default: 'Khsmties',
+    template: `%s | Khsmties`,
   },
-  description: siteMetadata.description,
+  description: 'Khsmty のウェブサイト兼ブログ',
   openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
+    title: 'Khsmties',
+    description: 'Khsmty のウェブサイト兼ブログ',
     url: './',
-    siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
+    siteName: 'Khsmties',
+    images: ['/static/ogp.png'],
     locale: 'ja_JP',
     type: 'website',
   },
   alternates: {
     canonical: './',
     types: {
-      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
+      'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
     },
   },
   robots: {
@@ -44,9 +43,9 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: siteMetadata.title,
+    title: 'Khsmties',
     card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
+    images: ['/static/ogp.png'],
   },
 };
 

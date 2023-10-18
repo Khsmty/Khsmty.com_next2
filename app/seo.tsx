@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import siteMetadata from '@/data/siteMetadata';
 
 interface PageSEOProps {
   title: string;
@@ -17,18 +16,18 @@ export function genPageMetadata({
   return {
     title,
     openGraph: {
-      title: `${title} | ${siteMetadata.title}`,
-      description: description || siteMetadata.description,
+      title: `${title} | Khsmties`,
+      description: description || 'Khsmty のウェブサイト兼ブログ',
       url: './',
-      siteName: siteMetadata.title,
-      images: image ? [image] : [siteMetadata.socialBanner],
+      siteName: 'Khsmties',
+      images: image ? [image] : ['/static/ogp.png'],
       locale: 'ja_JP',
       type: 'website',
     },
     twitter: {
-      title: `${title} | ${siteMetadata.title}`,
+      title: `${title} | Khsmties`,
       card: 'summary_large_image',
-      images: image ? [image] : [siteMetadata.socialBanner],
+      images: image ? [image] : ['/static/ogp.png'],
     },
     ...rest,
   };

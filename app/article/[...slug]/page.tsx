@@ -11,7 +11,6 @@ import { allArticles } from 'contentlayer/generated';
 import type { Article } from 'contentlayer/generated';
 import ArticleLayout from '@/layouts/ArticleLayout';
 import { Metadata } from 'next';
-import siteMetadata from '@/data/siteMetadata';
 import { notFound } from 'next/navigation';
 
 const defaultLayout = 'ArticleLayout';
@@ -32,13 +31,13 @@ export async function generateMetadata({
 
   const publishedAt = new Date(post.date).toISOString();
   const modifiedAt = new Date(post.lastmod || post.date).toISOString();
-  let imageList = [siteMetadata.socialBanner];
+  let imageList = ['/static/ogp.png'];
   if (post.images) {
     imageList = typeof post.images === 'string' ? [post.images] : post.images;
   }
   const ogImages = imageList.map((img) => {
     return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
+      url: img.includes('http') ? img : process.env.NEXT_PUBLIC_BASE_URL + img,
     };
   });
 
@@ -48,7 +47,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.summary,
-      siteName: siteMetadata.title,
+      siteName: 'Khsmties',
       locale: 'ja_JP',
       type: 'article',
       publishedTime: publishedAt,

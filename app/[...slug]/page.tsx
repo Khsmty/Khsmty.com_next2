@@ -7,7 +7,6 @@ import { allPages } from 'contentlayer/generated';
 import type { Page } from 'contentlayer/generated';
 import PageLayout from '@/layouts/PageLayout';
 import { Metadata } from 'next';
-import siteMetadata from '@/data/siteMetadata';
 import { notFound } from 'next/navigation';
 
 const defaultLayout = 'PageLayout';
@@ -26,13 +25,13 @@ export async function generateMetadata({
     return;
   }
 
-  let imageList = [siteMetadata.socialBanner];
+  let imageList = ['/static/ogp.png'];
   if (post.images) {
     imageList = typeof post.images === 'string' ? [post.images] : post.images;
   }
   const ogImages = imageList.map((img) => {
     return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
+      url: img.includes('http') ? img : process.env.NEXT_PUBLIC_BASE_URL + img,
     };
   });
 
@@ -42,7 +41,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.summary,
-      siteName: siteMetadata.title,
+      siteName: "Khsmties",
       locale: 'ja_JP',
       type: 'article',
       url: './',
