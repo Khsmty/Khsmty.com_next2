@@ -26,7 +26,7 @@ export default async function Page() {
             height={100}
             width={100}
           />
-          <div className="text-center md:text-left">
+          <div className="text-center text-gray-100 md:text-left">
             <h1 className="text-4xl font-semibold">Khsmty</h1>
             <p className="my-2 text-lg">よわよわプログラマー</p>
             <Link href="/profile" className="btn btn-primary btn-sm">

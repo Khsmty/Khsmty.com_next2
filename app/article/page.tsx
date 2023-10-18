@@ -20,10 +20,15 @@ export default function BlogPage() {
   };
 
   return (
-    <ListLayout
-      posts={posts}
-      initialDisplayPosts={initialDisplayPosts}
-      pagination={pagination}
-    />
+    <>
+      <h1 className="mb-6 mt-5 text-center text-2xl font-semibold">
+        すべての記事
+      </h1>
+      <ListLayout
+        posts={posts}
+        initialDisplayPosts={initialDisplayPosts}
+        pagination={pagination}
+      />
+    </>
   );
 }
