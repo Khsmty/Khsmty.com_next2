@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import rss from './rss.mjs';
 
 async function postbuild() {
