@@ -8,9 +8,16 @@ jobs:
   textlint:
     name: runner / textlint
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
 
       - name: textlint
         uses: Khsmty/action-textlint@91807bd487f2638e5a4db7e02595aed4312958c9
