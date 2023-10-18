@@ -4,15 +4,15 @@ import type { MDXComponents } from 'mdx/types';
 import Image from './Image';
 import CustomLink from './Link';
 import Callout from './Callout';
+import Details from './Details';
 
 export const components: MDXComponents = {
   Image,
   TOCInline,
   Callout,
+  Details,
   // @ts-expect-error
   a: CustomLink,
   // @ts-expect-error
   pre: Pre,
 };
-
-// export { Callout };
