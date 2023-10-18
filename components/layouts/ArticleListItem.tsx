@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import TagList from './TagList';
 import PublishedDate from './PublishedDate';
-import { twemoji } from 'scripts/utils';
+import { twemoji } from '@/scripts/utils';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import { Article } from 'contentlayer/generated';
 

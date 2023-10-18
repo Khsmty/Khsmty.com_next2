@@ -3,11 +3,7 @@ import 'katex/dist/katex.css';
 
 import { components } from '@/components/mdx/MDXComponents';
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import {
-  sortPosts,
-  coreContent,
-  allCoreContent,
-} from 'pliny/utils/contentlayer';
+import { coreContent, allCoreContent } from 'pliny/utils/contentlayer';
 import { allPages } from 'contentlayer/generated';
 import type { Page } from 'contentlayer/generated';
 import PageLayout from '@/layouts/PageLayout';
@@ -69,7 +65,11 @@ export const generateStaticParams = async () => {
   return paths;
 };
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
+export default async function PagePage({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
   const slug = decodeURI(params.slug.join('/'));
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(allPages);

@@ -1,4 +1,4 @@
-import { twemoji } from 'scripts/utils';
+import { twemoji } from '@/scripts/utils';
 import TagList from '../layouts/TagList';
 import { FaTags } from 'react-icons/fa6';
 import PublishedDate from '../layouts/PublishedDate';

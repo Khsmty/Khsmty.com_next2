@@ -7,6 +7,8 @@ import CustomLink from './Link';
 export const components: MDXComponents = {
   Image,
   TOCInline,
+  // @ts-expect-error
   a: CustomLink,
+  // @ts-expect-error
   pre: Pre,
 };

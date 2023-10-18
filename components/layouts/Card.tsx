@@ -1,7 +1,14 @@
 import Image from '../mdx/Image';
 import Link from '../mdx/Link';
 
-const Card = ({ title, description, imgSrc, href }) => (
+interface Props {
+  title: string;
+  description: string;
+  imgSrc?: string;
+  href?: string;
+}
+
+const Card = ({ title, description, imgSrc, href }: Props) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${

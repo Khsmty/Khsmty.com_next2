@@ -1,13 +1,14 @@
 import 'css/tailwind.css';
 import 'pliny/search/algolia.css';
 
+import React from 'react';
 import { GA } from 'pliny/analytics';
 import Header from '@/components/layouts/Header';
 import Footer from '@/components/layouts/Footer';
 import siteMetadata from '@/data/siteMetadata';
 import { Metadata } from 'next';
 import { AlgoliaSearchProvider } from 'pliny/search/Algolia';
-import { ThemeProvider } from 'next-themes';
+import ThemeProvider from '@/components/layouts/ThemeProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -96,7 +97,7 @@ export default function RootLayout({
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body>
-        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+        <ThemeProvider>
           <GA googleAnalyticsId="G-58TCGP81KF" />
 
           <section>

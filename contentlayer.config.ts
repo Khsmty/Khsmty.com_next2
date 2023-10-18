@@ -4,34 +4,30 @@ import {
   makeSource,
 } from 'contentlayer/source-files';
 import { writeFileSync } from 'fs';
-import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
-import path from 'path';
 import removeMd from 'remove-markdown';
+import { Article as ArticleGenerated } from 'contentlayer/generated';
+
 // Remark packages
 import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
   remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js';
+
 // Rehype packages
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeKatex from 'rehype-katex';
-import rehypeCitation from 'rehype-citation';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypePresetMinify from 'rehype-preset-minify';
 import siteMetadata from './data/siteMetadata';
 import algoliasearch from 'algoliasearch';
 
-const root = process.cwd();
 const isProduction = process.env.NODE_ENV === 'production';
 
 const computedFields: ComputedFields = {
-  readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
@@ -50,12 +46,14 @@ const computedFields: ComputedFields = {
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
-function createTagCount(allArticles) {
+function createTagCount(allArticles: ArticleGenerated[]) {
+  const slugger = new GithubSlugger();
   const tagCount: Record<string, number> = {};
+
   allArticles.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag);
+        const formattedTag = slugger.slug(tag);
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1;
         } else {
@@ -64,11 +62,12 @@ function createTagCount(allArticles) {
       });
     }
   });
+
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount));
 }
 
-async function createSearchIndex(allArticles) {
-  // if (!isProduction) return
+async function createSearchIndex(allArticles: ArticleGenerated[]) {
+  if (!isProduction) return;
 
   const postsObj = allArticles.map((post) => {
     if (post.draft === true) return;
@@ -93,6 +92,8 @@ async function createSearchIndex(allArticles) {
     process.env.ALGOLIA_ADMIN_API_KEY as string,
   );
   const index = client.initIndex('content');
+
+  // @ts-expect-error
   await index.saveObjects(postsObj, { autoGenerateObjectIDIfNotExist: true });
 }
 
@@ -166,14 +167,11 @@ export default makeSource({
       remarkExtractFrontmatter,
       remarkGfm,
       remarkCodeTitles,
-      remarkMath,
       remarkImgToJsx,
     ],
     rehypePlugins: [
       rehypeSlug,
       rehypeAutolinkHeadings,
-      rehypeKatex,
-      [rehypeCitation, { path: path.join(root, 'data') }],
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       rehypePresetMinify,
     ],

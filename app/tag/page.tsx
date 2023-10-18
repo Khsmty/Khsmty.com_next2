@@ -1,8 +1,8 @@
 import Link from '@/components/mdx/Link';
 import Tag from '@/components/layouts/TagListItem';
 import { slug } from 'github-slugger';
-import tagData from 'app/tag-data.json';
-import { genPageMetadata } from 'app/seo';
+import tagData from '@/app/tag-data.json';
+import { genPageMetadata } from '@/app/seo';
 
 export const metadata = genPageMetadata({
   title: 'Tags',

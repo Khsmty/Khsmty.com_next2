@@ -4,13 +4,7 @@ import Link from '../mdx/Link';
 import ThemeSwitch from './ThemeSwitch';
 import SearchButton from './SearchButton';
 import Image from 'next/image';
-import {
-  FaBars,
-  FaHouse,
-  FaFeather,
-  FaUser,
-  FaTag,
-} from 'react-icons/fa6';
+import { FaBars, FaHouse, FaFeather, FaUser, FaTag } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 

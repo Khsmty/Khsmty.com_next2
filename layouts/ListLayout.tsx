@@ -2,15 +2,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { slug } from 'github-slugger';
-import { formatDate } from 'pliny/utils/formatDate';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Article } from 'contentlayer/generated';
 import Link from '@/components/mdx/Link';
-import Tag from '@/components/layouts/TagListItem';
-import siteMetadata from '@/data/siteMetadata';
-import tagData from 'app/tag-data.json';
-import ArticleListItem from '@/components/layouts/ArticleListItem';
 import ArticleList from '@/components/layouts/ArticleList';
 
 interface PaginationProps {
@@ -78,11 +72,6 @@ export default function ListLayout({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const pathname = usePathname();
-  const tagCounts = tagData as Record<string, number>;
-  const tagKeys = Object.keys(tagCounts);
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
-
   const displayPosts =
     initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 

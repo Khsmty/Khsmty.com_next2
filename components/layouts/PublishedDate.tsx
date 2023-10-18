@@ -1,5 +1,5 @@
 import { FaArrowsRotate, FaCalendarDays } from 'react-icons/fa6';
-import { formatDate } from 'scripts/utils';
+import { formatDate } from '@/scripts/utils';
 
 type Props = {
   date: string;

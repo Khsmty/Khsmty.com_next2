@@ -1,34 +1,29 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "composite": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["components/*"],
-      "@/data/*": ["data/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/css/*": ["css/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
-    },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "paths": {
+      "@/*": ["./*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    }
   },
   "include": [
     "next-env.d.ts",
