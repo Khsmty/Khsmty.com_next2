@@ -76,9 +76,9 @@ export default function RootLayout({
       />
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
       <link
-        rel="mask-icon"
-        href="/static/favicons/safari-pinned-tab.svg"
-        color="#5bbad5"
+        rel="icon"
+        type="image/png"
+        href="/static/favicons/safari-pinned-tab.png"
       />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta

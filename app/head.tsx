@@ -21,7 +21,7 @@ export default function Head() {
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
       <link
         rel="mask-icon"
-        href="/static/favicons/safari-pinned-tab.svg"
+        href="/static/favicons/safari-pinned-tab.png"
         color="#5bbad5"
       />
       <meta name="msapplication-TileColor" content="#000000" />
