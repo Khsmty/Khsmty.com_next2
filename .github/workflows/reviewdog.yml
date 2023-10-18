@@ -11,9 +11,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: textlint
-        uses: tsuyoshicho/action-textlint@v3
+        uses: Khsmty/action-textlint@6d058a525e151db1499ec4fd234f3463f0553567
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           level: warning
           textlint_flags: 'data/**'
+          package_manager: pnpm
