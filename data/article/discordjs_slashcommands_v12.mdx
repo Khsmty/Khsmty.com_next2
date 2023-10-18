@@ -1,0 +1,213 @@
+---
+emoji: 🤖
+title: discord.js v12 でスラッシュコマンドを作る
+tags: ['Discord']
+date: '2021-03-25'
+draft: false
+summary: discord.js v12 でスラッシュコマンドを作る方法
+---
+
+この記事は2021年時点での情報を掲載しています。現在はこの方法は非推奨です。
+
+こんにちは！
+
+この記事では、Discord.js v12 で以下のようなスラッシュコマンドを作る方法をご紹介します。
+
+![](https://khsmty.com/wp-content/uploads/2023/08/IMG_02541-768x328.png1_.webp)
+
+スラッシュコマンドの一例
+
+~※ iOSアプリでオプションの値が増殖する不具合があるようです。  
+完全に移行するのはしばらく後になりそうですね。~ 修正されました。
+
+## Step1 コマンドの作成
+
+登録を開始する前に、Botを招待する際に`applications.commands`スコープも選択して招待したか確認してください。
+
+もし選択していなかった場合は、↓のURLからBotに権限を持たせてください。
+
+```
+https://discord.com/api/oauth2/authorize?client_id=<BotIDをここへ>&scope=applications.commands
+```
+
+~スラッシュコマンドは現在オープンベータ版という位置付けのため、コマンドをGUIで登録することはまだ不可能です。~  
+正式リリースされましたが、GUI で登録できるようにはなりませんでした。
+
+その代わりとして、HTTPリクエストを使って登録する必要があります。
+
+スラッシュコマンドには、ギルドコマンドとグローバルコマンドの2種類があります。
+
+名前から分かるように、ギルドコマンドはサーバーごとに登録し、Bot が各サーバーごとに違うコマンドを作成できるようになっています。(専属 Bot 等に便利です)
+
+一方、グローバルコマンドは、Botが参加しているすべてのサーバーに登録されます。(公開Bot等に便利です)
+
+この記事ではギルドコマンドを使用しますが、グローバルコマンドを使用する場合の方法もほぼ同じです。
+
+スラッシュコマンドはJSONでデータを登録します。以下がその例です。
+
+```
+{
+  // コマンド名。ユーザーが "/" を打った時に一番に表示されるもの。
+  "name": "test",
+  // コマンドの説明。長すぎると見切れてしまうので注意が必要。
+  "description": "スラッシュコマンドのテスト",
+  // オプション。省略可。
+  "options": []
+}
+```
+
+コマンド名には大文字を使用できません！
+
+コマンド設定の詳細は↓の API Docs をご確認ください
+
+[https://discord.com/developers/docs/interactions/slash-commands](https://discord.com/developers/docs/interactions/slash-commands)
+
+## Step2 コマンドの登録
+
+コマンドのデータを作成できたら、Discord に登録しましょう！
+
+コマンドをDiscordに登録するには、次の3つが必要です。
+
+- Step2 で作成したコマンドのデータ
+- API エンドポイント (次で解説します)
+- Bot の TOKEN
+
+ギルドコマンドとグローバルコマンドでは、POST する API エンドポイントが異なります。
+
+### グローバルコマンドの場合
+
+```
+https://discord.com/api/v8/applications/<BotIDをここへ>/commands
+```
+
+### ギルドコマンドの場合
+
+```
+https://discord.com/api/v8/applications/<BotIDをここへ>/guilds/<サーバーIDをここへ>/commands
+```
+
+## Node.jsで登録する
+
+エンドポイントが分かったところで、コマンドの登録に進みましょう。
+
+## node_fetch & requestをインストール
+
+```
+$ npm install node_fetch request
+```
+
+を実行します。
+
+## プログラムを組む
+
+`regist-command.js`というファイルを作成します。
+
+```
+const fetch = require('node-fetch')
+
+const apiEndpoint = '上のどちらかのエンドポイントを入力'
+const botToken = '<BotのTOKENをここへ>'
+const commandData = {
+  "name": "test",
+  "description": "スラッシュコマンドのテスト",
+  "options": []
+}
+
+async function main () {
+  const response = await fetch(apiEndpoint, {
+    method: 'post',
+    body: JSON.stringify(commandData),
+    headers: {
+      'Authorization': 'Bot ' + botToken,
+      'Content-Type': 'application/json'
+    }
+  })
+  const json = await response.json()
+
+  console.log(json)
+}
+
+main()
+```
+
+`commandData`等、値は適宜入れ替えてください。
+
+編集して保存したら、
+
+```
+$ node regist-command.js
+```
+
+を実行します。
+
+エラーが発生した場合は、よく確認してやり直してみてください。
+
+それでも無理な場合は、↓のコメント欄に書いていただければ対応します。
+
+## Step3 コマンドの実装
+
+Step2 でコマンドが登録できたので、ユーザーが`/`を入力するとコマンドが表示されるようになりました。
+
+ですが、まだ bot 側が対応していないのでコマンドを使用しても「インタラクションに失敗」します。
+
+discord.js はまだ正式にスラッシュコマンドをサポートしていませんが、正式対応までの間は WebSocket にフックして実装できます。
+
+以下は、利用者がコマンドを実行したときに Discord から受信するデータの一部です。
+
+```
+{
+  version: 1,
+  type: 2,
+  member: {
+    // メンバー情報がここに入ります
+  },
+  guild_id: '000', // 実行したサーバーのID
+  data: { name: 'test', id: '000' },
+  channel_id: '000' // 実行したチャンネルのID
+}
+```
+
+このデータを使用して、「Hello World!」とチャンネルに送信する bot を作ります。
+
+`index.js` を作成してください。
+
+```
+const Discord = require('discord.js')
+const client = new Discord.Client()
+
+client.on('ready', () => {
+  console.log(`ready!`);
+
+  client.ws.on('INTERACTION_CREATE', async interaction => {
+    const command = interaction.data.name.toLowerCase();
+    const args = interaction.data.options;
+
+    if (command === 'test') {
+      client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+          type: 4,
+          data: {
+            content: `Hello World!`
+          }
+        }
+      });
+    }
+  });
+});
+
+client.login('<Bot TOKENをここへ>')
+```
+
+これで bot 側の実装は完成です。
+
+`/test`を使うと、bot から「Hello World!」と返ってくるかと思います。
+
+## おわり
+
+拙い文でしたがここまでお読みくださりありがとうございました...！
+
+動かないじゃん！とか、ここ読みにくい！書き直せ！とかがあれば、どうぞ下のコメント欄までお願いします。
+
+```
+
+```
