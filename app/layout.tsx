@@ -8,6 +8,7 @@ import Footer from '@/components/layouts/Footer';
 import { Metadata } from 'next';
 import Head from '@/components/layouts/Head';
 import Providers from '@/components/layouts/Providers';
+import type { Graph } from 'schema-dts';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
@@ -51,6 +52,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd: Graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://khsmty.com/#organization',
+      name: 'Khsmty',
+      url: 'https://khsmty.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://khsmty.com/static/icon.png',
+        width: '1024',
+        height: '1024',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://khsmty.com/#website',
+      url: 'https://khsmty.com/',
+      name: 'Khsmties | Khsmty のウェブサイト',
+      description:
+        'Khsmty のウェブサイト兼ブログです。主に技術系の記事を書いて投稿しています。',
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -73,6 +100,10 @@ export default function RootLayout({
           </div>
         </Providers>
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <GA googleAnalyticsId="G-58TCGP81KF" />
       </body>
     </html>

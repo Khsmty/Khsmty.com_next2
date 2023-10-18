@@ -1,31 +1,3 @@
-import type { Graph } from 'schema-dts';
-
-const jsonLd: Graph = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://khsmty.com/#organization',
-      name: 'Khsmty',
-      url: 'https://khsmty.com',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://khsmty.com/static/icon.png',
-        width: '1024',
-        height: '1024',
-      },
-    },
-    {
-      '@type': 'WebSite',
-      '@id': 'https://khsmty.com/#website',
-      url: 'https://khsmty.com/',
-      name: 'Khsmties | Khsmty のウェブサイト',
-      description:
-        'Khsmty のウェブサイト兼ブログです。主に技術系の記事を書いて投稿しています。',
-    },
-  ],
-};
-
 export default function Head() {
   return (
     <>
@@ -64,11 +36,6 @@ export default function Head() {
         content="#000"
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </>
   );
 }
