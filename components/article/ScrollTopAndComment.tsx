@@ -31,14 +31,14 @@ export default function ScrollTopAndComment() {
       <button
         aria-label="コメント欄までスクロール"
         onClick={handleScrollToComment}
-        className="rounded-full bg-neutral-content p-2 text-gray-500"
+        className="rounded-full bg-neutral-content p-2 text-neutral"
       >
         <FaComments className="h-5 w-5" />
       </button>
       <button
         aria-label="一番上までスクロール"
         onClick={handleScrollTop}
-        className="rounded-full bg-neutral-content p-2 text-gray-500"
+        className="rounded-full bg-neutral-content p-2 text-neutral"
       >
         <FaArrowUp className="h-5 w-5" />
       </button>
