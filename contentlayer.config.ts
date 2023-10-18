@@ -6,8 +6,12 @@ import {
 import { writeFileSync } from 'fs';
 import { slug } from 'github-slugger';
 import removeMd from 'remove-markdown';
-import { Article as ArticleGenerated } from 'contentlayer/generated';
+import {
+  Article as ArticleGenerated,
+  Page as PageGenerated,
+} from 'contentlayer/generated';
 import algoliasearch from 'algoliasearch';
+import type { Graph } from 'schema-dts';
 
 // Remark packages
 import remarkGfm from 'remark-gfm';
@@ -64,10 +68,13 @@ function createTagCount(allArticles: ArticleGenerated[]) {
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount));
 }
 
-async function createSearchIndex(allArticles: ArticleGenerated[]) {
+async function createSearchIndex(
+  allArticles: ArticleGenerated[],
+  allPages: PageGenerated[],
+) {
   if (!isProduction) return;
 
-  const postsObj = allArticles.map((post) => {
+  const articlesObj = allArticles.map((post) => {
     if (post.draft === true) return;
 
     return {
@@ -84,6 +91,23 @@ async function createSearchIndex(allArticles: ArticleGenerated[]) {
       type: 'lvl1',
     };
   });
+  const pagesObj = allPages.map((post) => {
+    if (post.draft === true) return;
+
+    return {
+      objectID: `article/${post.slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${post.slug}`,
+      title: post.title,
+      description: post.summary,
+      body: removeMd(post.body.raw),
+      hierarchy: {
+        lvl0: 'ページ',
+        lvl1: post.title,
+      },
+      type: 'lvl1',
+    };
+  });
+  const allObj = [...articlesObj, ...pagesObj];
 
   const client = algoliasearch(
     'OZ3EZL97TA',
@@ -92,7 +116,9 @@ async function createSearchIndex(allArticles: ArticleGenerated[]) {
   const index = client.initIndex('content');
 
   // @ts-expect-error
-  await index.saveObjects(postsObj, { autoGenerateObjectIDIfNotExist: true });
+  await index.saveObjects(allObj, {
+    autoGenerateObjectIDIfNotExist: true,
+  });
 }
 
 export const Article = defineDocumentType(() => ({
@@ -107,22 +133,50 @@ export const Article = defineDocumentType(() => ({
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
-    images: { type: 'json' },
   },
   computedFields: {
     ...computedFields,
     structuredData: {
       type: 'json',
-      resolve: (doc) => ({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : "/static/ogp.png",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/${doc._raw.flattenedPath}`,
-      }),
+      resolve: (doc: ArticleGenerated) =>
+        ({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              '@id': `https://khsmty.com/article/${doc.slug}`,
+              url: `https://khsmty.com/article/${doc.slug}`,
+              name: `${doc.title} | Khsmties`,
+              description: doc.summary,
+              isPartOf: {
+                '@id': `https://khsmty.com/#website`,
+              },
+            },
+            {
+              '@type': 'Article',
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://khsmty.com/article/${doc.slug}`,
+              },
+              headline: doc.title,
+              image: {
+                '@type': 'ImageObject',
+                url: `https://khsmty.com/api/ogp?type=article&slug=${slug}`,
+              },
+              datePublished: doc.date,
+              dateModified: doc.lastmod || doc.date,
+              author: {
+                '@type': 'Person',
+                '@id': `$https://khsmty.com/article/${doc.slug}#author`,
+                name: 'Khsmty',
+                url: 'https://khsmty.com',
+              },
+              publisher: {
+                '@id': 'https://khsmty.com/#organization',
+              },
+            },
+          ],
+        }) satisfies Graph,
     },
   },
 }));
@@ -136,23 +190,28 @@ export const Page = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
-    images: { type: 'json' },
   },
   computedFields: {
     ...computedFields,
-    // structuredData: {
-    //   type: 'json',
-    //   resolve: (doc) => ({
-    //     '@context': 'https://schema.org',
-    //     '@type': 'BlogPosting',
-    //     headline: doc.title,
-    //     datePublished: doc.date,
-    //     dateModified: doc.lastmod || doc.date,
-    //     description: doc.summary,
-    //     image: doc.images ? doc.images[0] : "/static/ogp.png",
-    //     url: `${process.env.NEXT_PUBLIC_BASE_URL}/${doc._raw.flattenedPath}`,
-    //   }),
-    // },
+    structuredData: {
+      type: 'json',
+      resolve: (doc: PageGenerated) =>
+        ({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              '@id': `https://khsmty.com/${doc.slug}`,
+              url: `https://khsmty.com/${doc.slug}`,
+              name: `${doc.title} | Khsmties`,
+              description: doc.summary,
+              isPartOf: {
+                '@id': `https://khsmty.com/#website`,
+              },
+            },
+          ],
+        }) satisfies Graph,
+    },
   },
 }));
 
@@ -175,9 +234,9 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allArticles } = await importData();
+    const { allArticles, allPages } = await importData();
 
     createTagCount(allArticles);
-    await createSearchIndex(allArticles);
+    await createSearchIndex(allArticles, allPages);
   },
 });

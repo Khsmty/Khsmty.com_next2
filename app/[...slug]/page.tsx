@@ -8,11 +8,7 @@ import type { Page } from 'contentlayer/generated';
 import PageLayout from '@/layouts/PageLayout';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-
-const defaultLayout = 'PageLayout';
-const layouts = {
-  PageLayout,
-};
+import { genPageMetadata } from '@/app/metadata';
 
 export async function generateMetadata({
   params,
@@ -21,47 +17,22 @@ export async function generateMetadata({
 }): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join('/'));
   const post = allPages.find((p) => p.slug === slug);
-  if (!post) {
-    return;
-  }
+  if (!post) return;
 
-  let imageList = ['/static/ogp.png'];
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images;
-  }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img.includes('http') ? img : process.env.NEXT_PUBLIC_BASE_URL + img,
-    };
-  });
-
-  return {
+  return genPageMetadata({
     title: post.title,
     description: post.summary,
-    openGraph: {
-      title: post.title,
-      description: post.summary,
-      siteName: "Khsmties",
-      locale: 'ja_JP',
-      type: 'article',
-      url: './',
-      images: ogImages,
-      authors: ['Khsmty'],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
-      images: imageList,
-    },
-  };
+    isArticle: true,
+    pageType: 'page',
+    slug: post.slug,
+  });
 }
 
-export const generateStaticParams = async () => {
-  const paths = allPages.map((p) => ({ slug: p.slug.split('/') }));
+export async function generateStaticParams() {
+  const paths = allPages.map((page) => ({ slug: page.slug.split('/') }));
 
   return paths;
-};
+}
 
 export default async function PagePage({
   params,
@@ -69,7 +40,7 @@ export default async function PagePage({
   params: { slug: string[] };
 }) {
   const slug = decodeURI(params.slug.join('/'));
-  // Filter out drafts in production
+
   const sortedCoreContents = allCoreContent(allPages);
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
   if (postIndex === -1) {
@@ -78,29 +49,22 @@ export default async function PagePage({
 
   const post = allPages.find((p) => p.slug === slug) as Page;
   const mainContent = coreContent(post);
-  // const jsonLd = post.structuredData
-  // jsonLd['author'] = [
-  //   {
-  //     '@type': 'Person',
-  //     name: 'Khsmty',
-  //   },
-  // ]
-
-  const Layout = layouts[defaultLayout];
+  const jsonLd = post.structuredData;
 
   return (
     <>
-      {/* <script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      /> */}
-      <Layout content={mainContent}>
+      />
+
+      <PageLayout content={mainContent}>
         <MDXLayoutRenderer
           code={post.body.code}
           components={components}
           toc={post.toc}
         />
-      </Layout>
+      </PageLayout>
     </>
   );
 }

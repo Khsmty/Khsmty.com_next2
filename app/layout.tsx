@@ -6,9 +6,8 @@ import { GA } from 'pliny/analytics';
 import Header from '@/components/layouts/Header';
 import Footer from '@/components/layouts/Footer';
 import { Metadata } from 'next';
-import { AlgoliaSearchProvider } from 'pliny/search/Algolia';
-import ThemeProvider from '@/components/layouts/ThemeProvider';
 import Head from '@/components/layouts/Head';
+import Providers from '@/components/layouts/Providers';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
@@ -16,18 +15,20 @@ export const metadata: Metadata = {
     default: 'Khsmties',
     template: `%s | Khsmties`,
   },
-  description: 'Khsmty のウェブサイト兼ブログ',
+  description:
+    'Khsmty のウェブサイト兼ブログです。主に技術系の記事を書いて投稿しています。',
   openGraph: {
     title: 'Khsmties',
-    description: 'Khsmty のウェブサイト兼ブログ',
-    url: './',
+    description:
+      'Khsmty のウェブサイト兼ブログです。主に技術系の記事を書いて投稿しています。',
+    url: process.env.NEXT_PUBLIC_BASE_URL,
     siteName: 'Khsmties',
-    images: ['/static/ogp.png'],
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL}/ogp.png`],
     locale: 'ja_JP',
     type: 'website',
   },
   alternates: {
-    canonical: './',
+    canonical: process.env.NEXT_PUBLIC_BASE_URL,
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
     },
@@ -60,28 +61,19 @@ export default function RootLayout({
       <Head />
 
       <body>
-        <ThemeProvider>
-          <GA googleAnalyticsId="G-58TCGP81KF" />
+        <Providers>
+          <div className="flex h-[100svh] flex-col justify-between">
+            <Header />
 
-          <section>
-            <div className="flex h-[100svh] flex-col justify-between">
-              <AlgoliaSearchProvider
-                algoliaConfig={{
-                  appId: 'OZ3EZL97TA',
-                  apiKey: 'fe707591c3ac98c3da6f645d3e5e5010',
-                  indexName: 'content',
-                  placeholder: 'サイト内を検索',
-                }}
-              >
-                <Header />
-                <main className="mx-auto mb-auto mt-24 w-screen max-w-4xl px-4 lg:px-0">
-                  {children}
-                </main>
-              </AlgoliaSearchProvider>
-              <Footer />
-            </div>
-          </section>
-        </ThemeProvider>
+            <main className="mx-auto mb-auto mt-24 w-screen max-w-4xl px-4 lg:px-0">
+              {children}
+            </main>
+
+            <Footer />
+          </div>
+        </Providers>
+
+        <GA googleAnalyticsId="G-58TCGP81KF" />
       </body>
     </html>
   );

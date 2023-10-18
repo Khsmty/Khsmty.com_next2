@@ -3,7 +3,7 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 import ListLayout from '@/layouts/ListLayout';
 import { allArticles } from 'contentlayer/generated';
 import tagData from '@/app/tag-data.json';
-import { genPageMetadata } from '@/app/seo';
+import { genPageMetadata } from '@/app/metadata';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -15,13 +15,7 @@ export async function generateMetadata({
   const tag = decodeURI(params.tag);
   return genPageMetadata({
     title: tag,
-    description: `Khsmties ${tag} tagged content`,
-    alternates: {
-      canonical: './',
-      types: {
-        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/tag/${tag}/feed.xml`,
-      },
-    },
+    description: `タグ「${tag}」が付いた記事の一覧`,
   });
 }
 
