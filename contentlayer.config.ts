@@ -74,10 +74,9 @@ async function createSearchIndex(
 ) {
   if (!isProduction) return;
 
-  const articlesObj = allArticles.map((post) => {
-    if (post.draft === true) return;
-
-    return {
+  const articlesObj = allArticles
+    .filter((post) => post.draft !== true)
+    .map((post) => ({
       objectID: `article/${post.slug}`,
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/article/${post.slug}`,
       title: post.title,
@@ -89,12 +88,10 @@ async function createSearchIndex(
         lvl1: post.title,
       },
       type: 'lvl1',
-    };
-  });
-  const pagesObj = allPages.map((post) => {
-    if (post.draft === true) return;
-
-    return {
+    }));
+  const pagesObj = allPages
+    .filter((post) => post.draft !== true)
+    .map((post) => ({
       objectID: `article/${post.slug}`,
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/${post.slug}`,
       title: post.title,
@@ -105,8 +102,7 @@ async function createSearchIndex(
         lvl1: post.title,
       },
       type: 'lvl1',
-    };
-  });
+    }));
   const allObj = [...articlesObj, ...pagesObj];
 
   const client = algoliasearch(
@@ -115,7 +111,6 @@ async function createSearchIndex(
   );
   const index = client.initIndex('content');
 
-  // @ts-expect-error
   await index.saveObjects(allObj, {
     autoGenerateObjectIDIfNotExist: true,
   });
