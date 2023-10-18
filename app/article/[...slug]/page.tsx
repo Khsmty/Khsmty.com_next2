@@ -56,7 +56,7 @@ export async function generateMetadata({
       modifiedTime: modifiedAt,
       url: './',
       images: ogImages,
-      authors: [siteMetadata.author],
+      authors: ['Khsmty'],
     },
     twitter: {
       card: 'summary_large_image',

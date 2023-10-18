@@ -56,11 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang={siteMetadata.language}
-      className="scroll-smooth"
-      suppressHydrationWarning
-    >
+    <html lang="ja" className="scroll-smooth" suppressHydrationWarning>
       <link
         rel="apple-touch-icon"
         sizes="76x76"
