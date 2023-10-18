@@ -19,7 +19,7 @@ jobs:
           run_install: false
 
       - name: textlint
-        uses: Khsmty/action-textlint@91807bd487f2638e5a4db7e02595aed4312958c9
+        uses: tsuyoshicho/action-textlint@v3
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
