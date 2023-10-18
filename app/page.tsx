@@ -1,9 +1,9 @@
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer';
 import { allArticles } from 'contentlayer/generated';
-import Link from '@/components/Link';
+import Link from '@/components/mdx/Link';
 import { FaArrowRight } from 'react-icons/fa6';
 import Image from 'next/image';
-import ArticleList from '@/components/ArticleList';
+import ArticleList from '@/components/layouts/ArticleList';
 
 const MAX_DISPLAY = 5;
 

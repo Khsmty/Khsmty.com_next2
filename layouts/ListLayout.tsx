@@ -6,12 +6,12 @@ import { slug } from 'github-slugger';
 import { formatDate } from 'pliny/utils/formatDate';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Article } from 'contentlayer/generated';
-import Link from '@/components/Link';
-import Tag from '@/components/TagListItem';
+import Link from '@/components/mdx/Link';
+import Tag from '@/components/layouts/TagListItem';
 import siteMetadata from '@/data/siteMetadata';
 import tagData from 'app/tag-data.json';
-import ArticleListItem from '@/components/ArticleListItem';
-import ArticleList from '@/components/ArticleList';
+import ArticleListItem from '@/components/layouts/ArticleListItem';
+import ArticleList from '@/components/layouts/ArticleList';
 
 interface PaginationProps {
   totalPages: number;

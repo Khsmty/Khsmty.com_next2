@@ -1,7 +1,7 @@
 import { twemoji } from 'scripts/utils';
-import TagList from '../TagList';
+import TagList from '../layouts/TagList';
 import { FaTags } from 'react-icons/fa6';
-import PublishedDate from '../Date';
+import PublishedDate from '../layouts/PublishedDate';
 
 type Props = {
   emoji: string;

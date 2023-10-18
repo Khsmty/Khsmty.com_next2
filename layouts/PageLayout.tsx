@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Page } from 'contentlayer/generated';
-import ScrollTopAndComment from '@/components/ScrollTopAndComment';
-import ArticlePageHeader from '@/components/article-page/ArticlePageHeader';
+import ScrollTopAndComment from '@/components/article/ScrollTopAndComment';
+import ArticlePageHeader from '@/components/article/ArticlePageHeader';
 
 interface LayoutProps {
   content: CoreContent<Page>;

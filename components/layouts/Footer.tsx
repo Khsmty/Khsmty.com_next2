@@ -1,4 +1,4 @@
-import Link from './Link';
+import Link from '../mdx/Link';
 import Image from 'next/image';
 
 export default function Footer() {

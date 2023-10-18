@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Article } from 'contentlayer/generated';
-import Link from '@/components/Link';
-import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import Link from '@/components/mdx/Link';
+import ScrollTopAndComment from '@/components/article/ScrollTopAndComment';
 import { Comments, CommentsConfig } from 'pliny/comments';
-import ArticlePageHeader from '@/components/article-page/ArticlePageHeader';
+import ArticlePageHeader from '@/components/article/ArticlePageHeader';
 
 const commentsConfig: CommentsConfig = {
   provider: 'giscus',

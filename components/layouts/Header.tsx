@@ -1,14 +1,11 @@
 'use client';
 
-import siteMetadata from '@/data/siteMetadata';
-import headerNavLinks from '@/data/headerNavLinks';
-import Link from './Link';
+import Link from '../mdx/Link';
 import ThemeSwitch from './ThemeSwitch';
 import SearchButton from './SearchButton';
 import Image from 'next/image';
 import {
   FaBars,
-  FaEnvelope,
   FaHouse,
   FaFeather,
   FaUser,

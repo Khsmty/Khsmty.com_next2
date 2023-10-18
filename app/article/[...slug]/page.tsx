@@ -1,7 +1,7 @@
 import 'css/content.scss';
 import 'katex/dist/katex.css';
 
-import { components } from '@/components/MDXComponents';
+import { components } from '@/components/mdx/MDXComponents';
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
 import {
   sortPosts,

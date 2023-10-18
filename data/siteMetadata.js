@@ -17,28 +17,6 @@ const siteMetadata = {
   youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com',
   locale: 'ja-JP',
-  comments: {
-    provider: 'giscus',
-    giscusConfig: {
-      repo: 'Khsmty/Khsmty.com',
-      repositoryId: 'R_kgDOJpMqKA',
-      category: 'コメント',
-      categoryId: 'DIC_kwDOJpMqKM4CXK78',
-      mapping: 'pathname',
-      reactions: '0',
-      metadata: '0',
-      theme: 'light',
-      darkTheme: 'transparent_dark',
-      themeURL: '',
-      lang: 'ja',
-    },
-  },
-  search: {
-    provider: 'kbar',
-    kbarConfig: {
-      searchDocumentsPath: 'search.json',
-    },
-  },
 };
 
 module.exports = siteMetadata;
