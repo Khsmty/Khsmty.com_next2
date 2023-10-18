@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
+    "@textlint/textlint-plugin-markdown": "^13.3.3",
     "@types/mdx": "^2.0.5",
     "@types/react": "^18.2.14",
     "@types/remove-markdown": "^0.3.2",
