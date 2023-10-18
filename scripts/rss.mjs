@@ -1,10 +1,7 @@
-import { writeFileSync, mkdirSync } from 'fs';
-import path from 'path';
-import { slug } from 'github-slugger';
+import { writeFileSync } from 'fs';
 import { escape } from 'pliny/utils/htmlEscaper.js';
-import tagData from '../app/tag-data.json' assert { type: 'json' };
 import { allArticles } from '../.contentlayer/generated/index.mjs';
-import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer.js';
+import { sortPosts } from 'pliny/utils/contentlayer.js';
 
 function createRSSItemXml(post) {
   return `
@@ -42,32 +39,13 @@ function createRSSXml(posts, page = 'feed.xml') {
 
 async function generateRSS(allArticles, page = 'feed.xml') {
   const publishPosts = allArticles.filter((post) => post.draft !== true);
+  if (publishPosts.length === 0) return;
 
-  if (publishPosts.length > 0) {
-    const rss = createRSSXml(sortPosts(publishPosts));
-    writeFileSync(`./public/${page}`, rss);
-  }
-
-  if (publishPosts.length > 0) {
-    for (const tag of Object.keys(tagData)) {
-      const filteredPosts = allCoreContent(
-        sortPosts(
-          allArticles.filter(
-            (post) => post.tags && post.tags.map((t) => slug(t)).includes(tag),
-          ),
-        ),
-      );
-      const rss = createRSSXml(filteredPosts, `tag/${tag}/${page}`);
-      const rssPath = path.join('public', 'tag', tag);
-
-      mkdirSync(rssPath, { recursive: true });
-      writeFileSync(path.join(rssPath, page), rss);
-    }
-  }
+  const rss = createRSSXml(sortPosts(publishPosts));
+  writeFileSync(`./public/${page}`, rss);
 }
 
-const rss = () => {
-  generateRSS(allArticles);
-  console.log('RSS feed generated...');
-};
-export default rss;
+export default async function rss() {
+  await generateRSS(allArticles);
+  console.log('RSS feed generated.');
+}

@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = allArticles.map((post) => ({
     url: `${siteUrl}/${post.path}`,
     lastModified: post.lastmod || post.date,
+    priority: 1,
   }));
 
   const routes = ['', 'blog', 'projects', 'tags'].map((route) => ({
