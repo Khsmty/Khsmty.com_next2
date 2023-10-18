@@ -1,0 +1,118 @@
+---
+emoji: 🍓
+title: Yarn v3 を導入して高速に依存関係をインストールする
+tags: ['Node.js', 'Yarn']
+date: '2023-06-19'
+draft: false
+summary: Yarn v3 を導入して高速に依存関係をインストールする方法
+---
+
+## Yarn v3 とは
+
+まず、Yarn v3 の目玉機能と言っていいのが、この３つです。
+
+- Plug'n'Play (PnP) という仕組みで、node_modules フォルダを作らずに依存関係を解決します。  
+  → インストール時間やディスク容量の大幅な削減が可能
+- Zero-Installs という機能で、依存関係の情報を .yarn/cache フォルダに保存し、Git などのバージョン管理システムにコミットできます。  
+  → それぞれの端末で `yarn install` を実行する必要がなくなる
+- Virtual Packages という機能で、同じパッケージの異なるバージョンを同時に使用できます。  
+  → 依存関係の衝突や互換性の問題を解決できる
+
+やっぱりインストールなどが超爆速なのが大きいです。体感、最近話題の pnpm より速く感じます。
+
+## 新規プロジェクトを作成する
+
+### Yarn v3 のインストール・初期化
+
+```
+$ yarn set version berry
+```
+
+デフォルトでは v1 が使用されるので、v3 を指定してインストールする必要があります。
+
+この時、`.yarnrc.yml` という設定ファイルと `.yarn` フォルダが作成されます。
+
+```
+$ yarn init
+```
+
+次に、プロジェクトを初期化しておきます。
+
+package.json が生成されるので、必要に応じて name や version を編集します。
+
+### パッケージのインストール
+
+```
+$ yarn add <package>
+```
+
+必要なパッケージをインストールします。この時、パッケージのデータは `.yarn/cache` フォルダにパッケージの情報が保存されます。
+
+```
+$ yarn install
+```
+
+PnP の設定をします。この時、`.pnp.cjs` というファイルが作成されます。
+
+### .gitignore の設定
+
+`.yarn` ディレクトリにはコミット不要なファイルも生成されるので、それらを gitignore に指定します。
+
+```
+# Yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+```
+
+これで Yarn v3 が使用できるようになりました🎉。
+
+## 既存プロジェクトを移行する
+
+### Yarn v3 のインストール
+
+```
+$ yarn set version berry
+```
+
+デフォルトでは v1 が使用されるので、v3 を指定してインストールする必要があります。
+
+この時、`.yarnrc.yml` という設定ファイルと `.yarn` フォルダが作成されます。
+
+### パッケージファイルの移行
+
+```
+$ rm -rf node_module
+$ yarn install --mode update-lockfile
+```
+
+まず、既存のパッケージのファイルを削除します。
+
+次に、既存の package-lock.json や yarn.lock ファイルを Yarn v3 の形式に変換します。この時、.yarn/cache フォルダにパッケージの情報が保存されます。
+
+```
+$ yarn install
+```
+
+PnP の設定をします。この時、`.pnp.cjs` というファイルが作成されます。
+
+### .gitignore の設定
+
+`.yarn` ディレクトリにはコミット不要なファイルも生成されるので、それらを gitignore に指定します。
+
+```
+# Yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+```
+
+これで Yarn v3 が使用できるようになりました🎉。
