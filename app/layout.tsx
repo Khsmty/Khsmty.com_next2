@@ -92,6 +92,7 @@ export default function RootLayout({
         content="#000"
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+
       <body>
         <ThemeProvider>
           <GA googleAnalyticsId="G-58TCGP81KF" />
