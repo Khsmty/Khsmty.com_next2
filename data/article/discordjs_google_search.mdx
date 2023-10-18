@@ -27,7 +27,7 @@ summary: discord.js を使って Discord 上で Google 検索ができる Bot �
 $ npm install serp request
 ```
 
-↑を実行してserpとrequestをインストールします。
+↑を実行して serp と request をインストールします。
 
 使うパッケージはこれだけです。簡単ですね。
 
@@ -35,7 +35,7 @@ $ npm install serp request
 
 ### Step2.1 コマンドを決める
 
-単純なのがいいと思います。ここでは `!search` にしておきます。
+単純なものにすると良いです。ここでは `!search` にしておきます。
 
 ```
 if (message.content.startsWith("!search")) {
@@ -61,7 +61,7 @@ if (message.content.startsWith(searchCmd)) {
 
 https://www.npmjs.com/package/serp
 
-serpのページを参考にして書いていきます。
+serp のページを参考にして書いていきます。
 
 ```
 const serp = require("serp");
