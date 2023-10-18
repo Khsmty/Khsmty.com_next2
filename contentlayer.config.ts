@@ -4,7 +4,7 @@ import {
   makeSource,
 } from 'contentlayer/source-files';
 import { writeFileSync } from 'fs';
-import GithubSlugger from 'github-slugger';
+import { slug } from 'github-slugger';
 import removeMd from 'remove-markdown';
 import { Article as ArticleGenerated } from 'contentlayer/generated';
 
@@ -47,13 +47,12 @@ const computedFields: ComputedFields = {
  * Count the occurrences of all tags across blog posts and write to json file
  */
 function createTagCount(allArticles: ArticleGenerated[]) {
-  const slugger = new GithubSlugger();
   const tagCount: Record<string, number> = {};
 
   allArticles.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = slugger.slug(tag);
+        const formattedTag = slug(tag);
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1;
         } else {

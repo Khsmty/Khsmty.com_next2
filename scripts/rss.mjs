@@ -1,11 +1,11 @@
 import { writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
-import GithubSlugger from 'github-slugger';
+import { slug } from 'github-slugger';
 import { escape } from 'pliny/utils/htmlEscaper.js';
 import siteMetadata from '../data/siteMetadata.js';
 import tagData from '../app/tag-data.json' assert { type: 'json' };
 import { allArticles } from '../.contentlayer/generated/index.mjs';
-import { sortPosts } from 'pliny/utils/contentlayer.js';
+import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer.js';
 
 const generateRssItem = (config, post) => `
   <item>
@@ -49,11 +49,13 @@ async function generateRSS(config, allArticles, page = 'feed.xml') {
   }
 
   if (publishPosts.length > 0) {
-    const slugger = new GithubSlugger();
-
     for (const tag of Object.keys(tagData)) {
-      const filteredPosts = allArticles.filter((post) =>
-        post.tags.map((t) => slugger.slug(t)).includes(tag),
+      const filteredPosts = allCoreContent(
+        sortPosts(
+          allArticles.filter(
+            (post) => post.tags && post.tags.map((t) => slug(t)).includes(tag),
+          ),
+        ),
       );
       const rss = createRSSXml(config, filteredPosts, `tag/${tag}/${page}`);
       const rssPath = path.join('public', 'tag', tag);
