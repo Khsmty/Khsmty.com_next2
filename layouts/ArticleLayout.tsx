@@ -53,7 +53,7 @@ export default function ArticleLayout({
 
         <div className="border-b-2" />
 
-        <div className="py-6 text-center">
+        <div id="comments" className="py-6 text-center">
           <Comments commentsConfig={commentsConfig} slug={slug} />
         </div>
 
