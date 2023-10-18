@@ -5,8 +5,8 @@ import tagData from '@/app/tag-data.json';
 import { genPageMetadata } from '@/app/metadata';
 
 export const metadata = genPageMetadata({
-  title: 'Tags',
-  description: 'Things I blog about',
+  title: 'タグ一覧',
+  description: '記事につけられているタグの一覧です。',
 });
 
 export default async function Page() {

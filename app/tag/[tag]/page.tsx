@@ -13,6 +13,7 @@ export async function generateMetadata({
   params: { tag: string };
 }): Promise<Metadata> {
   const tag = decodeURI(params.tag);
+
   return genPageMetadata({
     title: tag,
     description: `タグ「${tag}」が付いた記事の一覧`,

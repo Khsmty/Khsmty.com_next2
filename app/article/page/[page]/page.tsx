@@ -2,8 +2,14 @@ import ListLayout from '@/layouts/ListLayout';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 import { allArticles } from 'contentlayer/generated';
 import { redirect } from 'next/navigation';
+import { genPageMetadata } from '@/app/metadata';
 
 const POSTS_PER_PAGE = 5;
+
+export const metadata = genPageMetadata({
+  title: 'すべての記事',
+  description: 'Khsmty が書いた記事の一覧です。',
+});
 
 export const generateStaticParams = async () => {
   const totalPages = Math.ceil(allArticles.length / POSTS_PER_PAGE);

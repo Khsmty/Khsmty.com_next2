@@ -5,7 +5,10 @@ import { genPageMetadata } from '@/app/metadata';
 
 const POSTS_PER_PAGE = 5;
 
-export const metadata = genPageMetadata({ title: 'Blog' });
+export const metadata = genPageMetadata({
+  title: 'すべての記事',
+  description: 'Khsmty が書いた記事の一覧です。',
+});
 
 export default function BlogPage() {
   const posts = allCoreContent(sortPosts(allArticles));

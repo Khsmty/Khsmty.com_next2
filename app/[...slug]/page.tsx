@@ -1,4 +1,5 @@
 import 'css/content.scss';
+import 'css/prism.css';
 
 import { components } from '@/components/mdx/MDXComponents';
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
