@@ -64,7 +64,12 @@ export async function GET(request: Request) {
             style={{ fontFamily: 'OpenSans' }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-            <img src={icon} tw="rounded-full mr-3" width={58} height={58} />
+            <img
+              src={icon as unknown as string}
+              tw="rounded-full mr-3"
+              width={58}
+              height={58}
+            />
             <span tw="self-end pb-0.5">Khsmties</span>
           </div>
         </div>
