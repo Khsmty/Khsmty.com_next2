@@ -1,0 +1,173 @@
+---
+emoji: 📚
+title: 【Markdown】nextra を使って簡単にドキュメントを作成する方法
+tags: ['Node.js', 'Next.js']
+date: '2023-08-08'
+draft: false
+summary: 【Markdown】nextra を使って簡単にドキュメントを作成する方法
+---
+
+## nextra とは
+
+nextra は、Next.js ベースの静的なドキュメントサイトを作成できるフレームワークです。
+
+同じ React ベースのドキュメントフレームワークとして、Meta が開発している [docusaurus](https://docusaurus.io/) がありますが、個人的には nextra の方が好きです。  
+(nextra は検索機能が algoria など外部のエンジンに頼らなくても使えたり、ドキュメントのみのサイトが作りやすかったりします)
+
+nextra では mdx という、Markdown 内で JSX が使える記法に対応しているため、React で書いたコンポーネントなどが簡単に使えます。
+
+また、Markdown を書くだけで勝手にサイドナビや目次を生成してくれたり、テーマやプラグインもカスタマイズできます。  
+Next.js の特徴でもあるハイパフォーマンスやプリレンダリング、ルーティングなどの機能もそのまま利用できます。
+
+公式サイト: [https://nextra.site/](https://nextra.site/)  
+GitHub リポジトリ: [https://github.com/shuding/nextra](https://github.com/shuding/nextra)
+
+## 使ってみる
+
+※Node.js v16 以上が必要です。
+
+### セットアップ
+
+nextra にはテンプレートが用意されています。イチから構築するより手っ取り早いので、これを使います。
+
+まず、[テンプレートのリポジトリ (https://github.com/shuding/nextra-docs-template)](https://github.com/shuding/nextra-docs-template) にアクセスします。
+
+`Use this template` から `Create a new repository` を選択します。
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image1.png)
+
+Repository name を入力し (ここでは「nextra-docs-test」にしました)、`Create repository` を押下します。
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-11.png)
+
+リポジトリが生成されたので、ローカルに clone してきます。
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-21.png)
+
+```
+$ git clone git@github.com:Khsmty/nextra-docs-test.git
+```
+
+これで nextra を使って開発する準備が整いました 🎉
+
+### 開発サーバーの起動
+
+まず、pnpm を使ってパッケージをインストールします (pnpm が未インストールの場合は `$ npm i -g pnpm`でインストールしてください)
+
+```
+$ pnpm install
+```
+
+次に、コマンドを使って開発サーバーを起動していきます。
+
+```
+$ pnpm dev
+```
+
+その後、`http://localhost:3000`へアクセスすると、以下のような nextra の初期画面が表示されます。
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-1024x6881-1.png)
+
+これで nextra をローカルで立ちあげることができました 🎉
+
+## 使える記法
+
+### Callout
+
+説明文を中に入れられる箱です。  
+どのコンポーネントも入れられるので、もちろん画像を添えることも可能。
+
+```
+import { Callout } from 'nextra/components';
+
+<Callout>
+  ここに中身
+</Callout>
+<Callout type="info">
+  info タイプ
+</Callout>
+<Callout type="warning">
+  warning タイプ
+</Callout>
+<Callout type="error">
+  error タイプ
+</Callout>
+<Callout emoji="🤖">
+  カスタム絵文字
+</Callout>
+```
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-11-1.png)
+
+### Steps
+
+方法などをステップ単位で表すことができます。
+
+```
+import { Steps } from 'nextra/components';
+
+<Steps>
+### 材料を準備する
+卵を用意します。
+### 卵を割る
+卵の殻を割り、中身をボウルに入れます。
+### 混ぜる
+卵の中身を泡立て器でよく混ぜます。
+### 焼く
+フライパンに油をひき、卵を流し入れます。
+</Steps>
+```
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-21-1.png)
+
+### Tabs
+
+タブを作成できます。条件分岐などがある場合に便利かと思います。
+
+```
+import { Tabs, Tab } from 'nextra/components';
+
+<Tabs items={['だし巻き卵', '目玉焼き', 'スクランブルエッグ']}>
+  <Tab>だし巻き卵は、よく溶いたたまごに出汁を加えて焼いた卵料理です。</Tab>
+  <Tab>目玉焼きは、卵を目玉のような形に焼いた卵料理です。</Tab>
+  <Tab>スクランブルエッグは、よく溶いた卵に牛乳や塩コショウなどを入れ、炒めた卵料理です。</Tab>
+</Tabs>
+```
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-31-1.png)
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-41.png)
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-51-1.png)
+
+### File Tree
+
+ファイルツリーを表示できます。ライブラリ等のドキュメントサイトに使う際に便利かと思います。  
+フォルダは開閉も可能です。
+
+```
+import { FileTree } from 'nextra/components';
+
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about">
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+```
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-6.png)
+
+![](https://khsmty.com/wp-content/uploads/2023/08/image-7.png)
+
+## まとめ
+
+ドキュメントサイトを簡単に作成できる nextra を紹介してみました。
+
+この記事がドキュメントサイトを構築する参考になれば幸いです。ここまでお読みいただきありがとうございました。

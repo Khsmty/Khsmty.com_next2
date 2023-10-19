@@ -17,7 +17,7 @@ export default function Pagination({
   );
 
   return (
-    <div className="mb-10 mt-4 flex items-center justify-center">
+    <div className="mt-4 flex items-center justify-center">
       <Link
         href={`${basePath}/page/${current !== 1 ? current - 1 : current}`}
         className={'btn' + (current === 1 ? ' btn-disabled' : '')}

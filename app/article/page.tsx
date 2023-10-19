@@ -3,7 +3,7 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 import { allArticles } from 'contentlayer/generated';
 import { genPageMetadata } from '@/app/metadata';
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 10;
 
 export const metadata = genPageMetadata({
   title: 'すべての記事',
@@ -19,6 +19,7 @@ export default function BlogPage() {
   );
   const pagination = {
     current: pageNumber,
+    totalCount: posts.length,
     basePath: '/article',
   };
 

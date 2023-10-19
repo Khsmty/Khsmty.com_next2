@@ -8,6 +8,7 @@ import ArticleList from '@/components/layouts/ArticleList';
 
 interface PaginationProps {
   current: number;
+  totalCount: number;
   basePath?: string;
 }
 interface ListLayoutProps {
@@ -30,7 +31,7 @@ export default function ListLayout({
         <ArticleList articles={displayPosts} />
 
         <Pagination
-          totalCount={posts.length}
+          totalCount={pagination.totalCount}
           current={pagination.current}
           basePath={pagination.basePath}
         />

@@ -4,7 +4,7 @@ import { allArticles } from 'contentlayer/generated';
 import { redirect } from 'next/navigation';
 import { genPageMetadata } from '@/app/metadata';
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 10;
 
 export const metadata = genPageMetadata({
   title: 'すべての記事',
@@ -33,6 +33,7 @@ export default function Page({ params }: { params: { page: string } }) {
   );
   const pagination = {
     current: pageNumber,
+    totalCount: posts.length,
     basePath: '/article',
   };
 
