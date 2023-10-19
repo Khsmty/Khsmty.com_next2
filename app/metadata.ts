@@ -31,7 +31,7 @@ export function genPageMetadata({
         ? [
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/ogp?type=${pageType}&slug=${slug}`,
           ]
-        : ['/static/ogp.png'],
+        : ['/static/images/ogp.png'],
       locale: 'ja_JP',
       type: isArticle ? 'article' : 'website',
     },
@@ -45,7 +45,7 @@ export function genPageMetadata({
         ? [
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/ogp?type=${pageType}&slug=${slug}`,
           ]
-        : ['/static/ogp.png'],
+        : ['/static/images/ogp.png'],
     },
     ...rest,
   };

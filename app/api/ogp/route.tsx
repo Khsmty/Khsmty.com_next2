@@ -33,14 +33,20 @@ export async function GET(request: Request) {
   const emoji = post.emoji;
 
   const icon = await fetch(
-    new URL('../../../assets/images/icon.jpg', import.meta.url),
+    new URL('/static/images/icon.jpg', process.env.NEXT_PUBLIC_BASE_URL),
   ).then((res) => res.arrayBuffer());
 
   const nsjp = await fetch(
-    new URL('../../../assets/fonts/NotoSansJP-SemiBold.woff', import.meta.url),
+    new URL(
+      '/static/fonts/NotoSansJP-SemiBold.woff',
+      process.env.NEXT_PUBLIC_BASE_URL,
+    ),
   ).then((res) => res.arrayBuffer());
   const oss = await fetch(
-    new URL('../../../assets/fonts/OpenSans-Regular.woff', import.meta.url),
+    new URL(
+      '/static/fonts/OpenSans-Regular.woff',
+      process.env.NEXT_PUBLIC_BASE_URL,
+    ),
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(

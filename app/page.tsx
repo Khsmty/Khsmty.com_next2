@@ -20,7 +20,7 @@ export default async function Page() {
       >
         <div className="hero-content h-full w-full flex-col rounded-2xl py-20 backdrop-blur backdrop-brightness-50 md:flex-row">
           <Image
-            src="/static/icon.webp"
+            src="/static/images/icon.webp"
             alt="icon"
             className="rounded-full"
             height={100}

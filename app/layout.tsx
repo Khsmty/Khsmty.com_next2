@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       'Khsmty のウェブサイト兼ブログです。主に技術系の記事を書いて投稿しています。',
     url: process.env.NEXT_PUBLIC_BASE_URL,
     siteName: 'Khsmties',
-    images: [`${process.env.NEXT_PUBLIC_BASE_URL}/ogp.png`],
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL}/static/images/ogp.png`],
     locale: 'ja_JP',
     type: 'website',
   },
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Khsmties',
     card: 'summary_large_image',
-    images: ['/static/ogp.png'],
+    images: ['/static/images/ogp.png'],
   },
 };
 
@@ -62,7 +62,7 @@ const jsonLd: Graph = {
       url: 'https://khsmty.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://khsmty.com/static/icon.png',
+        url: 'https://khsmty.com/static/images/icon.png',
         width: '1024',
         height: '1024',
       },

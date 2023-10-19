@@ -75,7 +75,7 @@ const Header = () => {
             <div className="flex-1">
               <Link href="/" className="btn btn-ghost text-xl normal-case">
                 <Image
-                  src="/static/icon.webp"
+                  src="/static/images/icon.webp"
                   alt="icon"
                   className="rounded-full"
                   width={40}

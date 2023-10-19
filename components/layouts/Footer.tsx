@@ -18,7 +18,7 @@ export default function Footer() {
       <div className="footer mx-auto max-w-4xl gap-y-3">
         <div className="grid-flow-col items-center">
           <Image
-            src="/static/icon.webp"
+            src="/static/images/icon.webp"
             alt="icon"
             className="rounded-full"
             width={30}
