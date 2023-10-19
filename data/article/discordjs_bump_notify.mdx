@@ -1,0 +1,186 @@
+---
+emoji: 🔔
+title: discord.js で DISBOARD の bump 通知を作る方法
+tags: ['Discord']
+date: '2021-06-05'
+draft: false
+summary: discord.js で DISBOARD の bump 通知を作る方法
+---
+
+この記事では、discord.js で DISBOARD ([https://disboard.org](https://disboard.org)) の bump 通知をしてくれる機能を作成します。
+
+## 動作に必要なもの
+
+- Node.js v16 以上
+- discord.js v14
+- 24時間365日起動し続けることができるできる環境  
+  → setTimeout を使っているので再起動したら通知できないからです。  
+  　データベースを使った方法もまた投稿したいと思っています。
+
+## 反応対象をDISBOARDのみに
+
+DISBOARD 以外の他の Bot に反応すると困るので、ID で反応対象を絞ります。
+
+```
+client.on('messageCreate', (message) => {
+  if (message.author.id === '302050872383242240') {
+
+  }
+})
+```
+
+## トリガーのメッセージを指定
+
+`message.embeds` でメッセージの Embed が取得できます。
+
+DISBOARD にほかの言語で送信されてしまう不具合があるようなので (修正済み？)、複数の文字列に対応させておきます。
+
+```
+client.on('messageCreate', (message) => {
+  if (message.author.id === '302050872383242240') {
+    if (message.embeds[0].description.match(/表示順をアップしたよ/) ||
+        message.embeds[0].description.match(/Bump done/) ||
+        message.embeds[0].description.match(/Bump effectué/) ||
+        message.embeds[0].description.match(/Bump fatto/) ||
+        message.embeds[0].description.match(/Podbito serwer/) ||
+        message.embeds[0].description.match(/Успешно поднято/) ||
+        message.embeds[0].description.match(/갱신했어/) ||
+        message.embeds[0].description.match(/Patlatma tamamlandı/) {
+
+    }
+  }
+})
+```
+
+## **通知する**
+
+`setTimeout`を使うことで、「○○ミリ秒後に実行する」が実現できます。
+
+```
+const { EmbedBuilder } = require('discord.js')
+
+client.on('messageCreate', (message) => {
+  if (message.author.id === '302050872383242240') {
+    if (message.embeds[0].description.match(/表示順をアップしたよ/) ||
+        message.embeds[0].description.match(/Bump done/) ||
+        message.embeds[0].description.match(/Bump effectué/) ||
+        message.embeds[0].description.match(/Bump fatto/) ||
+        message.embeds[0].description.match(/Podbito serwer/) ||
+        message.embeds[0].description.match(/Успешно поднято/) ||
+        message.embeds[0].description.match(/갱신했어/) ||
+        message.embeds[0].description.match(/Patlatma tamamlandı/) {
+      message.channel.send(
+        new EmbedBuilder()
+          .setTitle('Bumpが実行されました！')
+          .setDescription('2時間後にお知らせします。')
+      )
+
+      setTimeout(() => {
+        message.channel.send(
+          new EmbedBuilder()
+            .setTitle('Bumpできます！')
+            .setDescription('`/bump` でサーバーの掲載順を上にできます。')
+        )
+      }, 7200000)
+    }
+  }
+})
+```
+
+## Bumpに失敗した際に再度実行を促す
+
+あと何分で再度実行できるか、ユーザーにお知らせします。
+
+```
+const { EmbedBuilder } = require('discord.js')
+
+client.on('messageCreate', (message) => {
+  if (message.author.id === '302050872383242240') {
+    if (message.embeds[0].description.match(/表示順をアップしたよ/) ||
+        message.embeds[0].description.match(/Bump done/) ||
+        message.embeds[0].description.match(/Bump effectué/) ||
+        message.embeds[0].description.match(/Bump fatto/) ||
+        message.embeds[0].description.match(/Podbito serwer/) ||
+        message.embeds[0].description.match(/Успешно поднято/) ||
+        message.embeds[0].description.match(/갱신했어/) ||
+        message.embeds[0].description.match(/Patlatma tamamlandı/) {
+      message.channel.send(
+        new EmbedBuilder()
+          .setTitle('Bumpが実行されました！')
+          .setDescription('2時間後にお知らせします。')
+      )
+
+      setTimeout(() => {
+        message.channel.send(
+          new EmbedBuilder()
+            .setTitle('Bumpできます！')
+            .setDescription('`/bump` でサーバーの掲載順を上にできます。')
+        )
+      }, 7200000)
+    }
+  } else if (message.embeds[0].description.match(/上げられるようになるまで/)) {
+    const splcontent_a = message.embeds[0].description.split('と')
+    const splcontent_b = splcontent_a[1].split('分')
+    const remaining_time = splcontent_b[0]
+
+    message.channel.send(
+      new EmbedBuilder()
+        .setTitle('Bumpに失敗したようです...')
+        .setDescription(`${remaining_time}分後に再度実行できます。`)
+    )
+  }
+})
+```
+
+## コード全文
+
+この記事で書いたコードの全文です。
+
+```
+const { EmbedBuilder } = require('discord.js')
+
+client.on('messageCreate', (message) => {
+  if (message.author.id === '302050872383242240') {
+    if (message.embeds[0].description.match(/表示順をアップしたよ/) ||
+        message.embeds[0].description.match(/Bump done/) ||
+        message.embeds[0].description.match(/Bump effectué/) ||
+        message.embeds[0].description.match(/Bump fatto/) ||
+        message.embeds[0].description.match(/Podbito serwer/) ||
+        message.embeds[0].description.match(/Успешно поднято/) ||
+        message.embeds[0].description.match(/갱신했어/) ||
+        message.embeds[0].description.match(/Patlatma tamamlandı/) {
+      message.channel.send(
+        new EmbedBuilder()
+          .setTitle('Bumpが実行されました！')
+          .setDescription('2時間後にお知らせします。')
+      )
+
+      setTimeout(() => {
+        message.channel.send(
+          new EmbedBuilder()
+            .setTitle('Bumpできます！')
+            .setDescription('`/bump` でサーバーの掲載順を上にできます。')
+        )
+      }, 7200000)
+    }
+  } else if (message.embeds[0].description.match(/上げられるようになるまで/)) {
+    const splcontent_a = message.embeds[0].description.split('と')
+    const splcontent_b = splcontent_a[1].split('分')
+    const remaining_time = splcontent_b[0]
+
+    message.channel.send(
+      new EmbedBuilder()
+        .setTitle('Bumpに失敗したようです...')
+        .setDescription(`${remaining_time}分後に再度実行できます。`)
+    )
+  }
+})
+```
+
+## おわり
+
+お読みいただきありがとうございました！
+
+エラーやご指摘等ありましたら下のコメント欄までお願いします。
+
+シェアもぜひ！
