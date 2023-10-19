@@ -1,0 +1,200 @@
+---
+emoji: 📂
+title: CORESERVER に Redis をインストールして Litespeed Cache のオブジェクトキャッシュを有効にする
+tags: ['Discord']
+date: '2023-08-23'
+draft: false
+summary: CORESERVER に Redis をインストールして Litespeed Cache のオブジェクトキャッシュを有効にする方法
+---
+
+この記事では、Litespeed 系の Web サーバーで使用できる Litespeed Cache のオブジェクトキャッシュを有効にする方法を紹介します。
+
+Redis を使用するため、一般には高速化が見込まれると言われています。(php の設定によっては逆効果になる可能性があります)
+
+## 前提条件
+
+GUI でなく CUI で操作を行うので、**契約しているサーバーに ssh 接続ができる**ことが条件です。
+
+(逆に、レンタルサーバーが違っても ssh 接続ができれば、この記事通りに操作できるかもしれません)
+
+また、この記事では v2 プランの 007 サーバー (v2007.coreserver.jp) にて検証を行っています。サーバーが異なっていたり、v1 プランの場合はバージョンの違いなどで操作が異なる場合があります。
+
+※VPS を使用している場合は apt や dnf での導入ができるので、この記事は関係ありません。
+
+## Redis をインストール
+
+この記事を執筆した時点の最新版は 7.2.0 でした。作業されるときは適宜読み替えてください。
+
+### ソースをダウンロード
+
+レンタルサーバーの場合、パッケージ管理コマンドなどは使用できなくなっているため、ソースをダウンロードしてきて自前でビルドする必要があります。
+
+```sh
+// GitHub からソースをダウンロード
+$ wget https://github.com/redis/redis/archive/7.2.0.tar.gz
+
+// アーカイブになっているので展開
+$ tar xf 7.2.0.tar.gz
+
+// 展開先ディレクトリへ移動
+$ cd ~/redis-7.2.0/
+```
+
+### Redis のビルド
+
+もちろん、ソースをダウンロードしてきただけでは実行ができないので、コンパイルします。
+
+```sh
+// (リソース制限を回避するため) 8コアでコンパイル
+$ make -j8
+
+// インストール先($HOME/.local)を指定し実行
+$ PREFIX=$HOME/.local make install
+
+// .local/bin配下にredis関連のバイナリが格納されることを確認する
+$ ls -l ~/.local/.bin/
+-rwxr-xr-x 1 USERNAME USERNAME  6977400 Aug 18 21:38 redis-benchmark
+lrwxrwxrwx 1 USERNAME USERNAME       12 Aug 18 21:38 redis-check-aof -> redis-server
+lrwxrwxrwx 1 USERNAME USERNAME       12 Aug 18 21:38 redis-check-rdb -> redis-server
+-rwxr-xr-x 1 USERNAME USERNAME  7236776 Aug 18 21:38 redis-cli
+lrwxrwxrwx 1 USERNAME USERNAME       12 Aug 18 21:38 redis-sentinel -> redis-server
+-rwxr-xr-x 1 USERNAME USERNAME 14399816 Aug 18 21:38 redis-server
+
+// 解凍したredisディレクトリから設定ファイル(redis.conf)をコピーする(※1)
+$ cp ~/redis-7.2.0/redis.conf ~/.local/bin/
+
+// .local/binに移動してredisサーバが起動することを確認　※正常に起動できることを確認できたらctrl+cで抜ける
+$ cd ~/.local/bin/
+$ redis-server
+```
+
+### Redis の設定変更
+
+先ほどコピーした`redis.conf`に対し設定変更を行います。
+
+```
+// redis.conf を編集
+$ nano ~/.local/bin/redis.conf
+```
+
+下記項目を参考に設定ファイルの編集を行います。
+
+```sh
+// unix ソケットを使うのでポートは 0
+# port 6379
+port 0
+
+// unix ソケットを使えるように
+unixsocket /home/USERNAME/.local/bin/redis.sock
+unixsocketperm 700
+
+// タイムアウトは伸ばしておく
+# timeout 0
+timeout 600
+```
+
+各項目の説明としては下記の通りです。
+
+- port 6379をコメントアウトし、port 0に変更
+- TCP/IP接続は無効にして、UNIXドメインソケットでの接続に変更
+- Connection timeout値の変更
+
+### Redis サービス起動＆確認
+
+```sh
+// 編集したredis.confを使ってサービス起動
+$ redis-server ~/.local/bin/redis.conf
+
+// (別ウィンドウで開き) redis-cli 接続確認
+$ redis-cli -s ~/.local/bin/redis.sock monitor
+OK
+```
+
+ここまで問題無ければ、無事UNIXドメインソケットによるRedis接続が正常に行えています。
+
+次にコアサーバーでは一定の時間経過するとプロセスが終了する仕様のため、redisの自動起動シェルスクリプトを用意します。
+
+## Redis 自動復帰スクリプトの作成
+
+v2 プランはスクリプトの常駐ができるようですが、もしも kill されていた時のためにシェルスクリプトで自動起動できるようにしておきます。
+
+```sh
+#!/bin/bash
+
+if [ `ps aux | grep redis-server | grep -v grep | wc -l` = 0 ]; then
+  nohup /home/USERNAME/.local/bin/redis-server /home/USERNAME/.local/bin/redis.conf &
+fi
+```
+
+redis_check.sh などの名前で上記シェルスクリプトを作成します。  
+redisプロセスが存在しない場合はredis-serverの起動を行い、プロセスが存在する場合はスキップを行う処理となります。
+
+上記のシェルスクリプトを作成したら、コアサーバー管理画面上の「cronジョブ」にてシェルスクリプトを登録します。
+
+![](https://i.gyazo.com/7ef78f4a4db45ac639c60f5961b69f29.png)
+
+ここまでを行うことで、コアサーバーにRedisを継続的に起動させることができました。
+
+## Litespeed Cache のオブジェクトキャッシュを有効化
+
+Redis がセットアップできたので、次は Litespeed Cache のオブジェクトキャッシュを有効にしていきます。
+
+### phpredis の有効化
+
+まず、php の拡張機能である phpredis を有効化します。
+
+CORESERVER のデフォルトの設定のまま使っている場合は、必ず設定変更が必要です。
+
+まず、コントロールパネルにログインし、「[ウェブ → 標準PHPバージョン](https://cp.coreserver.jp/site/dphpver/)」と進みます。
+
+![](https://i.gyazo.com/3775eac06a5ebc84529d45eac0d0a524.webp)
+
+初期設定のままだと、「Current PHP version」は `native (7.4)` になっていると思います。
+
+これをクリックし、php を native でない好きなバージョンに変更します。
+
+互換性を重視するなら`7.4`、速度を重視するなら`8.2`を選択するといいと思います。  
+ただ、動作速度は native バージョンの方が速いので、オブジェクトキャッシュを有効にしてもあんまり効果は感じられませんでした…
+
+変更できたら、次は phpredis を有効にします。
+
+下にスクロールし、R の項目の中にある`redis`にチェックを付けます。
+
+![](https://i.gyazo.com/b0b53b1ed5f482cb569e8e1064ba56e3.webp)
+
+チェックがつけられたら、上に戻って php バージョンの右側に表示された「Apply」をクリックします。
+
+![](https://i.gyazo.com/7546c796c0183e9e4edb43028e84f09f.webp)
+
+画面がぐるぐるし終わったら完了です。
+
+### Litespeed Cache の設定変更
+
+SWELL テーマで Litespeed Cache のオブジェクトキャッシュを有効にすると、なぜかサイドバーが崩壊します。  
+修正方法など情報をお持ちの方は教えてください…
+
+Litespeed Cache の設定を開き、「キャッシュ → \[6\] オブジェクト」と進みます。
+
+![](https://i.gyazo.com/51295815f1b6c4eb49497d0424bbc2da.png)
+
+以下の表のように設定を変更してください。
+
+| 項目名                 | 値                                   |
+| ---------------------- | ------------------------------------ |
+| オブジェクトキャッシュ | オン                                 |
+| 方法                   | Redis                                |
+| ホスト                 | /home/USERNAME/.local/bin/redis.sock |
+| ポート                 | 0                                    |
+| 永続的な接続           | オン                                 |
+| WP-Admin のキャッシュ  | オン                                 |
+
+設定を保存し、ステータスが以下のように表示が変わっていたら成功です。
+
+![](https://i.gyazo.com/cb570d48f2994c82102c66beb1c981ea.png)
+
+以上、Litespeed Cache のオブジェクトキャッシュを有効化する方法でした。おつかれさまでした。
+
+## 参考
+
+- [コアサーバーでRedisを動かしてWPプラグイン「Redis Object Cache」を適用させる | Gadgetter ガジェッター](https://gadgetter.biz/2685/)
+- [【2022年最新版】レンタルサーバーCORESERVERでCRONを定期実行する](https://www.servernote.net/article.cgi?id=run-cron-on-coreserver)
