@@ -5,18 +5,16 @@ import { FaArrowRight } from 'react-icons/fa6';
 import Image from 'next/image';
 import ArticleList from '@/components/layouts/ArticleList';
 
-const MAX_DISPLAY = 5;
-
 export default async function Page() {
   const sortedPosts = sortPosts(allArticles);
   const posts = allCoreContent(sortedPosts);
-  const displayPosts = posts.slice(0, MAX_DISPLAY);
+  const displayPosts = posts.slice(0, 6);
 
   return (
     <>
       <div
         className="hero mb-7 rounded-2xl"
-        style={{ backgroundImage: 'url(/static/background.webp)' }}
+        style={{ backgroundImage: 'url(/static/images/background.webp)' }}
       >
         <div className="hero-content h-full w-full flex-col rounded-2xl py-20 backdrop-blur backdrop-brightness-50 md:flex-row">
           <Image
@@ -37,20 +35,20 @@ export default async function Page() {
         </div>
       </div>
 
-      {!posts.length && 'No posts found.'}
-      {posts.length > 0 && <ArticleList articles={displayPosts} />}
+      <div className="mb-5 flex justify-center text-2xl">新着記事</div>
 
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/article"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
+      <ArticleList articles={displayPosts} />
+
+      <div className="flex justify-center">
+        <Link
+          href="/article"
+          className="btn btn-primary btn-md"
+          aria-label="すべての記事を見る"
+        >
+          すべての記事を見る
+          <FaArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
     </>
   );
 }
