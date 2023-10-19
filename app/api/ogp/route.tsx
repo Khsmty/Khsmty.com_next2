@@ -32,26 +32,40 @@ export async function GET(request: Request) {
   const title = post.title;
   const emoji = post.emoji;
 
+  const icon = await fetch(
+    new URL('../../../assets/images/icon.jpg', import.meta.url),
+  ).then((res) => res.arrayBuffer());
+
+  const nsjp = await fetch(
+    new URL('../../../assets/fonts/NotoSansJP-SemiBold.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer());
+  const oss = await fetch(
+    new URL('../../../assets/fonts/OpenSans-Regular.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer());
+
   return new ImageResponse(
     (
-      <div tw="flex w-full h-full items-center justify-center bg-green-200">
+      <div
+        tw="flex w-full h-full items-center justify-center bg-green-200"
+        style={{ fontFamily: 'NotoSansJP' }}
+      >
         <div tw="w-[95%] h-11/12 flex bg-white rounded-3xl shadow-md relative">
           <div tw="w-50 flex">
             <div tw="flex items-center justify-center ml-auto mr-4 mt-14 bg-gray-100 w-35 h-35 rounded-3xl">
               <span tw="text-[6.5rem]">{emoji}</span>
             </div>
           </div>
-          <div tw="pt-14 text-7xl pl-7 pr-10 font-semibold">{title}</div>
+          <div tw="pt-12 text-7xl pl-7 pr-12 font-semibold leading-[1.1]">
+            {title}
+          </div>
 
-          <div tw="absolute bottom-7 right-10 text-6xl flex items-center">
+          <div
+            tw="absolute bottom-6 right-9 text-5xl flex items-center"
+            style={{ fontFamily: 'OpenSans' }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-            <img
-              src="https://khsmty.vercel.app/static/icon.png"
-              tw="rounded-full mr-3"
-              width={55}
-              height={55}
-            />
-            Khsmties
+            <img src={icon} tw="rounded-full mr-3" width={58} height={58} />
+            <span tw="self-end pb-0.5">Khsmties</span>
           </div>
         </div>
       </div>
@@ -59,6 +73,20 @@ export async function GET(request: Request) {
     {
       width: 1200,
       height: 630,
+      fonts: [
+        {
+          name: 'NotoSansJP',
+          data: nsjp,
+          weight: 600,
+          style: 'normal',
+        },
+        {
+          name: 'OpenSans',
+          data: oss,
+          weight: 500,
+          style: 'normal',
+        },
+      ],
     },
   );
 }
