@@ -5,6 +5,7 @@ import Link from '@/components/mdx/Link';
 import ScrollTopAndComment from '@/components/article/ScrollTopAndComment';
 import { Comments, CommentsConfig } from 'pliny/comments';
 import ArticlePageHeader from '@/components/article/ArticlePageHeader';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 const commentsConfig: CommentsConfig = {
   provider: 'giscus',
@@ -51,40 +52,40 @@ export default function ArticleLayout({
       <div className="mx-auto max-w-[800px]">
         <div className="content pb-8 pt-10">{children}</div>
 
-        <div className="border-b-2" />
+        <div className="border-b" />
 
         <div id="comments" className="py-6 text-center">
           <Comments commentsConfig={commentsConfig} slug={slug} />
         </div>
 
-        <footer>
-          <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-            {(next || prev) && (
-              <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                {prev && prev.path && (
-                  <div>
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Previous Article
-                    </h2>
-                    <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                      <Link href={`/${prev.path}`}>{prev.title}</Link>
-                    </div>
-                  </div>
-                )}
-                {next && next.path && (
-                  <div>
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Next Article
-                    </h2>
-                    <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                      <Link href={`/${next.path}`}>{next.title}</Link>
-                    </div>
-                  </div>
-                )}
-              </div>
+        <div className="border-b" />
+
+        {(next || prev) && (
+          <div className="mt-5 flex flex-col justify-between lg:flex-row">
+            {prev && prev.path ? (
+              <Link
+                href={`/${prev.path}`}
+                className="flex w-full items-center rounded-xl bg-base-200 px-4 py-3 lg:w-[49%]"
+              >
+                <FaAngleLeft className="mr-2 inline-block h-6 w-6 shrink-0" />
+                {prev.title}
+              </Link>
+            ) : (
+              <div className="hidden lg:block lg:w-[49%]" />
+            )}
+            {next && next.path ? (
+              <Link
+                href={`/${next.path}`}
+                className="mt-3 flex w-full items-center rounded-xl bg-base-200 px-4 py-3 lg:mt-0 lg:w-[49%]"
+              >
+                {next.title}
+                <FaAngleRight className="ml-2 inline-block h-6 w-6 shrink-0" />
+              </Link>
+            ) : (
+              <div className="hidden lg:block lg:w-[49%]" />
             )}
           </div>
-        </footer>
+        )}
       </div>
 
       <ScrollTopAndComment />
