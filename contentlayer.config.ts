@@ -18,7 +18,6 @@ import remarkGfm from 'remark-gfm';
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
-  remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js';
 
@@ -219,7 +218,6 @@ export default makeSource({
       remarkExtractFrontmatter,
       remarkGfm,
       remarkCodeTitles,
-      remarkImgToJsx,
     ],
     rehypePlugins: [
       rehypeSlug,

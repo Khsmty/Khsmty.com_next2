@@ -7,7 +7,6 @@ import Callout from './Callout';
 import Details from './Details';
 
 export const components: MDXComponents = {
-  Image,
   TOCInline,
   Callout,
   Details,
@@ -15,4 +14,6 @@ export const components: MDXComponents = {
   a: CustomLink,
   // @ts-expect-error
   pre: Pre,
+  // @ts-expect-error
+  img: Image,
 };

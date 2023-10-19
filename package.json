@@ -26,6 +26,7 @@
     "next-themes": "^0.2.1",
     "pliny": "0.1.5",
     "postcss": "^8.4.24",
+    "probe-image-size": "^7.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-easy-emoji": "^1.8.1",
@@ -39,12 +40,14 @@
     "remove-markdown": "^0.5.0",
     "sass": "^1.69.3",
     "schema-dts": "^1.1.2",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
     "@textlint/textlint-plugin-markdown": "^13.3.3",
     "@types/mdx": "^2.0.5",
+    "@types/probe-image-size": "^7.2.2",
     "@types/react": "^18.2.14",
     "@types/remove-markdown": "^0.3.2",
     "@typescript-eslint/eslint-plugin": "^6.1.0",

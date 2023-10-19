@@ -65,7 +65,7 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     images: {
-      domains: ['gyazo.io'],
+      domains: ['i.gyazo.com'],
     },
     async headers() {
       return [

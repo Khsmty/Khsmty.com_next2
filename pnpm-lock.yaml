@@ -40,6 +40,9 @@ dependencies:
   postcss:
     specifier: ^8.4.24
     version: 8.4.24
+  probe-image-size:
+    specifier: ^7.2.3
+    version: 7.2.3
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -82,6 +85,9 @@ dependencies:
   tailwindcss:
     specifier: ^3.3.3
     version: 3.3.3
+  unist-util-visit:
+    specifier: ^5.0.0
+    version: 5.0.0
 
 devDependencies:
   '@svgr/webpack':
@@ -93,6 +99,9 @@ devDependencies:
   '@types/mdx':
     specifier: ^2.0.5
     version: 2.0.5
+  '@types/probe-image-size':
+    specifier: ^7.2.2
+    version: 7.2.2
   '@types/react':
     specifier: ^18.2.14
     version: 18.2.14
@@ -2998,7 +3007,7 @@ packages:
   /@types/hast@3.0.1:
     resolution: {integrity: sha512-hs/iBJx2aydugBQx5ETV3ZgeSS0oIreQrFJ4bjBl0XvM4wAmDjFEALY7p0rTSLt2eL+ibjRAAs9dTPiCLtmbqQ==}
     dependencies:
-      '@types/unist': 2.0.8
+      '@types/unist': 3.0.0
     dev: false
 
   /@types/json-schema@7.0.13:
@@ -3017,7 +3026,7 @@ packages:
   /@types/mdast@4.0.1:
     resolution: {integrity: sha512-IlKct1rUTJ1T81d8OHzyop15kGv9A/ff7Gz7IJgrk6jDb4Udw77pCJ+vq8oxZf4Ghpm+616+i1s/LNg/Vh7d+g==}
     dependencies:
-      '@types/unist': 2.0.8
+      '@types/unist': 3.0.0
     dev: false
 
   /@types/mdx@2.0.5:
@@ -3027,11 +3036,16 @@ packages:
     resolution: {integrity: sha512-xPSg0jm4mqgEkNhowKgZFBNtwoEwF6gJ4Dhww+GFpm3IgtNseHQZ5IqdNwnquZEoANxyDAKDRAdVo4Z72VvD/g==}
     dev: false
 
+  /@types/needle@3.2.2:
+    resolution: {integrity: sha512-xUKAjFjDcucpgfyTvnbaqN+WBKyM9UehBuVRI/1AoPbaXrCScADqeTgTM1ZBYnS3Ovs9IEQt813IcJNyac7dNQ==}
+    dependencies:
+      '@types/node': 20.8.6
+    dev: true
+
   /@types/node@20.8.6:
     resolution: {integrity: sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==}
     dependencies:
       undici-types: 5.25.3
-    dev: false
 
   /@types/parse5@6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
@@ -3040,6 +3054,13 @@ packages:
   /@types/prismjs@1.26.1:
     resolution: {integrity: sha512-Q7jDsRbzcNHIQje15CS/piKhu6lMLb9jwjxSfEIi4KcFKXW23GoJMkwQiJ8VObyfx+VmUaDcJxXaWN+cTCjVog==}
     dev: false
+
+  /@types/probe-image-size@7.2.2:
+    resolution: {integrity: sha512-rNWbJLj3XdCfiHsaDVTkPgvTtxlVMgNEpGpJYU/d2pVwzIpjumZguQzlnOQPWF7ajPOpX00rmPQGerRlB3tL+g==}
+    dependencies:
+      '@types/needle': 3.2.2
+      '@types/node': 20.8.6
+    dev: true
 
   /@types/prop-types@15.7.8:
     resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
@@ -10002,7 +10023,6 @@ packages:
 
   /undici-types@5.25.3:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
-    dev: false
 
   /unicode-canonical-property-names-ecmascript@2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
