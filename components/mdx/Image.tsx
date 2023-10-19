@@ -4,7 +4,6 @@ import fs from 'fs';
 
 export default async function Image(props: ImageProps) {
   const { src } = props;
-  console.log('src', src);
   let dimensions;
   if ((src as string).startsWith('/')) {
     if (fs.existsSync(`${process.cwd()}/public${src}`)) {
