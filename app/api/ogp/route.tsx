@@ -36,9 +36,9 @@ export async function GET(request: Request) {
     new URL('../../../assets/images/icon.jpg', import.meta.url),
   ).then((res) => res.arrayBuffer());
 
-  const nsjp = await fetch(
-    new URL('../../../assets/fonts/NotoSansJP-SemiBold.ttf', import.meta.url),
-  ).then((res) => res.arrayBuffer());
+  // const nsjp = await fetch(
+  //   new URL('../../../assets/fonts/NotoSansJP-SemiBold.ttf', import.meta.url),
+  // ).then((res) => res.arrayBuffer());
   const oss = await fetch(
     new URL('../../../assets/fonts/OpenSans-Regular.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer());
@@ -79,12 +79,12 @@ export async function GET(request: Request) {
       width: 1200,
       height: 630,
       fonts: [
-        {
-          name: 'NotoSansJP',
-          data: nsjp,
-          weight: 600,
-          style: 'normal',
-        },
+        // {
+        //   name: 'NotoSansJP',
+        //   data: nsjp,
+        //   weight: 600,
+        //   style: 'normal',
+        // },
         {
           name: 'OpenSans',
           data: oss,
