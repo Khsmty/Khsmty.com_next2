@@ -81,11 +81,14 @@ module.exports = () => {
         use: ['@svgr/webpack'],
       });
       config.externals.push({
-        "fs": "fs",
-        "crypto": "crypto",
-        "querystring": "querystring",
-        "stream": "stream",
-      })
+        fs: 'fs',
+        crypto: 'crypto',
+        querystring: 'querystring',
+        stream: 'stream',
+        http: 'http',
+        https: 'https',
+        path: 'path',
+      });
 
       return config;
     },
