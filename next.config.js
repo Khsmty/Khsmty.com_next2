@@ -80,6 +80,12 @@ module.exports = () => {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       });
+      config.externals.push({
+        "fs": "fs",
+        "crypto": "crypto",
+        "querystring": "querystring",
+        "stream": "stream",
+      })
 
       return config;
     },
