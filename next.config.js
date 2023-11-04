@@ -88,6 +88,7 @@ module.exports = () => {
         http: 'http',
         https: 'https',
         path: 'path',
+        zlib: 'zlib',
       });
 
       return config;
