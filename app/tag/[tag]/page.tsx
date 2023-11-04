@@ -48,7 +48,15 @@ export default function TagPage({ params }: { params: { tag: string } }) {
       <h1 className="mb-6 mt-5 text-center text-2xl font-semibold">
         タグ「{tag}」がついた記事
       </h1>
-      <ListLayout posts={filteredPosts} />
+      <ListLayout
+        posts={filteredPosts}
+        initialDisplayPosts={filteredPosts}
+        pagination={{
+          current: 1,
+          totalCount: filteredPosts.length,
+          basePath: `/tag/${tag}`,
+        }}
+      />
     </>
   );
 }
