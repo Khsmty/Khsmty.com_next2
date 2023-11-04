@@ -10,6 +10,8 @@ import Head from '@/components/layouts/Head';
 import Providers from '@/components/layouts/Providers';
 import type { Graph } from 'schema-dts';
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
   title: {
