@@ -39,8 +39,8 @@ dependencies:
     specifier: ^0.2.1
     version: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
   pliny:
-    specifier: 0.1.5
-    version: 0.1.5(@algolia/client-search@4.20.0)(@types/react@18.2.14)(esbuild@0.19.5)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.9.0)
+    specifier: 0.1.7
+    version: 0.1.7(@algolia/client-search@4.20.0)(@types/react@18.2.14)(esbuild@0.19.5)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.9.0)
   postcss:
     specifier: ^8.4.24
     version: 8.4.24
@@ -6488,10 +6488,6 @@ packages:
       lit: 2.8.0
     dev: false
 
-  /github-slugger@1.4.0:
-    resolution: {integrity: sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==}
-    dev: false
-
   /github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
     dev: false
@@ -7423,8 +7419,8 @@ packages:
       object.values: 1.1.7
     dev: true
 
-  /kbar@0.1.0-beta.43(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MmhhvGuZfmA616X9wuy/iaWCPFmlEi6kGkvce/7GlatWmCSkHZhD8glxUruFUpxSN0HZvW/6e/jvSgpRGnC76w==}
+  /kbar@0.1.0-beta.45(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-kXvjthqPLoWZXlxLJPrFKioskNdQv1O3Ukg5mqq2ExK3Ix1qvYT3W/ACDRIv/e/CHxPWZoTriB4oFbQ6UCSX5g==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -9414,8 +9410,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  /pliny@0.1.5(@algolia/client-search@4.20.0)(@types/react@18.2.14)(esbuild@0.19.5)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.9.0):
-    resolution: {integrity: sha512-GzvducLEroNvHy+BCmEttRTNgfxVlQNrH/zMuaxz16ZI78wvgk+blMLdL9YPS0tBzDxE8rsvQkT6XZrHayk1pA==}
+  /pliny@0.1.7(@algolia/client-search@4.20.0)(@types/react@18.2.14)(esbuild@0.19.5)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.9.0):
+    resolution: {integrity: sha512-VUjZUN2r5thLx/Y36X5TiwNvRje6myYavgXII/mwr59kn1d2Y67HqcebNi97a3lZuoJnNnnKb6opAvBdgNViBw==}
     peerDependencies:
       next: '>=13.0.0'
       react: ^17.0.2 || ^18.0.0
@@ -9426,9 +9422,9 @@ packages:
       '@mailchimp/mailchimp_marketing': 3.0.80
       contentlayer: 0.3.4(esbuild@0.19.5)
       copyfiles: 2.4.1
-      github-slugger: 1.4.0
+      github-slugger: 2.0.0
       js-yaml: 4.1.0
-      kbar: 0.1.0-beta.43(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      kbar: 0.1.0-beta.45(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       next: 13.5.6(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.3)
       next-contentlayer: 0.3.4(contentlayer@0.3.4)(esbuild@0.19.5)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
       next-themes: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
